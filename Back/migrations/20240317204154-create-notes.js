@@ -18,6 +18,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
+      study_method: {
+        type: Sequelize.STRING(255),
+        allowNull: true,
+      },
       start_date: {
         type: Sequelize.DATE,
         allowNull: true,
@@ -48,17 +52,15 @@ module.exports = {
       },
       active: {
         type: Sequelize.BOOLEAN,
-        defaultValue: null,
+        defaultValue: true,
       },
       create_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       update_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },

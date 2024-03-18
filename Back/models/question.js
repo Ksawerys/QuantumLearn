@@ -25,7 +25,7 @@ Question.init(
     },
     active: {
       type: DataTypes.BOOLEAN,
-      defaultValue: null,
+      defaultValue: true,
     },
 
   },
