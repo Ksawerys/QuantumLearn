@@ -1,26 +1,36 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+'use strict';
+const { Model } = require('sequelize');
 
-class Role extends Model {}
-
-Role.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-  },
-  {
-    sequelize,
-    underscored: true,
-    modelName: 'role',
+module.exports = (sequelize, DataTypes) => {
+  class Role extends Model {
+    static associate(models) {
+      // Define associations here
+      // this.hasMany(models.User, { foreignKey: 'role_id', as: 'users' });
+    }
   }
-);
 
-module.exports = Role;
+  Role.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'Role',
+      as: 'Roles',
+      tableName: 'roles',
+      timestamps: false, 
+      underscored: true,
+    }
+  );
+
+  return Role;
+};

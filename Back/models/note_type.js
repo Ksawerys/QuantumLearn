@@ -1,28 +1,35 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+'use strict';
+const { Model } = require('sequelize');
 
-class NoteType extends Model {}
-
-NoteType.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-  },
-  {
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'noteType',
+module.exports = (sequelize, DataTypes) => {
+  class NoteType extends Model {
+    static associate(models) {
+      // Define associations here
+      // this.hasMany(models.Note, { foreignKey: 'noteTypeId', as: 'notes' });
+    }
   }
-);
 
-module.exports = NoteType;
+  NoteType.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'NoteType',
+      tableName: 'note_types',
+      timestamps: false,
+      underscored: true,
+    }
+  );
+
+  return NoteType;
+};

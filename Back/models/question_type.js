@@ -1,32 +1,39 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+'use strict';
+const { Model } = require('sequelize');
 
-class QuestionType extends Model {}
-
-QuestionType.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    active: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-  },
-  {
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'questionType',
+module.exports = (sequelize, DataTypes) => {
+  class QuestionType extends Model {
+    static associate(models) {
+      // Define associations here
+      // this.hasMany(models.Question, { foreignKey: 'type_id', as: 'questions' });
+    }
   }
-);
 
-module.exports = QuestionType;
+  QuestionType.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'QuestionType',
+      tableName: 'question_types',
+      timestamps: false,
+      underscored: true,
+    }
+  );
+
+  return QuestionType;
+};
