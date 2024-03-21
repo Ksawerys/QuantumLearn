@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 Factory.define('user')
   .attr('name', () => faker.internet.userName())
+  .attr('second_name', () => faker.name.lastName())  
   .attr('email', () => faker.internet.email())
   .attr('password', () => bcrypt.hashSync('User123#', 10));
 

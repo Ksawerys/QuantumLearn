@@ -1,30 +1,39 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+'use strict';
+const { Model } = require('sequelize');
 
-class Chat extends Model {}
-
-Chat.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    active: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-  },
-  {
-    sequelize,
-    underscored: true,
-    modelName: 'chat',
+module.exports = (sequelize, DataTypes) => {
+  class Chat extends Model {
+    static associate(models) {
+      // Define associations here
+      // this.hasMany(models.OtherModel, { foreignKey: 'chatId', as: 'otherModels' });
+    }
   }
-);
 
-module.exports = Chat;
+  Chat.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'Chat',
+      tableName: 'chats',
+      timestamps: true, 
+      underscored: true,
+    }
+  );
+
+  return Chat;
+};
