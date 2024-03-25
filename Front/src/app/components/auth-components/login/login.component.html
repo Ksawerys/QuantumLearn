@@ -1,0 +1,43 @@
+<div class="login-wrapper">
+
+    <div class="form-container">
+      <h1>Iniciar Sesión</h1>
+      <form [formGroup]="loginFormulario">
+        <!--Campo para el correo electrónico-->
+        <div class="form-field">
+          <label class="label" [class.active]="loginFormulario.get('email')?.value">Correo Electrónico</label>
+          <input  formControlName="email">
+          <span class="icon">email</span>
+          @if (loginFormulario.get('email')?.hasError('pattern')) {
+          <div class="error">Intruce un <strong>correo electrónico válido</strong></div>
+          }
+          @if (loginFormulario.get('email')?.hasError('required')) {
+            <div class="error">El correo electrónico es <strong>obligatorio</strong></div>
+          }
+        </div> 
+         
+        <!-- Campo para la contraseña -->
+        <div class="form-field">
+          <label class="label">Contraseña</label>
+          <input [type]="hide ? 'password' : 'text'" formControlName="password">
+          <button (click)="hide = !hide">
+            <span class="icon">{{ hide ? 'visibility_off' : 'visibility' }}</span>
+          </button>
+          @if (loginFormulario.get('password')?.hasError('required')) {
+            <div class="error"> La contraseña es <strong>obligatoria</strong></div> 
+          }
+        </div>
+        <button class="botonRegistro" (click)="botonLogin()" [disabled]="!loginFormulario.valid">Iniciar Sesión</button>
+      </form>
+      <div class="extras">
+        <div class="extras">
+          <span>¿No tienes una cuenta? <a routerLink="/registro">Regístrate</a></span><br>
+          <span>¿Has olvidado tu contraseña? <a (click)="recuperarPassword()">Recuperar contraseña</a></span><br>
+        @if (errorLogin) {
+          <!-- spinner -->
+          }
+        <label>{{ mensajeError }}</label>
+      </div>
+    </div>
+  </div>
+  
