@@ -1,152 +1,306 @@
-@import '../../../../styles.scss';
+// Font Family
+$body-font: "Roboto";
+
+// Font Weights
+$thin: 100;
+$light: 300;
+$regular: 400;
+$semibold: 500;
+$bold: 700;
+$ultra: 800;
+
+// Base Font
+$base-font-family: $body-font, sans-serif;
+$base-font-size: 14px;
+$base-font-weight: $regular;
+$base-line-height: 1.6em;
+
+// Colors
+$black: #000000;
+$dark-gray: rgba($black, 0.8);
+$gray: rgba($black, 0.6);
+$light-gray: rgba($black, 0.4);
+$lighter-gray: rgba($black, 0.2);
+$white: #FFFFFF;
+$accent: #4285F4;
+
+// Form Settings
+$max-width: 600px;
+$max-height: 400px;
+$gutters: 24px;
 
 
-.login-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+html {
+  width: 100%;
+  height: 100%;
+}
 
-  .form-container {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    margin: 0 auto;
-    max-width: 400px;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    transition: box-shadow 0.7s ease; 
+body {
+  background: linear-gradient(45deg,  rgba(66, 183, 245,0.8) 0%,rgba(66, 245, 189,0.4) 100%);
+  color: $gray;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    &:hover {
-      box-shadow: 0 0 20px rgba(28, 164, 133, 0.8), 
-      0 0 30px rgba(28, 164, 133, 0.6), 
-      0 0 40px rgba(28, 164, 133, 0.4);    
-    }
-    h1 {
-      font-family: $font-family; 
-      font-size: 4vh;
-      text-align: center;
-      color: #1ca485;
-      margin-bottom: 1.5rem;
-      font-weight: bold;   
-      padding-top: 3vh;
-      padding-bottom: 3vh;  
-    }
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  background: rgba($black, 0.8);
+  width: 100%;
+  height: 100%;
+}
 
-    form{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center; 
+.form {
+  z-index: 15;
+  position: relative;
+  background: $white;
+  width: $max-width;
+  border-radius: 4px;
+  box-shadow: 0 0 30px rgba($black, .1);
+  box-sizing: border-box;
+  margin: 100px auto 10px;
+  overflow: hidden;
+  
+  // Toggle
+  &-toggle {
+    z-index: 10;
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    background: $white;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    transform-origin: center;
+    transform: translate(0, -25%) scale(0);
+    opacity: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
 
-      .form-field {
-        position: relative;
-        margin-bottom: 1.5rem;
-      
-        label {
-          position: absolute;
-          top: 50%;
-          left: 0;
-          transform: translateY(-50%);
-          font-size: 1rem;
-          color: #757575;
-          transition: all 0.3s;
-        }
-      
-        input {
-          width: 100%;
-          border: none;
-          border-bottom: 2px solid transparent;
-          font-size: 1.5rem;
-          color: #212121;
-          padding: 0.5rem 0;
-        }
-      
-        input:focus {
-          outline: none;
-          border-bottom: 2px solid #1ca485;
-        }
-      
-        &.active {
-          top: 0;
-          transform: translateY(-50%) scale(0.75);
-          color: #1ca485;
-        }
-        .icon {
-          position: absolute;
-          right: 0;
-          bottom: 5px;
-          color: #757575;
-        }
-      }
-    .label{
-      font-family: $font-family; 
-      color: #1ca485;
-    }
-
-
-    mat-form-field {
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-
-    mat-icon {
-      color: #666;
-    }
-
-    input.mat-input {
-      padding: 0.5rem;
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 30px;
+      height: 4px;
+      background: $accent;
+      transform: translate(-50%, -50%);
     }
 
-    .botonRegistro {
-      transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease;
-
-      &:enabled {
-        border: 1px transparent;
-        margin-bottom: 20px;
-        color: white;
-        background-color: #1ca485;
-        font-family: $font-family;
-      }
-    
-      &:disabled {
-        background-color: transparent;
-        color: transparent;
-        border: 1px solid transparent;
-        margin-bottom: 20px;
-      }
+    &:before {
+      transform: translate(-50%, -50%) rotate(45deg);
     }
+
+    &:after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    &.visible {
+      transform: translate(0, -25%) scale(1);
+      opacity: 1;
     }
   }
 
-  .extras {
+  &-group {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 0 20px;
 
-    a {
-      color: #1ca485;
-      text-decoration: none;
-      cursor: pointer;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-
-    mat-spinner {
-      margin: 20px 0;
+    &:last-child {
+      margin: 0;
     }
 
     label {
-      color: rgb(255, 0, 0);
       display: block;
-      text-align: center;
-      margin-top: 1rem;
+      margin: 0 0 10px;
+      color: $gray;
+      font-size: 12px;
+      font-weight: $semibold;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+
+      .two & {
+        color: $white;
+      }
+    }
+
+    input {
+      outline: none;
+      display: block;
+      background: rgba($black, 0.1);
+      width: 100%;
+      border: 0;
+      border-radius: 4px;
+      box-sizing: border-box;
+      padding: 12px 20px;
+      color: $gray;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: $semibold;
+      line-height: inherit;
+      transition: 0.3s ease;
+
+      &:focus {
+        color: $dark-gray;
+      }
+
+      .two & {
+        color: $white;
+
+        &:focus {
+          color: $white;
+        }
+      }
+    }
+
+    button {
+      outline: none;
+      background: $accent;
+      width: 100%;
+      border: 0;
+      border-radius: 4px;
+      padding: 12px 20px;
+      color: $white;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: $semibold;
+      line-height: inherit;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      .two & {
+        background: $white;
+        color: $accent;
+      }
+    }
+
+    .form-remember {
+      font-size: 12px;
+      font-weight: $regular;
+      letter-spacing: 0;
+      text-transform: none;
+
+      input[type='checkbox'] {
+        display: inline-block;
+        width: auto;
+        margin: 0 10px 0 0;
+      }
+    }
+
+    .form-recovery {
+      color: $accent;
+      font-size: 12px;
+      text-decoration: none;
     }
   }
+
+  // Panel
+  &-panel {
+    padding: 60px calc(5% + 60px) 60px 60px;
+    box-sizing: border-box;
+
+    // Panel One
+    &.one {
+      &:before {
+        @extend .overlay;
+
+        content: '';
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ease;
+      }
+
+      &.hidden {
+        &:before {
+          display: block;
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+
+    // Panel Two
+    &.two {
+      z-index: 5;
+      position: absolute;
+      top: 0;
+      left: 95%;
+      background: $accent;
+      width: 100%;
+      min-height: 100%;
+      padding: 60px calc(10% + 60px) 60px 60px;
+      transition: 0.3s ease;
+      cursor: pointer;
+
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 60px;
+        left: 1.5%;
+        background: rgba($white, 0.2);
+        height: 30px;
+        width: 2px;
+        transition: 0.3s ease;
+      }
+
+      &:after {
+        left: 3%;
+      }
+
+      &:hover {
+        left: 93%;
+        box-shadow: 0 0 10px rgba($black, 0.2);
+
+        &:before,
+        &:after {
+          opacity: 0;
+        }
+      }
+
+      &.active {
+        left: 10%;
+        box-shadow: 0 0 10px rgba($black, 0.2);
+        cursor: default;
+
+        &:before,
+        &:after {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  // Header
+  &-header {
+    margin: 0 0 40px;
+
+    h1 {
+      padding: 4px 0;
+      color: $accent;
+      font-size: 24px;
+      font-weight: $bold;
+      text-transform: uppercase;
+
+      .two & {
+        position: relative;
+        z-index: 40;
+        color: $white;
+      }
+    }
+  }
+
 }
+

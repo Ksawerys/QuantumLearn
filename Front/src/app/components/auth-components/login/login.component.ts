@@ -32,17 +32,26 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
   styleUrl: './login.component.scss'
 })
 export class LoginComponenteComponent implements OnInit {
-  //JavierMorales
-  //Declaraciones generales
+
   errorLogin!: Boolean
   hide = true
   mensajeError = ''
-  // Declaración del formulario reactivo
+  showRegister = false; 
   loginFormulario = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]),
     password: new FormControl('', [Validators.required])
   })
 
+  OpenPanelTwo() {
+    if(this.showRegister == false){
+    this.showRegister = !this.showRegister;
+    }
+  }
+  ColsePanelTwo() {
+    if(this.showRegister == true){
+    this.showRegister = !this.showRegister;
+    }
+  }
   // Evento que se ejecuta al pulsar sobre el boton de iniciar sesion
   botonLogin() {
     this.errorLogin = true
