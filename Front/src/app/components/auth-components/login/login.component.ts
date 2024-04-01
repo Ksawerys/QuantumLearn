@@ -31,27 +31,80 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponenteComponent implements OnInit {
+export class LoginComponenteComponent implements OnInit  {
 
   errorLogin!: Boolean
   hide = true
   mensajeError = ''
   showRegister = false; 
+  showRoles = false;
+  selectedRoles: string[] = [];
+
   loginFormulario = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]),
-    password: new FormControl('', [Validators.required])
+    email: new FormControl('', [
+      Validators.required,  
+      Validators.email
+    ]),
+    password: new FormControl('', [
+      Validators.required, 
+      Validators.minLength(8), 
+      Validators.maxLength(30), 
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])[a-zA-Z0-9!@#\$%\^&\*]{8,}$')
+    ])  
   })
 
-  OpenPanelTwo() {
-    if(this.showRegister == false){
-    this.showRegister = !this.showRegister;
+  registerForm = new FormGroup({
+    email: new FormControl('', [
+      Validators.required, 
+      Validators.email
+    ]),
+    name: new FormControl('', [
+      Validators.required, 
+      Validators.minLength(2), 
+      Validators.maxLength(50), 
+      Validators.pattern('^[a-zA-Z ]*$')
+    ]),
+    second_name: new FormControl('', [
+      Validators.required, 
+      Validators.minLength(2), 
+      Validators.maxLength(50), 
+      Validators.pattern('^[a-zA-Z ]*$')
+    ]),
+    password: new FormControl('', [
+      Validators.required, 
+      Validators.minLength(8), 
+      Validators.maxLength(30), 
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])[a-zA-Z0-9!@#\$%\^&\*]{8,}$')
+    ]),
+    roles: new FormControl([], Validators.required)
+  });
+
+  toggleSelection(event: Event) {
+    let target: HTMLElement | null = event.target as HTMLElement;
+  
+    // Sube por el árbol del DOM hasta encontrar un elemento con la clase 'role-option'
+    while (target && !target.classList.contains('role-option')) {
+      target = target.parentElement;
     }
-  }
-  ColsePanelTwo() {
-    if(this.showRegister == true){
-    this.showRegister = !this.showRegister;
+  
+    // Si no encontramos un elemento con la clase 'role-option', salimos de la función
+    if (!target) return;
+  
+    const roleId = target.id.replace('role-', '');
+  
+    if (target.classList.contains('selected')) {
+      this.selectedRoles = this.selectedRoles.filter(role => role !== roleId);
+    } else {
+      this.selectedRoles.push(roleId);
     }
+  
+    target.classList.toggle('selected');
   }
+  register() {
+    // Aquí puedes hacer algo con this.selectedRoles, que contiene los roles seleccionados
+    console.log(this.selectedRoles);
+  }
+
   // Evento que se ejecuta al pulsar sobre el boton de iniciar sesion
   botonLogin() {
     this.errorLogin = true
@@ -124,11 +177,14 @@ export class LoginComponenteComponent implements OnInit {
 
   ngOnInit(): void {
     if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('token')) {
-      this.router.navigate(['/login'])
+      this.router.navigate(['/inicio'])
     }
   }
 
   constructor(private userService: UserService, private router: Router, public dialog: MatDialog) {
   }
-
+  onSubmit(event: Event) {
+    event.preventDefault();
+    // Aquí va el código que se ejecutará cuando se envíe el formulario
+  }
 }
