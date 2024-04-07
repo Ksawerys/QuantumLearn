@@ -11,6 +11,8 @@ import {HttpResponse} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogPasswordComponent} from "../../dialogs/dialog-password/dialog-password.component";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import { NotificationComponent } from '../../notifications/notification/notification.component';
+import { NotificationsService } from '../../../services/notifications.service';
 
 @Component({
   selector: 'app-login-componente',
@@ -27,67 +29,73 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     RouterLink,
     MatButton,
     MatProgressSpinner,
+    NotificationComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponenteComponent implements OnInit  {
 
-  errorLogin!: Boolean
   hide = true
-  mensajeError = ''
   showRegister = false; 
   showRoles = false;
   selectedRoles: string[] = [];
 
+  errorLogin!: Boolean
+  errorRegistro!: Boolean
+  titleError = 'Error'
+  messageError = ''
+  descriptionError = 'Revisa los campos introducidos, revisa la conexion y vuelve a intentarlo'
+
   loginFormulario = new FormGroup({
     email: new FormControl('', [
-      Validators.required,  
+      Validators.required,
+      Validators.maxLength(50),   
       Validators.email
     ]),
-    password: new FormControl('', [
+    password: new FormControl('',{ updateOn: 'blur', validators: [
       Validators.required, 
       Validators.minLength(8), 
       Validators.maxLength(30), 
-      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])[a-zA-Z0-9!@#\$%\^&\*]{8,}$')
-    ])  
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])[a-zA-Z0-9!@#\$%\^&\*]*$')
+    ]})
   })
 
   registerForm = new FormGroup({
-    email: new FormControl('', [
+    email: new FormControl('', { updateOn: 'blur', validators: [
       Validators.required, 
+      Validators.maxLength(50),   
       Validators.email
-    ]),
-    name: new FormControl('', [
+    ]}),
+    name: new FormControl('', { updateOn: 'blur', validators:  [
       Validators.required, 
       Validators.minLength(2), 
-      Validators.maxLength(50), 
+      Validators.maxLength(30), 
       Validators.pattern('^[a-zA-Z ]*$')
-    ]),
-    second_name: new FormControl('', [
+    ]}),
+    second_name: new FormControl('', { updateOn: 'blur', validators:  [
       Validators.required, 
       Validators.minLength(2), 
-      Validators.maxLength(50), 
+      Validators.maxLength(30), 
       Validators.pattern('^[a-zA-Z ]*$')
-    ]),
-    password: new FormControl('', [
+    ]}),
+    password: new FormControl('', { updateOn: 'blur', validators:  [
       Validators.required, 
       Validators.minLength(8), 
       Validators.maxLength(30), 
-      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])[a-zA-Z0-9!@#\$%\^&\*]{8,}$')
-    ]),
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])[a-zA-Z0-9!@#\$%\^&\*]*$')
+    ]}),
+
     roles: new FormControl([], Validators.required)
   });
 
-  toggleSelection(event: Event) {
+  rolesSelection(event: Event) {
     let target: HTMLElement | null = event.target as HTMLElement;
   
-    // Sube por el árbol del DOM hasta encontrar un elemento con la clase 'role-option'
     while (target && !target.classList.contains('role-option')) {
       target = target.parentElement;
     }
   
-    // Si no encontramos un elemento con la clase 'role-option', salimos de la función
     if (!target) return;
   
     const roleId = target.id.replace('role-', '');
@@ -100,80 +108,36 @@ export class LoginComponenteComponent implements OnInit  {
   
     target.classList.toggle('selected');
   }
-  register() {
-    // Aquí puedes hacer algo con this.selectedRoles, que contiene los roles seleccionados
-    console.log(this.selectedRoles);
-  }
-
-  // Evento que se ejecuta al pulsar sobre el boton de iniciar sesion
-  botonLogin() {
-    this.errorLogin = true
-    this.mensajeError = ''
-    let usuario: User = {
-      email: this.loginFormulario.value.email ?? '',
-      password: this.loginFormulario.value.password ?? ''
-    }
-
-    //Llamada al servicio para realizar el login
-    this.userService.login(usuario).subscribe({
-      next: (respuestaServidor: HttpResponse<UserAccess>) => {
-        this.errorLogin = false
-        switch (respuestaServidor.status) {
-          case 200:
-            this.loginExistoso(respuestaServidor.body)
-            break;
-          case 203:
-            // Codigo de error en caso de que el usuario introducido sea incorrecto
-            this.loginFormulario.reset({}, {emitEvent: false});
-            this.mensajeError = 'Usuario incorrecto'
-            break;
-          default:
-            // Este mensaje de error no deberia salir nunca, ya que las validaciones del formulario están correctas.
-            this.loginFormulario.reset()
-            this.mensajeError = 'Error en el servidor. Vuelva a intentarlo más tarde'
-            break;
+  login() {
+    this.userService.login(this.loginFormulario.value).subscribe(
+      response => {
+        if(response.body){
+        sessionStorage.setItem('token', response.body!.token!);
+        this.router.navigate(['/inicio']);
         }
       },
-      error: (err) => {
-        this.errorLogin = false
-        this.mensajeError = 'Servicio no disponible'
+      error => {
+        this.errorRegistro = true;
+        this.createNotification();
       }
-    })
-
+    );
   }
-
-  // Guarda el usuario en el session storage en caso de que el login haya sido correcto
-  loginExistoso(usuarioSessionStorage: UserAccess | null) {
-    console.log('sgdfsdfg',usuarioSessionStorage)
-    sessionStorage.setItem('token', <string>usuarioSessionStorage?.token)
-    this.router.navigate(['/inicio'])
-  }
-
-  // Botón de recuperar contraseña. Abre un dialog para pedir el email.
-  recuperarPassword() {
-    const dialogRef = this.dialog.open(DialogPasswordComponent, {
-      width: '500px',
-      disableClose: false
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      // Si en el popup de pedir email, el usuario pulsa sobre aceptar,
-      // devuelve el email introducido, en caso de que pulse sobre cancelar devolver false.
-      if (result != false) {
-        this.sendPassword(result.value)
+  
+  register() {
+    this.userService.register(this.registerForm.value).subscribe(
+      response => {
+        if(response.body){
+        sessionStorage.setItem('token', response.body!.token!);
+        this.router.navigate(['/inicio']);
+        }
+      },
+      error => {
+        this.errorLogin = true;
+        this.createNotification();
       }
-    });
+    );
   }
 
-  // Manda el email al servidor
-  sendPassword(email: string) {
-    let body = {
-      email: email
-    }
-    this.userService.sendPassword(body).subscribe({
-      next: () => {
-      }
-    })
-  }
 
   ngOnInit(): void {
     if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('token')) {
@@ -181,10 +145,13 @@ export class LoginComponenteComponent implements OnInit  {
     }
   }
 
-  constructor(private userService: UserService, private router: Router, public dialog: MatDialog) {
+  createNotification() {
+    console.log('Creating notification');
+    const notification = { title: 'Title', message: 'Message', additionalInfo: 'Additional info' };
+    this.notificationService.addNotification(notification);
   }
-  onSubmit(event: Event) {
-    event.preventDefault();
-    // Aquí va el código que se ejecutará cuando se envíe el formulario
+
+  constructor(private userService: UserService, private router: Router, public dialog: MatDialog,private notificationService: NotificationsService) {
   }
+
 }

@@ -27,6 +27,7 @@ body {
   height: 100%;
 }
 
+
 .form {
   z-index: 15;
   position: absolute;
@@ -166,12 +167,32 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 1vh 0 5vh;
+    margin: 1vh 0 6.0vh;
     position: relative;
     flex-grow: 1;
     border: none;
+    @media (max-width: 376px) {
+      margin: 0 0 10vh;
+    }
+    .error-login {
+      color: rgb(221, 0, 0);
+      font-size: 12px;
+      position: absolute;
+      top: 100%;
+      transition: all 0.7s ease-out;
+      font-family: $font-family;
+      font-weight: 550;
+    }
 
-
+    .error-register {
+      color: rgb(130, 0, 0);
+      font-size: 12.5px;
+      position: absolute;
+      top: 100%;
+      transition: all 0.7s ease-out;
+      font-family: $font-family;
+      font-weight: 550;
+    }
 
     label {
       position: absolute;
@@ -209,6 +230,7 @@ body {
       transition: all 0.3s cubic-bezier(.64, .09, .08, 1);
       z-index: 1;
       position: relative;
+      user-select: none;
 
       &:focus {
         border-bottom: 2px solid #1ca485;
@@ -400,11 +422,8 @@ body {
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
-        margin-top: -30px;
         border: none;
-        @media (max-width: 376px) {
-          margin-top: -60px; 
-        }
+
         &.active {
           opacity: 1;
           visibility: visible;
@@ -484,7 +503,7 @@ body {
       font-size: 4vh;
       text-align: center;
       color: $accent;
-      margin-bottom: 1.0rem;
+      margin-bottom: 0.1rem;
       font-weight: bold;
       padding-bottom: 2vh;
 
