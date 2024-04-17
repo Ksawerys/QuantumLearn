@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import {Router, RouterOutlet} from '@angular/router';
 import {MatMenuModule} from "@angular/material/menu";
 import {ToastModule} from "primeng/toast";
-
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatMenuModule, ToastModule],
+  imports: [CommonModule, RouterOutlet, MatMenuModule, ToastModule, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
