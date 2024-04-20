@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { MatIcon } from "@angular/material/icon";
-import { Router } from 'express';
 import { RouterLink } from "@angular/router";
-import { HttpResponse } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatIcon,RouterLink],
+  imports: [MatIcon,RouterLink,HttpClientModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-  constructor( private router: Router) {}
+  constructor(private http: HttpClient) {}
 
 }

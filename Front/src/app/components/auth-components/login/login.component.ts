@@ -7,12 +7,13 @@ import {MatInput} from "@angular/material/input";
 import {Router, RouterLink} from "@angular/router";
 import {UserAccess, User} from "../../../interfaces/interfaz-user";
 import {UserService} from "../../../services/user.service";
-import {HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogPasswordComponent} from "../../dialogs/dialog-password/dialog-password.component";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import { NotificationComponent } from '../../notifications/notification/notification.component';
 import { NotificationsService } from '../../../services/notifications.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-componente',
@@ -29,7 +30,8 @@ import { NotificationsService } from '../../../services/notifications.service';
     RouterLink,
     MatButton,
     MatProgressSpinner,
-    NotificationComponent
+    NotificationComponent,
+    HttpClientModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -151,7 +153,7 @@ export class LoginComponenteComponent implements OnInit  {
     this.notificationService.addNotification(notification);
   }
 
-  constructor(private userService: UserService, private router: Router, public dialog: MatDialog,private notificationService: NotificationsService) {
+  constructor(private userService: UserService, private router: Router, public dialog: MatDialog,private notificationService: NotificationsService,private http: HttpClient) {
   }
 
 }

@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import {Router, RouterOutlet} from '@angular/router';
 import {MatMenuModule} from "@angular/material/menu";
 import {ToastModule} from "primeng/toast";
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { RouterLink } from "@angular/router";
+import { HttpClient } from '@angular/common/http';
+import { LoginComponenteComponent } from './components/auth-components/login/login.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatMenuModule, ToastModule, NavbarComponent],
+  imports: [CommonModule, RouterOutlet, MatMenuModule, ToastModule, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
