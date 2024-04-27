@@ -11,8 +11,8 @@ import {HttpClient, HttpResponse} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogPasswordComponent} from "../../dialogs/dialog-password/dialog-password.component";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
-import { NotificationComponent } from '../../notifications/notification/notification.component';
-import { NotificationsService } from '../../../services/notifications.service';
+// import { NotificationComponent } from '../../notifications/notification/notification.component';
+// import { NotificationsService } from '../../../services/notifications.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({
@@ -30,7 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     RouterLink,
     MatButton,
     MatProgressSpinner,
-    NotificationComponent,
+    // NotificationComponent,
     HttpClientModule
   ],
   templateUrl: './login.component.html',
@@ -120,7 +120,6 @@ export class LoginComponenteComponent implements OnInit  {
       },
       error => {
         this.errorRegistro = true;
-        this.createNotification();
       }
     );
   }
@@ -135,7 +134,6 @@ export class LoginComponenteComponent implements OnInit  {
       },
       error => {
         this.errorLogin = true;
-        this.createNotification();
       }
     );
   }
@@ -147,13 +145,8 @@ export class LoginComponenteComponent implements OnInit  {
     }
   }
 
-  createNotification() {
-    console.log('Creating notification');
-    const notification = { title: 'Title', message: 'Message', additionalInfo: 'Additional info' };
-    this.notificationService.addNotification(notification);
-  }
 
-  constructor(private userService: UserService, private router: Router, public dialog: MatDialog,private notificationService: NotificationsService,private http: HttpClient) {
+  constructor(private userService: UserService, private router: Router, public dialog: MatDialog,private http: HttpClient) {
   }
 
 }
