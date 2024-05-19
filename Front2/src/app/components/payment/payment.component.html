@@ -1,0 +1,82 @@
+<div class="payment-page">
+    <h1>Complet you purchase</h1>
+    <div class="payment-methods">
+      <button class="oval-lg payment-method" [class.active]="creditCard" (click)=" sepa = false; paypal = false; creditCard = true;">Credit Card</button>
+      <button class="oval-lg payment-method" [class.active]="paypal" (click)=" sepa = false; paypal = true; creditCard = false;">PayPal</button>
+      <button class="oval-lg payment-method" [class.active]="sepa" (click)=" sepa = true; paypal = false; creditCard = false;">SEPA</button>
+    </div>
+  </div>
+@if(creditCard){
+  <div id="credit-card" class="payment-information">
+    <form>
+        <div class="form-group">
+          <label for="cardName">Cardholder Name</label>
+          <input type="text" id="cardName" name="cardName" required>
+        </div>
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <input type="text" id="cardNumber" name="cardNumber" required>
+        </div>
+        <div class="form-group">
+          <label for="expiryDate">Expiry Date</label>
+          <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV</label>
+          <input type="text" id="cvv" name="cvv" required>
+        </div>
+      </form>
+  </div>
+}@else if(paypal){
+  <div id="paypal" class="payment-information">
+    <form>
+        <div class="form-group">
+          <label for="paypalEmail">PayPal Email</label>
+          <input type="email" id="paypalEmail" name="paypalEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="paypalPassword">PayPal Password</label>
+          <input type="password" id="paypalPassword" name="paypalPassword" required>
+        </div>
+      </form>
+  </div>
+}@else if(sepa){
+  <div id="sepa" class="payment-information">
+    <form>
+        <div class="form-group">
+          <label for="accountName">Account Holder Name</label>
+          <input type="text" id="accountName" name="accountName" required>
+        </div>
+        <div class="form-group">
+          <label for="iban">IBAN</label>
+          <input type="text" id="iban" name="iban" required>
+        </div>
+        <div class="form-group">
+          <label for="bic">BIC</label>
+          <input type="text" id="bic" name="bic" required>
+        </div>
+      </form>
+  </div>
+}
+  <div id="personal-information">
+    <form>
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </form>
+  </div>
+  <button id="submit-button" type="submit">Submit</button>
+

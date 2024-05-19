@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "quantumlearn-418816",
+  "private_key_id": "7a1528261416b09dba3dbeb7e21cd22244ec6dc7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCkgCb8+RYfN6h7\n95Nl0vEiZcQGtIpN7bZBnwfwDRBM3eJskFtuxZn4Uq6TmJIP/h4oBw9VNdJ4P7J8\niNluTxfEzpA3mmdcgiYpg7ljm0m0u64uoAPNvvG0ThxS+RX5tkMc5hnvwURoHuk2\nmdBsg6jKoQ1yNanDslTtrSIEJI4hYSHQG6suo+1X6gysEz3HssOiQGFWqv4rg0tl\n73I+KsKSuOsxINIv/l11uZMDPIQpULeyvY70y7PnsFvnhGzCSTQvljDpqHN3AcAd\nrbQgEuK2wa2AYlYQnY3aB69e29f69JYMHJ2tGTg0nabap2IY+3Wmafhh2TFD8y88\ny9pMFYHLAgMBAAECggEAUbXsZ+UsdWY2tRk1qLL+nyjwlaoRNwNYcEEX9sfubFgc\n8/NCz4Os5vnfCKaVCwedoCFdnuRkvuFY/d4WLuJvuo0metAh/oQRg7aQHGeS1YkS\nTMukCAuMURUpoZdjsI21yYGMqZiVK6kLC9mce4JskfYs0SnRwUjwQb0ps+gah35E\n34+kVvWgNDibbarnkR7h2vmjgRbwXYF3ALorfrW7NGlDdRfDkMmPRUYSaxj/clJy\nBdd9cP7RtPobahUinQiHK7BgPfeEQ8v7OhmQOsdPKPZYuIN092xvFUec/ZIRRDX7\ngN7oPzgVhEUEiAgcsYDLBWXLxq7vZD96lTFfvrIluQKBgQDgBnh7MF+Yzu16EeFU\nMnWRU38dTTr6fV4ZWKW2XwSvuD/iNivmeXtULcQfM30FrPd+40ZZurkn3KMhHTyM\nGqQo4kI1BVcnQGnLHN7m0/+o6NESlT1R8oBNnRHl/dxBoDx+xBJqkj31zBE9jue9\nBG1Oi8q5KnUNTZLnuduI6OP8KQKBgQC7+r5y4CTrkmW4gir7gDcRFV0aOepdzkll\ns3TZrlfVaTlRd7eMjPAd9fJVMxwrs/urWNRfyWw/9fZCg9i/B/Yq1r4q+IalJgCp\navsk8kWocMyCD8UJURDVaoW/FWC/gB1CY5KETq5x1lJMTxLuMtr0wuCSVro7FMBw\n/x1/ONzM0wKBgQDMhvvOND7C6wDCtrpKvXq6wElIPi8/a9/SMi2wj5VevE+Ovjhc\nRcLD+riYZ9CXsu+OZ/7dguzyKKzCWcfifZwsO02IzKRiEJvFtUkH4rsBwfTHC3ud\nalGbCnDB0oAZZip07ZuGspdg5ftDgUmvNvB4ioX9gXa2O4GIkBWPLFig6QKBgFd/\nUjCUZnsETLbCWBFyz67y+8AeXxnE0GM3UdeVECs07EogaF5Sp926Qk8oGB+7ihRq\np4ficLGg4jx5tGTO5uVvyVqlDb9HXh19v2KmJohN4NNVVciNZEGCcLjN0ZexoWzq\nfiN5oDc6pFoCoHQhVcuB/hf/qHWhpiWyid9S72ujAoGBAK61mpOAqua1gfSZY8jW\nmcukhN1jPOocqDCAOOOg51fOwlBSk2XP+KoUC+U5hyGAhWmykB0QpULvCMLeR0h3\nsQx1aI8qH0nWXbK2vyuqFN4wKufj0nOTFKLCC0RSvJ/vxvzWz5oSLFRWMXBV9gLq\nxoSQ9S3Dht1BQhPBylY3OETj\n-----END PRIVATE KEY-----\n",
+  "client_email": "quantumlearn@quantumlearn-418816.iam.gserviceaccount.com",
+  "client_id": "117065405220457067300",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/quantumlearn%40quantumlearn-418816.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

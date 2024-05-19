@@ -1,0 +1,29 @@
+
+
+<div  class="note-container">
+  @for(categorie of categories; track categories.indexOf){
+    <div class="categorie">
+      <h2>{{categorie.content}}</h2>
+      <div class="notes">
+    @for(note of notes; track notes.indexOf){
+    <div  class="note">
+        <textarea>{{note.content}}</textarea>
+    </div>
+    }
+  </div>
+  </div>
+  }
+  </div>
+
+  <!-- <div cdkDropList (cdkDropListDropped)="drop($event)" class="note-container">
+    @for(categorie of categories; track categories.indexOf){
+      <div>
+        <h2>{{categorie.content}}</h2>
+      @for(note of notes; track notes.indexOf){
+      <div cdkDrag class="note">
+          <textarea>{{note.content}}</textarea>
+      </div>
+      }
+    </div>
+    }
+    </div> -->

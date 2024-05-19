@@ -31,7 +31,7 @@ class UserConnection {
           throw error;
         }
       }
-getUser = async (email) => {
+getUserLogin = async (email) => {
   try {
     const user = await model.User.findOne({
       where: { 
@@ -82,6 +82,71 @@ getUser = async (email) => {
       throw error;
     }
   }
+
+  getUser = async (id) => {
+    try {
+      const user = await model.User.findOne({ 
+        where: { id },
+        include: [{
+          model: model.Role,
+          through: model.UserRole,
+          as: 'Roles'
+        }]
+      });
   
+      if (!user) {
+        throw new Error('User not found');
+      }
+  
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  updateUser = async (id, updatedUser, roles) => {
+    try {
+      const user = await model.User.findOne({ where: { id } });
+      if (!user) {
+        throw new Error('User not found');
+      }
+  
+      if (updatedUser.password) {
+        updatedUser.password = await bcrypt.hash(updatedUser.password, 10);
+      }
+  
+      await user.update(updatedUser);
+  
+      if (roles && roles.length > 0) {
+        const roleInstances = await model.Role.findAll({
+          where: { name: roles }
+        });
+  
+        await user.setRoles(roleInstances);
+      }
+  
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+}
+
+saveImage = async (id, imageUrl) => {
+  try {
+    const user = await model.User.findOne({ where: { id } });
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    await user.update({ url_photo: imageUrl });
+
+    return user;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 module.exports = UserConnection;

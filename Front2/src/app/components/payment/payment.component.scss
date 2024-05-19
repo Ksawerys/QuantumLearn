@@ -1,0 +1,138 @@
+  
+  $fontFamily: 'Montserrat', sans-serif;
+  $fontSize: 18px;
+  $textColor: #6C7587;
+  
+  $height: 54px;
+  
+  $bgColor: #EBECF0;
+  
+  $darkShadow: #484f60;
+  $lightShadow: #FFFFFF;
+  
+  $dropShadow: 8px 8px 12px -2px rgba($darkShadow, 0.4),
+               -6px -6px 12px -1px rgba($lightShadow, 1);
+  
+  $innerShadow: inset -4px -4px 6px -1px rgba($lightShadow, 1),
+                inset 2px 2px 8px -1px rgba($darkShadow, 0.5);
+
+  $dropShadow0: 8px 8px 12px -2px rgba($darkShadow, 0),
+                -6px -6px 12px -1px rgba($lightShadow, 0);
+   
+   $innerShadow0: inset -4px -4px 6px -1px rgba($lightShadow, 0),
+                 inset 2px 2px 8px -1px rgba($darkShadow, 0);
+  
+  @mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+  }
+  
+  @mixin applyFontStyle() {
+    font-family: $fontFamily;
+    font-size: $fontSize;
+    line-height: $fontSize;
+    color: $textColor;
+  }
+  
+
+.payment-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .payment-methods {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  #personal-information {
+    position: absolute;
+    top: 50%;
+    width: 50%; 
+    right: 0;
+    background-color: #484f60;
+    transform: translateY(-50%);
+  }
+
+  .payment-information{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: #1d4195;
+  }
+
+  .form-group{
+    margin: 20px;
+  }
+
+  %shared-styles {
+    @include applyFontStyle;
+    padding: 0 8px;
+    position: relative;
+    border: 3px solid rgba($lightShadow, 0);
+    outline: none;
+    text-align: center;
+    background-color: white;
+    transition: all 290ms ease-in-out;
+    font-weight: bold;
+    &:hover {
+      box-shadow: none;
+      border-color: rgba($lightShadow, 0.5);
+    }
+  }
+  
+  button {
+    @extend %shared-styles;
+    box-shadow:$dropShadow, $innerShadow0;
+    cursor: pointer;
+  
+    &:active {
+      box-shadow: $innerShadow;
+      border-color: rgba($lightShadow, 0);
+    }
+    
+    & > * { vertical-align: middle; }
+    & > span:last-child { padding-left: 8px; }
+  }
+  .active {
+    box-shadow:$dropShadow0, $innerShadow;
+    border-color: rgba($lightShadow, 0);
+    transition: all 990ms ease-in-out;
+    button {
+
+    }
+    &:hover {
+        box-shadow:  $innerShadow;
+        border-color: none;
+      }
+  }
+  // Oval Buttons
+  
+  %oval-btn {
+    height: $height;
+    padding: 0 28px;
+    border-radius: 40px;
+  }
+  
+  
+  .oval-lg {
+    @extend %oval-btn;
+    width: 210px;
+    
+    &--with-icon {
+      @extend .oval-lg;
+      text-align: left;
+    }
+  }
+  
+  #submit-button{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); 
+    margin: 50px;
+  }

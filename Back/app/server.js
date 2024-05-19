@@ -9,6 +9,7 @@ class Server {
     constructor() {
         this.app = express();
         this.userPath = '/user'
+        this.openaiPath = '/openai'
 
         // Para websocket
         this.serverWebSocket = require('http').createServer(this.app)
@@ -47,7 +48,10 @@ class Server {
 
     routes() {
         this.app.use(this.userPath, require('../routes/userRoute'));
+        this.app.use(this.openaiPath, require('../routes/openaiRoutes'));
+
         this.app.use((err, req, res, next) => {
+            console.log('asdasdasdasdasdsd',err);
             res.status(500).send('¡Algo salió mal!');
         });
     }

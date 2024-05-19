@@ -9,7 +9,7 @@ const validarUsuario = (req, res, next) => {
 
     try {
         const {roles} = jwt.verify(token, process.env.secretOrPrivateKey)
-        const rolesArray = roles[0].roles.map(rol => rol.nombre); // Transforma a un array de nombres
+        const rolesArray = roles[0].roles.map(rol => rol.nombre); 
 
         if (rolesArray.includes('usuario')) {
                 next();
