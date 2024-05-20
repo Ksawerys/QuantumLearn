@@ -3,28 +3,32 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('questions', {
+    await queryInterface.createTable('user_answers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      question: {
+      response: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      type_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'question_types', 
+          model: 'users', 
           key: 'id'
         },
-        allowNull: true,
+        allowNull: false,
       },
-      active: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
+      question_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'questions', 
+          key: 'id'
+        },
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -40,6 +44,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('questions');
+    await queryInterface.dropTable('user_answers');
   }
 };

@@ -2,14 +2,14 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Class extends Model {
+  class Message extends Model {
     static associate(models) {
-      this.belongsToMany(models.User, { through: 'class_students', foreignKey: 'class_id' });
-      models.User.belongsToMany(this, { through: 'class_students', foreignKey: 'student_id' });
+      this.belongsTo(models.Chat, { foreignKey: 'chat_id', as: 'chat' });
+      this.belongsTo(models.UserRole, { foreignKey: 'user_role_id', as: 'userRole' });
     }
   }
 
-  Class.init(
+  Message.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -17,15 +17,23 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      teacher_id: {
+      chat_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        references: {
+          model: 'chats', 
+          key: 'id'
+        }
       },
-      name: {
-        type: DataTypes.STRING,
+      user_role_id: {
+        type: DataTypes.INTEGER,
         allowNull: true,
+        references: {
+          model: 'user_roles', 
+          key: 'id'
+        }
       },
-      description: {
+      text: {
         type: DataTypes.TEXT,
         allowNull: true,
       },
@@ -36,12 +44,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Class',
-      tableName: 'classes',
+      modelName: 'Message',
+      tableName: 'messages',
       timestamps: true,
       underscored: true,
     }
   );
 
-  return Class;
+  return Message;
 };

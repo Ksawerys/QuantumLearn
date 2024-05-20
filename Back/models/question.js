@@ -4,9 +4,9 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Question extends Model {
     static associate(models) {
-      // Define associations here
-      // this.belongsTo(models.QuestionType, { foreignKey: 'type_id', as: 'questionType' });
-      // this.hasMany(models.QuestionChoice, { foreignKey: 'question_id', as: 'questionChoices' });
+      this.belongsTo(models.QuestionType, { foreignKey: 'type_id', as: 'questionType' });
+      this.hasMany(models.QuestionChoice, { foreignKey: 'question_id', as: 'questionChoices' });
+      this.hasMany(models.UserAnswer, { foreignKey: 'question_id', as: 'userAnswers' });
     }
   }
 
@@ -19,10 +19,6 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
       },
       question: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
-      answer: {
         type: DataTypes.TEXT,
         allowNull: true,
       },
