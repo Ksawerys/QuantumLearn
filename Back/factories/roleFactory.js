@@ -1,11 +1,11 @@
 const { Factory } = require('rosie');
-const faker = require('faker');
 
 const roleNames = ['teacher', 'guardian', 'student', 'admin'];
 
-roleNames.forEach((role, index) => {
-  Factory.define(`role${index}`)
-    .attr('name', role);
+const roles = roleNames.map((role, index) => {
+  return Factory.define(`role`)
+    .attr('name', role)
+    .build();
 });
 
-module.exports = Factory;
+module.exports = roles;
