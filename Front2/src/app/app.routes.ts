@@ -5,6 +5,7 @@ import { ProfileComponent } from './components/auth-components/profile/profile.c
 import { ErrorComponent } from './components/error/error.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { NotesComponent } from './components/notes/notes.component';
+import { SubNotesComponent } from './components/sub-notes/sub-notes.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -14,4 +15,6 @@ export const routes: Routes = [
     { path: 'error', component:  ErrorComponent},
     { path: 'payments', component:  PaymentComponent},
     { path: 'notes', component:  NotesComponent},
+    { path: 'sub-notes', component:  SubNotesComponent},
+
 ];

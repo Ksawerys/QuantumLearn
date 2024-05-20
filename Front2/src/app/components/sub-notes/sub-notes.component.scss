@@ -236,16 +236,6 @@ input {
   flex-direction: column;
   width: 55%;
   margin: auto;
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    h2 {
-      width: 100%;
-      font-family: $fontFamily;
-      ;
-      text-align: center;
-    }
     .notes{
       display: flex;
       flex-direction: row;
@@ -289,7 +279,6 @@ input {
           pointer-events: none;
         }
       }
-    }
   }
 }
 
