@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   class QuestionChoice extends Model {
     static associate(models) {
       this.belongsTo(models.Question, { foreignKey: 'question_id', as: 'question' });
+      this.belongsTo(models.Choice, { foreignKey: 'choice_id', as: 'choice' });
     }
   }
 
@@ -20,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      choice: {
-        type: DataTypes.TEXT,
+      choice_id: {
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
     },

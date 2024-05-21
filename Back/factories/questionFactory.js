@@ -1,6 +1,6 @@
 const { Factory } = require('rosie');
 
-//genero una pregunta por cada tipo de pregunta. Pero los tipos de preguntas que se crean en el seeder son estos pero se definen en el archvio questionTypeFactory.js
+//genero una pregunta por cada tipo de pregunta. Los tipos de preguntas que se crean en el seeder. Son estos pero se definen en el archvio questionTypeFactory.js
 const questionTypes = ['open', 'rating', 'choice'];
 const questions = [
   "¿Que quieres hacer de mayor?",

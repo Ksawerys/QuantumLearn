@@ -3,33 +3,36 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('question_choices', {
+    await queryInterface.createTable('note_tags', { 
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        primaryKey: true
       },
-      question_id: {
+      note_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'questions',
+          model: 'notes', 
           key: 'id'
         },
-        allowNull: true,
+        allowNull: false
       },
-      choice_id: {
+      tag_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'choices',
+          model: 'tags', 
           key: 'id'
         },
-        allowNull: true,
+        allowNull: false
+      },
+      data: {
+        type: Sequelize.JSON,
+        allowNull: false
       }
     });
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('question_choices');
+    await queryInterface.dropTable('note_tags');
   }
 };

@@ -4,10 +4,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Note extends Model {
     static associate(models) {
-      this.belongsToMany(models.Class, { through: 'class_notes', foreignKey: 'note_id' });
-      models.Class.belongsToMany(this, { through: 'class_notes', foreignKey: 'class_id' });
-      this.belongsToMany(this, { as: 'Subnotes', through: 'subnotes', foreignKey: 'note_id', otherKey: 'subnote_id' });
-      this.belongsToMany(this, { as: 'ParentNotes', through: 'subnotes', foreignKey: 'subnote_id', otherKey: 'note_id' });
+      this.belongsToMany(models.Tag, { through: 'note_tags', foreignKey: 'note_id' });
     }
   }
 
@@ -20,35 +17,11 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
       },
       title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: true,
       },
       description: {
         type: DataTypes.TEXT,
-        allowNull: true,
-      },
-      start_date: {
-        type: DataTypes.DATEONLY,
-        allowNull: true,
-      },
-      end_date: {
-        type: DataTypes.DATEONLY,
-        allowNull: true,
-      },
-      priority: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      completed: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: null,
-      },
-      grade: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
-      },
-      type_id: {
-        type: DataTypes.INTEGER,
         allowNull: true,
       },
       active: {

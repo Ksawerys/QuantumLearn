@@ -3,21 +3,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('note_types', {
+    await queryInterface.createTable('tags', { 
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        primaryKey: true
       },
       name: {
         type: Sequelize.STRING(255),
-        allowNull: true,
+        allowNull: false
       }
     });
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('note_types');
+    await queryInterface.dropTable('tags');
   }
 };
