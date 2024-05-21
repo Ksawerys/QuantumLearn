@@ -1,7 +1,5 @@
 # QuantumLearn
 The academic organizer that helps you improve.
-| | | | | | | | |
-|-|-|-|-|-|-|-|-|
 |Project|routesGroups| | | | | | |
 |name|name|items| | | | | |
 | | |name|request| |response| | |
