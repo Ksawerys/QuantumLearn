@@ -1,6 +1,5 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
-const { socketController } = require('../controllers/websocket-controller');
 
 
 const cors = require('cors');
@@ -11,26 +10,8 @@ class Server {
         this.userPath = '/user'
         this.openaiPath = '/openai'
 
-        // Para websocket
-        this.serverWebSocket = require('http').createServer(this.app)
-        this.io = require('socket.io')(this.serverWebSocket,{
-            cors: {
-                origin: "http://localhost:4200",
-                methods: ["*"],
-                allowedHeaders: ["*"],
-                credentials: true
-            },
-        })
-
         this.middlewares()
         this.routes()
-        this.sockets()
-    }
-
-    sockets(){
-        this.io.on('connection', (socket) => {
-            socketController(socket, this.io)
-        });
     }
 
     middlewares() {

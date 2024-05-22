@@ -1,4 +1,3 @@
-const { response } = require('express')
 const { generarJWT } = require('../helpers/generate_jwt')
 const bcrypt = require('bcrypt');
 const UserConnection = require('../database/UserConnection');

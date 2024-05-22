@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400&display=swap');
 
+body.mat-typography {
+    margin: 0;
+    padding: 0;
+    background-color: #ebecf0;
+}
+
+
 $font-family: 'Google Sans',  sans-serif;
 
 // Font Family
@@ -32,3 +39,5 @@ $accent:  #1ca485;
 $max-width: 600px;
 $max-height: 400px;
 $gutters: 24px;
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

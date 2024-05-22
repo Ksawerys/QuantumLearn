@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       models.Note.belongsToMany(this, { through: 'user_notes', foreignKey: 'note_id' });
       this.belongsToMany(models.Role, { through: 'user_roles', foreignKey: 'user_id' });
       models.Role.belongsToMany(this, { through: 'user_roles', foreignKey: 'role_id' });
-      // this.hasMany(models.UserAnswer, { foreignKey: 'user_id', as: 'UserAnswer' });
+      this.hasMany(models.UserAnswer, { foreignKey: 'user_id', as: 'UserAnswer' });
     }
   }
 

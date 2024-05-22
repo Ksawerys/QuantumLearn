@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsToMany(models.Note, { through: 'note_tags', foreignKey: 'tag_id' });
     }
-  }
+}
 
   Tag.init(
     {

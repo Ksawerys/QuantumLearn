@@ -6,7 +6,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {SnackbarComponent} from "../../notifications/snackbar/snackbar.component";
+import {SnackbarComponent} from "../../notifications-components/snackbar/snackbar.component";
 
 @Component({
   selector: 'app-dialog-password',
@@ -25,7 +25,7 @@ import {SnackbarComponent} from "../../notifications/snackbar/snackbar.component
     ReactiveFormsModule,
   ],
   templateUrl: './dialog-password.component.html',
-  styleUrl: './dialog-password.component.css'
+  styleUrl: './dialog-password.component.scss'
 })
 export class DialogPasswordComponent {
   email = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')])

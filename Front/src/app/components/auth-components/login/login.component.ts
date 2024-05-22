@@ -5,7 +5,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {Router, RouterLink} from "@angular/router";
-import {UserAccess, User} from "../../../interfaces/interfaz-user";
+import {UserAccess, User} from "../../../interfaces/interface-user";
 import {UserService} from "../../../services/user.service";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
@@ -113,9 +113,10 @@ export class LoginComponenteComponent implements OnInit  {
   login() {
     this.userService.login(this.loginFormulario.value).subscribe(
       response => {
+        console.log(response)
         if(response.body){
         sessionStorage.setItem('token', response.body!.token!);
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/home']);
         }
       },
       error => {
@@ -129,7 +130,7 @@ export class LoginComponenteComponent implements OnInit  {
       response => {
         if(response.body){
         sessionStorage.setItem('token', response.body!.token!);
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/home']);
         }
       },
       error => {
