@@ -1,4 +1,4 @@
-const QuestionnaireConnection = require('../database/questionConnection');
+const QuestionnaireConnection = require('../database/questionnaireConnection');
 const QuestionConnection = require('../database/questionConnection');
 let questionConx = new QuestionConnection();
 let questionnaireConx = new QuestionnaireConnection();

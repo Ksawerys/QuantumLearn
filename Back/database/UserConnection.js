@@ -169,6 +169,21 @@ class UserConnection {
       throw error;
     }
   }
+  
+  insertUserAnswer = async(userId, questionId, response) => {
+    try {
+      const userAnswer = await model.UserAnswer.create({
+        user_id: userId,
+        question_id: questionId,
+        response: response
+      });
+  
+      return userAnswer;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }
 
 module.exports = UserConnection;
