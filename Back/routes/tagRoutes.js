@@ -5,7 +5,11 @@ const tagController = require('../controllers/tagController');
 router.put('/:tagId', tagController.updateTag);
 router.delete('/:tagId', tagController.deleteTag);
 router.post('/note/:noteId/:tagId', tagController.insertNoteTag);
-router.put('/note/:noteId/:tagId', tagController.updateNoteTag);
-router.delete('/note/:noteId/:tagId', tagController.deleteNoteTag);
+router.put('/noteTag/:noteTagId', tagController.updateNoteTag);
+router.delete('/notetag/:noteTagId', tagController.deleteNoteTag);
+router.get('/note/:noteId', tagController.getNoteTags);
+router.post('/', tagController.insertTag);
+
+
 
 module.exports = router;

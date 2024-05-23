@@ -1,11 +1,11 @@
 'use strict';
-const { Model } = require('sequelize');
+const { Model, Sequelize } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Subnote extends Model {
     static associate(models) {
-      this.belongsTo(models.Note, { as: 'Note', foreignKey: 'note_id' });
-      this.belongsTo(models.Note, { as: 'Subnote', foreignKey: 'subnote_id' });
+        this.belongsTo(models.Note, { as: 'Note', foreignKey: 'note_id' });
+        this.belongsTo(models.Subnote, { as: 'ParentSubnote', foreignKey: 'subnote_id' });
     }
   }
 
@@ -24,13 +24,14 @@ module.exports = (sequelize, DataTypes) => {
       subnote_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
-      },
+      }
     },
     {
       sequelize,
       underscored: true,
       modelName: 'Subnote',
       tableName: 'subnotes',
+      timestamps: true,   
     }
   );
 

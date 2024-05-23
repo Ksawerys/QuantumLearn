@@ -25,6 +25,11 @@ module.exports = {
           key: 'id'
         },
         allowNull: true,
+      },
+      answer_count: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0
       }
     });
   },

@@ -2,14 +2,14 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class QuestionChoice extends Model {
+  class QuestionnaireQuestion extends Model {
     static associate(models) {
+      this.belongsTo(models.Questionnaire, { foreignKey: 'questionnaire_id', as: 'questionnaire' });
       this.belongsTo(models.Question, { foreignKey: 'question_id', as: 'question' });
-      this.belongsTo(models.Choice, { foreignKey: 'choice_id', as: 'choice' });
     }
   }
 
-  QuestionChoice.init(
+  QuestionnaireQuestion.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -17,27 +17,23 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      questionnaire_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       question_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      choice_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      answer_count: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-      },
     },
     {
       sequelize,
-      modelName: 'QuestionChoice',
-      tableName: 'question_choices',
+      modelName: 'QuestionnaireQuestion',
+      tableName: 'questionnaire_questions',
       timestamps: false,
       underscored: true,
     }
   );
 
-  return QuestionChoice;
+  return QuestionnaireQuestion;
 };

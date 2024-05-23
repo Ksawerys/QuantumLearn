@@ -1,16 +1,17 @@
 const { generarJWT } = require('../helpers/generate_jwt')
 const bcrypt = require('bcrypt');
-const UserConnection = require('../database/UserConnection');
-const { authorize, uploadFile, getFile } = require('../database/driveConnection');
+const UserConnection = require('../database/userConnection');
+const { authorize, uploadFile, getFile, deleteFile } = require('../database/driveConnection');
+const { evaluateImage } = require('../services/openai');
 let conx = new UserConnection();
 
 const register = async (req, res) => {
   try {
-    const { email, name, second_name, password, url_photo, extension, roles } = req.body;
-    const user = await conx.insertUser({ email, name, second_name, password, url_photo, extension }, roles);
+    const { email, name, second_name, password, photo_id, extension, roles } = req.body;
+    const user = await conx.insertUser({ email, name, second_name, password, photo_id, extension }, roles);
     const token = await generarJWT(user.id, user.name);
 
-    res.status(200).json({token });
+    res.status(200).json({ token });
   } catch (error) {
     res.status(500).json({ 'msg': 'Error creating user', error });
   }
@@ -28,9 +29,9 @@ const login = async (req, res) => {
       return res.status(400).json({ 'msg': 'Invalid credentials' });
     }
     const token = await generarJWT(user.id, user.name);
-    res.status(200).json({token });
+    res.status(200).json({ token });
   } catch (error) {
-    console.error(error); 
+    console.error(error);
     res.status(500).json({ 'msg': 'Error retrieving user', error });
   }
 }
@@ -71,7 +72,7 @@ const updateUser = async (req, res) => {
     const { id } = req.params;
     const { email, name, second_name, password, roles } = req.body;
 
-    const updatedUser = await conx.updateUser(id, { email, name, second_name, password, url_photo, extension }, roles);
+    const updatedUser = await conx.updateUser(id, { email, name, second_name, password, photo_id, extension }, roles);
 
     res.status(200).json({ updatedUser });
   } catch (error) {
@@ -82,8 +83,25 @@ const updateUser = async (req, res) => {
 
 const updateProfileImage = async (req, res, next) => {
   try {
-    const file = req.files.file; 
+    const file = req.files.file;
     const userId = req.params.id;
+
+    let isImageValid;
+    try {
+      isImageValid = await evaluateImage(req);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+
+    if (!isImageValid) {
+      return res.status(400).json({ error: 'Invalid image' });
+    }
+
+    const currentImageUrl = await getUserImageUrl(userId);
+    if (currentImageUrl) {
+      await deleteFile(currentImageUrl);
+    }
+
     const fileId = await uploadFile(file.tempFilePath, file.name, file.mimetype);
     console.log('fileId:', fileId);
 
@@ -96,6 +114,7 @@ const updateProfileImage = async (req, res, next) => {
     next(error);
   }
 }
+
 
 const getProfileImage = async (req, res, next) => {
   try {
@@ -111,4 +130,4 @@ const getProfileImage = async (req, res, next) => {
 
 
 
-module.exports = { getRoles, getUsers, login, register, updateUser, getUser,updateProfileImage, getProfileImage};
+module.exports = { getRoles, getUsers, login, register, updateUser, getUser, updateProfileImage, getProfileImage };

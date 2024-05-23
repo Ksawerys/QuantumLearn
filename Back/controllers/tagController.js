@@ -51,31 +51,53 @@ const insertNoteTag = async (req, res, next) => {
   
   const updateNoteTag = async (req, res, next) => {
     try {
-      const noteId = req.params.noteId;
-      const tagId = req.params.tagId;
+      const noteTagId = req.params.noteTagId;
       const updatedData = req.body;
   
-      const updatedNoteTag = await tagConx.updateNoteTag(noteId, tagId, updatedData);
+      const updatedNoteTag = await tagConx.updateNoteTag(noteTagId, updatedData);
   
       res.status(200).json({ message: 'NoteTag updated successfully', data: updatedNoteTag });
     } catch (error) {
       console.error(error);
       next(error);
     }
-  }
+}
   
   const deleteNoteTag = async (req, res, next) => {
     try {
-      const noteId = req.params.noteId;
-      const tagId = req.params.tagId;
+      const noteTagId = req.params.noteTagId;
   
-      await tagConx.deleteNoteTag(noteId, tagId);
+      await tagConx.deleteNoteTag(noteTagId);
   
       res.status(200).json({ message: 'NoteTag deleted successfully' });
     } catch (error) {
       console.error(error);
       next(error);
     }
-  }
+}
+
+  const getNoteTags = async (req, res, next) => {
+    try {
+        const noteId = req.params.noteId;
+        const tags = await tagConx.getNoteTags(noteId);
+
+        res.status(200).json({ message: 'Tags fetched successfully', data: tags });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+}
+
+const insertTag = async (req, res, next) => {
+    try {
+        const tagData = req.body;
+        const newTag = await tagConx.insertTag(tagData);
+
+        res.status(200).json({ message: 'Tag inserted successfully', data: newTag });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+}
   
-module.exports = { updateTag, deleteTag,insertNoteTag, deleteNoteTag, updateNoteTag };
+module.exports = { updateTag, deleteTag,insertNoteTag, deleteNoteTag, updateNoteTag, getNoteTags, insertTag};

@@ -9,6 +9,10 @@ class Server {
         this.app = express();
         this.userPath = '/user'
         this.openaiPath = '/openai'
+        this.notePath = '/note'
+        this.tagPath = '/tag'
+        this.questionnairePath = '/questionnaire'
+        this.questionPath = '/question'
 
         this.middlewares()
         this.routes()
@@ -24,15 +28,18 @@ class Server {
         }));
         
         this.app.use(express.static('public'));
-
     }
 
     routes() {
         this.app.use(this.userPath, require('../routes/userRoute'));
         this.app.use(this.openaiPath, require('../routes/openaiRoutes'));
+        this.app.use(this.notePath, require('../routes/noteRoutes'));
+        this.app.use(this.tagPath, require('../routes/tagRoutes'));
+        this.app.use(this.questionnairePath, require('../routes/questionnaireRoutes'));
+        this.app.use(this.questionPath, require('../routes/questionRoutes'));
 
         this.app.use((err, req, res, next) => {
-            console.log('asdasdasdasdasdsd',err);
+            console.log('-',err);
             res.status(500).send('¡Algo salió mal!');
         });
     }
@@ -41,10 +48,6 @@ class Server {
         this.app.listen(process.env.PORT, () => {
             console.log(`Servidor escuchando en: ${process.env.PORT}`);
         })
-
-        this.serverWebSocket.listen(process.env.WEBSOCKET_PORT1, () => {
-            console.log(`Servidor de WebSockets escuchando en: ${process.env.WEBSOCKET_PORT1}`);
-        });
     }
 }
 

@@ -13,10 +13,12 @@ module.exports = {
       name: {
         type: Sequelize.STRING(255),
         allowNull: true,
+        defaultValue: Sequelize.literal("DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR)")
       },
       active: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
+        defaultValue: Sequelize.literal("DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR)")
       }
     });
   },

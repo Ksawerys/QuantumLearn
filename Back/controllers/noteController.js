@@ -17,25 +17,31 @@ const deleteNote = async (req, res, next) => {
 
 const createNoteAndTags = async (req, res, next) => {
     try {
-      const noteData = {
-        title: req.body.title,
-        description: req.body.description
-      };
-      const tags = req.body.tags;
-  
-      const newNote = await noteConx.insertNote(noteData);
-  
-      for (let tagData of tags) {
-        const newTag = await tagConx.insertTag(tagData);
-        await tagConx.insertNoteTag(newNote.id, newTag.id, {});
-      }
-  
-      res.status(200).json({ message: 'Note and tags created successfully', data: newNote });
+        const noteData = {
+            title: req.body.title,
+            description: req.body.description,
+            container_note_id: req.body.container_note_id || null
+        };
+        const tags = req.body.tags;
+        const userId = req.params.userid;
+
+        const newNote = await noteConx.insertNote(noteData);
+        await noteConx.insertUserNote(userId, newNote.id);
+
+        if (noteData.container_note_id) {
+            await noteConx.insertSubnote(noteData.container_note_id, newNote.id);
+        }
+
+        for (let tagData of tags) {
+            await tagConx.insertNoteTag(newNote.id, tagData.tag_id, tagData.data);
+        }
+
+        res.status(200).json({ message: 'Note and tags created successfully', data: newNote });
     } catch (error) {
-      console.error(error);
-      next(error);
+        console.error(error);
+        next(error);
     }
-  }
+}
 
 const updateNoteContent = async (req, res, next) => {
     try {

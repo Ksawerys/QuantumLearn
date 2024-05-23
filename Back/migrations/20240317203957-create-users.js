@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable('users', {
       id: {
         allowNull: false,
@@ -26,11 +26,7 @@ module.exports = {
         type: Sequelize.STRING(255),
         allowNull: true,
       },
-      url_photo: {
-        type: Sequelize.STRING(255),
-        allowNull: true,
-      },
-      extension: {
+      photo_id: {
         type: Sequelize.STRING(255),
         allowNull: true,
       },
@@ -51,7 +47,7 @@ module.exports = {
     });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('users');
   }
 };

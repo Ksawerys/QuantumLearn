@@ -40,11 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      url_photo: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      extension: {
+      photo_id: {
         type: DataTypes.STRING,
         allowNull: true,
       },

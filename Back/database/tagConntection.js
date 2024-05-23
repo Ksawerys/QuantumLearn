@@ -8,19 +8,22 @@ const { Op } = require('sequelize');
 
 class TagConnection {
 
-    getNoteTags = async (noteId) =>{
+    getNoteTags = async (noteId) => {
         try {
-          const note = await model.Note.findOne({
-            where: { id: noteId },
-            include: model.Tag
-          });
+            const note = await model.Note.findOne({
+                where: { id: noteId },
+                include: [{
+                    model: model.NoteTag,
+                    include: model.Tag
+                }]
+            });
     
-          return note ? note.Tags : [];
+            return note ? note.NoteTags.map(noteTag => ({...noteTag.Tag.dataValues, data: noteTag.data})) : [];
         } catch (error) {
-          console.error(error);
-          throw error;
+            console.error(error);
+            throw error;
         }
-      }
+    }
     
     insertTag = async (tagData) =>  {
         try {
@@ -46,11 +49,11 @@ class TagConnection {
         }
     }
 
-    updateNoteTag = async (noteId, tagId, updatedData) => {
+    updateNoteTag = async (noteTagId, updatedData) => {
         try {
           const noteTag = await model.NoteTag.update(
             { data: updatedData },
-            { where: { note_id: noteId, tag_id: tagId } }
+            { where: { id: noteTagId } }
           );
       
           return noteTag;
@@ -58,7 +61,7 @@ class TagConnection {
           console.error(error);
           throw error;
         }
-      }
+    }
     
     deleteTag = async (tagId) => {
         try {
@@ -85,12 +88,11 @@ class TagConnection {
         }
       }
 
-      deleteNoteTag = async (noteId, tagId) => {
+      deleteNoteTag = async (noteTagId) => {
         try {
           const noteTag = await model.NoteTag.destroy({
             where: {
-              note_id: noteId,
-              tag_id: tagId
+              id: noteTagId
             }
           });
       
@@ -99,7 +101,7 @@ class TagConnection {
           console.error(error);
           throw error;
         }
-      }
+    }
 
       getNotesWithTag = async (tagId) => {
         try {

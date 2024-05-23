@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       underscored: true,
+      timestamps: true,
       modelName: 'NoteTag',
       tableName: 'note_tags'
     }

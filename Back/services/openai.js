@@ -24,26 +24,52 @@ async function generateText(req, res) {
   }
 }
 
-async function evaluateImage(req, res) {
-    if (!req.files || !req.files.file) {
-      return res.status(400).send('No file uploaded.');
-    }
-  
-    try {
-      const file = req.files.file;
-      const base64 = Buffer.from(file.data).toString('base64');
-      const prompt = `A detailed description of the image: ${base64}`+ " dame una descripcion de mas de 400 caracteres";
-  
-      const response = await openai.chat.completions.create({
-        messages: [{ role: "system", content: prompt }],
-        model: "gpt-4",
-      });
-  
-      res.json({ response:response.choices[0].message.content });
-    } catch (error) {
-      console.error("Error al conectar con la API de OpenAI:", error);
-      res.status(500).json({ error: "Failed to process request" });
-    }
+async function evaluateImage(req) {
+  if (!req.files || !req.files.file) {
+    throw new Error('No file uploaded.');
   }
+
+  try {
+    const file = req.files.file;
+    const fileData = fs.readFileSync(file.tempFilePath);
+    let base64 = Buffer.from(fileData).toString('base64');
+    
+    if (!base64.match(/^[a-zA-Z0-9+/]*={0,2}$/)) {
+      throw new Error('Invalid base64 string.');
+    }
+
+    const prompt = "A detailed description of the image:dame una descripcion de mas de 400 caracteres si recibes una imagen y sino solo di que no has recibido nada";
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: prompt
+            },
+            {
+              type: "image_url",
+              image_url: {
+                url: `data:image/jpeg;base64,${base64}`
+              }
+            }
+          ]
+        }
+      ],
+      max_tokens: 300
+    });
+
+    const description = response.choices[0].message.content;
+    const isAdequate = description.length > 400;
+
+    return isAdequate;
+  } catch (error) {
+    console.error("Error al conectar con la API de OpenAI:", error);
+    throw new Error("Failed to process request");
+  }
+}
 
 module.exports = { generateText, evaluateImage };

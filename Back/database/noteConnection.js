@@ -80,17 +80,21 @@ class NoteConnection {
 
     insertSubnote = async (noteId, subnoteId) => {
         try {
-        const newSubnote = await model.Subnote.create({
+          if (!noteId || !subnoteId) {
+            throw new Error('noteId and subnoteId are required');
+          }
+      
+          const newSubnote = await model.Subnote.create({
             note_id: noteId,
-            subnote_id: subnoteId
-        });
-    
-        return newSubnote;
+            subnote_id: subnoteId,
+          });
+      
+          return newSubnote;
         } catch (error) {
-        console.error(error);
-        throw error;
+          console.error(error);
+          throw error;
         }
-    }
+      }
   
     getNoteSubnotes = async (noteId) => {
         try {

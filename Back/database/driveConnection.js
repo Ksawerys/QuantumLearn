@@ -53,7 +53,21 @@ async function getFile(fileId) {
     });
 }
 
-module.exports = { uploadFile, getFile};
+async function deleteFile(fileId) {
+    return new Promise((resolve, reject) => {
+        const drive = google.drive({ version: 'v3', auth: jwtClient });
+        drive.files.delete({ fileId: fileId }, function(err, res) {
+            if (err) {
+                return reject(err);
+            } else {
+                resolve(res.data);
+            }
+        });
+    });
+}
+
+
+module.exports = { uploadFile, getFile, deleteFile};
 
 // require('dotenv').config()
 // const fs=require('fs')

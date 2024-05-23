@@ -25,10 +25,12 @@ module.exports = {
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
+        defaultValue: Sequelize.literal("DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR)")
       },
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
+        defaultValue: Sequelize.literal("DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR)")
       }
     });
   },

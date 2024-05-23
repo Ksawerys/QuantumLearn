@@ -5,6 +5,8 @@ module.exports = (sequelize, DataTypes) => {
   class Note extends Model {
     static associate(models) {
       this.belongsToMany(models.Tag, { through: 'note_tags', foreignKey: 'note_id' });
+      this.hasMany(models.NoteTag, { foreignKey: 'note_id' });
+      this.hasMany(models.Subnote, { foreignKey: 'note_id' });
     }
   }
 
@@ -32,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       underscored: true,
+      timestamps: true,
       modelName: 'Note',
       tableName: 'notes'
     }

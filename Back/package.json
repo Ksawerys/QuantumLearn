@@ -35,7 +35,6 @@
         "uuid": "^9.0.1"
     },
     "devDependencies": {
-        "factory-girl": "^5.0.4",
         "faker": "^5.5.3",
         "sequelize-cli": "^6.6.2"
     },
