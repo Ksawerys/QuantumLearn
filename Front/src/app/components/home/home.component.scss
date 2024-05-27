@@ -118,6 +118,7 @@
     margin-top: -1%; 
     position: relative;
     z-index: 1;
+    margin-bottom: 13%;
     
     .ag-format-container {
         width: 1142px;
@@ -730,45 +731,5 @@
   }
 }
 
-// #collaborator {
-//   display: flex;
-//   position: relative;
-//   background: #0e0202;
-//   margin-left: -3%;
-//   height: 45vh;
-//   #title{
-//   h1 {
-//     background-color: #fd8080;
-//     font-size: 8em;
-//     margin: 0;
-//     margin-bottom: 22%;
-//     font-family: 'Tajawal', sans-serif;
-//     line-height: 1.9;
-//     background: linear-gradient(90deg, #4f8fe7, #08c2da);
-//     -webkit-background-clip: text;
-//     -webkit-text-fill-color: transparent;
-//     animation: gradient 5s ease-in-out infinite;
-//     font-weight: 250;
-//     letter-spacing: 0.24em;
-//     z-index: 1; // Coloca el texto encima de las tarjetas
-//   }
-// }
-
-//   .cards {
-//     margin-top: 5%;
-//     display: flex;
-//     flex-direction: row;
-//     position: absolute;
-//     left: 0; 
-//     background: #2b2424;
-
-//     .card {
-//       background: #8a6a6a;
-//       margin: 1em;
-//       padding: 1em;
-//       z-index: 0; // Coloca las tarjetas debajo del texto
-//     }
-//   }
-// }
 }
 

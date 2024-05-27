@@ -1,9 +1,20 @@
 const { generarJWT } = require('../helpers/generate_jwt')
 const bcrypt = require('bcrypt');
 const UserConnection = require('../database/userConnection');
-const { authorize, uploadFile, getFile, deleteFile } = require('../database/driveConnection');
-const { evaluateImage } = require('../services/openai');
+const { authorize, uploadFile, getFile, deleteFile } = require('../services/driveService');
+const { evaluateImage } = require('../services/openaiService');
 let conx = new UserConnection();
+const { sendCode } = require('../services/mailerService');
+
+const sendVerificationCode = async (req, res) => {
+  const { email } = req.body;
+  const result = await sendCode(email);
+  if (result.status === 'success') {
+      res.status(200).send({ message: result.message, code: result.code });
+  } else {
+      res.status(500).send(result.message);
+  }
+}
 
 const register = async (req, res) => {
   try {
@@ -16,6 +27,7 @@ const register = async (req, res) => {
     res.status(500).json({ 'msg': 'Error creating user', error });
   }
 }
+
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -130,4 +142,4 @@ const getProfileImage = async (req, res, next) => {
 
 
 
-module.exports = { getRoles, getUsers, login, register, updateUser, getUser, updateProfileImage, getProfileImage };
+module.exports = { getRoles, getUsers, login, register, updateUser, getUser, updateProfileImage, getProfileImage, sendVerificationCode};

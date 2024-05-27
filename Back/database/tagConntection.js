@@ -1,4 +1,4 @@
-const DatabaseConnection = require('../database/DatabaseConnection')
+const DatabaseConnection = require('./databaseConnection')
 const model = require('../models/index')
 const bcrypt = require("bcrypt");
 const { Sequelize } = require("sequelize");
@@ -118,6 +118,50 @@ class TagConnection {
           throw error;
         }
       }
+
+      getTagByName = async (tagName) => {
+        try {
+            const tag = await model.Tag.findOne({ where: { name: tagName } });
+            if (!tag) {
+                throw new Error('Tag not found');
+            }
+            return tag;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+    
+    getNotesByTagIdsAndUserId = async (tagIds, userId) => {
+      try {
+          const notes = await model.Note.findAll({
+              include: [
+                  {
+                      model: model.NoteTag,
+                      where: { tag_id: tagIds },
+                      required: true
+                  },
+                  {
+                      model: model.UserNote,
+                      where: { user_id: userId }
+                  }
+              ]
+          });
+          return notes;
+      } catch (error) {
+          console.error(error);
+          throw error;
+      }
+  }
+    
+    getGradesFromNotes = (notes, gradeTagId) => {
+        return notes.map(note => ({
+            noteId: note.id,
+            title: note.title,
+            description: note.description,
+            grades: note.NoteTags.filter(noteTag => noteTag.tag_id === gradeTagId).map(noteTag => noteTag.data)
+        }));
+    }
 
 }
 

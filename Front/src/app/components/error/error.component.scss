@@ -152,7 +152,7 @@
     @extend %shared-styles;
     box-shadow: $dropShadow;
     cursor: pointer;
-  
+    margin-top: 5%;
     &:active {
       box-shadow: $innerShadow;
       border-color: rgba($lightShadow, 0);

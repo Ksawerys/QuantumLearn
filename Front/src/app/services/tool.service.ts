@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserSessionStorage } from "../../app/interfaces/interface-user";
+import { UserSessionStorage } from "../interfaces/Interface-user";
 import { jwtDecode } from "jwt-decode";
 
 @Injectable({
@@ -17,7 +17,7 @@ export class ToolsService {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join(' ');
   }
-  getUsuarioSession(token: string) : UserSessionStorage | null{
+  getUsuarioSession(token: string): UserSessionStorage | null {
     return jwtDecode(token)
   }
 

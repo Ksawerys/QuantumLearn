@@ -2,10 +2,15 @@ const express = require('express');
 const router = express.Router();
 const noteController = require('../controllers/noteController');
 
-router.delete('/:noteId', noteController.deleteNote);
-router.post('/:userid', noteController.createNoteAndTags);
-router.put('/:noteId', noteController.updateNoteContent);
-router.get('/user/:userId', noteController.getUserNotes);
+router.route('/:noteId')
+  .delete(noteController.deleteNote)
+  .put(noteController.updateNoteContent);
+
+router.route('/:userid')
+  .post(noteController.createNoteAndTags);
+
+router.route('/user/:userId')
+  .get(noteController.getUserNotes);
 
 //middleware para que el subnote exista que no sea el note mismo, que el usuario exista, que las etquetas existan que esten activas las etiqeutas y notas
 

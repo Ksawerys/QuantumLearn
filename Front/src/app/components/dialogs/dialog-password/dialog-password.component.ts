@@ -1,41 +1,36 @@
-import { Component } from '@angular/core';
-import {MatButton} from "@angular/material/button";
-import {MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
-import {MatError, MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
-import {MatIcon} from "@angular/material/icon";
-import {MatInput} from "@angular/material/input";
+import { Component, OnInit } from '@angular/core';
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {SnackbarComponent} from "../../notifications-components/snackbar/snackbar.component";
+import { LoginComponenteComponent } from '../../auth-components/login/login.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoadingSpinnerComponent } from '../../notifications-components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-dialog-password',
   standalone: true,
   imports: [
-    MatButton,
-    MatDialogContent,
-    MatDialogTitle,
-    MatDialogClose,
-    MatError,
-    MatFormField,
-    MatIcon,
-    MatInput,
-    MatLabel,
-    MatSuffix,
     ReactiveFormsModule,
+    MatSnackBarModule,
+    LoadingSpinnerComponent
   ],
   templateUrl: './dialog-password.component.html',
-  styleUrl: './dialog-password.component.scss'
+  styleUrl: './dialog-password.component.scss',
 })
 export class DialogPasswordComponent {
+  visible = false;
+  emailRecovery = true;
+  sentCode = false;
+  newPassword = false;
+  dialog=false;
+
   email = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')])
   durationInSeconds = 5;
 
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor() {}
 
-  openSnackBar() {
-    this._snackBar.openFromComponent(SnackbarComponent,{
-      duration: this.durationInSeconds * 1000,
-    });
+  open(): void {
+    this.dialog = true;
+    setTimeout(() => {
+      this.visible = true;
+    });    
   }
 }

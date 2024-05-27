@@ -1,4 +1,4 @@
-const DatabaseConnection = require('./DatabaseConnection')
+const DatabaseConnection = require('./databaseConnection')
 const model = require('../models/index')
 const bcrypt = require("bcrypt");
 const { Sequelize } = require("sequelize");
@@ -37,7 +37,9 @@ class UserConnection {
       const user = await model.User.findOne({
         where: {
           email,
-          active: 1
+          active: {
+            [Op.ne]: 0
+          }        
         },
         include: [{
           model: model.Role,
@@ -169,7 +171,7 @@ class UserConnection {
       throw error;
     }
   }
-  
+
   insertUserAnswer = async(userId, questionId, response) => {
     try {
       const userAnswer = await model.UserAnswer.create({
@@ -184,6 +186,69 @@ class UserConnection {
       throw error;
     }
   }
+
+  checkActiveUser = async (userId) => {
+    try {
+      const user = await model.User.findOne({
+        where: {
+          id: userId,
+          active: {
+            [Op.ne]: 0
+          }
+        }
+      });
+
+      if (!user) {
+        throw new Error('User not found or not active');
+      }
+
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  checkUserRole = async (userId, roleName) => {
+    const user = await this.checkActiveUser(userId);
+    const roles = await user.getRoles();
+    return roles.some(role => role.name === roleName);
+  }
+
+  checkUserPassword = async (userId, password) => {
+    const user = await this.checkActiveUser(userId);
+    return bcrypt.compare(password, user.password);
+  }
+
+  deleteUser = async (id) => {
+    try {
+      const user = await model.User.update(
+        { active: false },
+        { where: { id } }
+      );
+
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  restoreUser = async (id) => {
+    try {
+      const user = await model.User.update(
+        { active: true },
+        { where: { id } }
+      );
+
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  
 }
 
 module.exports = UserConnection;

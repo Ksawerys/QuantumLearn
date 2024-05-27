@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { MatIcon } from "@angular/material/icon";
 import { RouterLink } from "@angular/router";
+import { FooterComponent } from '../shared/footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent,MatIcon,RouterLink],
+  imports: [NavbarComponent,MatIcon,RouterLink,FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

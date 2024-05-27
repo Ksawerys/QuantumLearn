@@ -1,8 +1,11 @@
-const openaiController = require('../services/openai');
+const openaiController = require('../services/openaiService');
 const express = require('express');
 const router = express.Router();
 
-router.post('/generate-text', openaiController.generateText);
-router.post('/evaluate-image',  openaiController.evaluateImage)
+router.route('/generate-text')
+    .post(openaiController.generateText);
+
+router.route('/evaluate-image')
+    .post(openaiController.evaluateImage);
 
 module.exports = router;

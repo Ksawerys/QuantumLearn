@@ -3,7 +3,7 @@ const path = require('path');
 
 class ErrorLogger {
   constructor() {
-    this.logFile = path.join(__dirname, 'error.log');
+    this.logFile = path.join(__dirname, '..', 'logs', 'error.log');
   }
 
   log(error) {

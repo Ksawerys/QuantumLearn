@@ -1,4 +1,4 @@
-const DatabaseConnection = require('../database/DatabaseConnection')
+const DatabaseConnection = require('./databaseConnection')
 const model = require('../models/index')
 const bcrypt = require("bcrypt");
 const { Sequelize } = require("sequelize");
