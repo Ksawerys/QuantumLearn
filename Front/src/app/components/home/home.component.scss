@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
 
   // un proceso mpuede tener varios assets
   //sincronizar los archivos con el explorador de archivos loczl o mirarlo en la maquina
@@ -9,7 +8,7 @@
     position: absolute; 
     width: 100%; 
     background-color: transparent; 
-    z-index: 1000;
+    z-index: 10;
 
     .menu {
       display: flex; 
@@ -118,7 +117,8 @@
     margin-top: -1%; 
     position: relative;
     z-index: 1;
-    margin-bottom: 13%;
+    margin-bottom: 12%;
+    padding-bottom: 3%;
     
     .ag-format-container {
         width: 1142px;

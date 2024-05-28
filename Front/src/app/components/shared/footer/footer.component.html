@@ -1,8 +1,59 @@
-<div class="button-container">
-    <button class="oval-lg spaced-container"> Cancel</button>
-    <button class="oval-lg spaced-container"> Verify</button>
-    <button class="oval-lg spaced-container"> Verify</button>
-    <a href="https://www.instagram.com/your_instagram_username/">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" width="30" height="30">
-    </a>
+<div class="anchor-container">
+    <div class="buttons-container">
+        <button class="oval-lg spaced-container"  (click)="onTermsButtonClick($event)" >
+            <img class="icon" src="../../../../assets/image/IconQuestionMark.png" alt="Gmail Icon">
+        </button>
+        <button class="oval-lg spaced-container"  (click)="onContactButtonClick($event)">
+            <img class="icon" src="../../../../assets/image/IconSuggestion.png" alt="Gmail Icon">
+        </button>
+    </div>
+
+    <div class="links-container">
+        <a class="oval-lg spaced-container" href="mailto:quamtumlearn@gmail.com">
+            <img class="icon" src="../../../../assets/image/IconGmail.png" alt="Gmail Icon">
+        </a>
+        <a class="oval-lg spaced-container" href="https://www.twitter.com">
+            <img class="icon" src="../../../../assets/image/IconTwitter.png" alt="Twitter Icon">
+        </a>
+        <a class="oval-lg spaced-container" href="https://www.instagram.com">
+            <img class="icon" src="../../../../assets/image/IconInstagram.png" alt="Instagram Icon">
+        </a>
+    </div>
 </div>
+<div id="background-dialog" [class.active]="termsActive">
+    <div class="terms" (click)="$event.stopPropagation()">
+        <h2>Terms and Conditions</h2>
+        <p>Welcome to QuantumLearn! These terms and conditions outline the rules and regulations for the use of our website and services.</p>
+        <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use QuantumLearn if you do not agree to all of the terms and conditions stated on this page.</p>
+
+        <h2>Privacy Policy</h2>
+        <p>Your privacy is important to us. It is QuantumLearn's policy to respect your privacy regarding any information we may collect from you across our website, QuantumLearn, and other sites we own and operate.</p>
+        <p>We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re collecting it and how it will be used.</p>
+
+        <h2>Cookie Policy</h2>
+        <p>We employ the use of cookies. By accessing QuantumLearn, you agreed to use cookies in agreement with QuantumLearn's privacy policy.</p>
+        <p>Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.</p>
+
+        <h2>Legal Notice</h2>
+        <p>All the information on this website is published in good faith and for general information purpose only. QuantumLearn does not make any warranties about the completeness, reliability, and accuracy of this information.</p>
+        <p>Any action you take upon the information you find on this website (QuantumLearn), is strictly at your own risk. QuantumLearn will not be liable for any losses and/or damages in connection with the use of our website.</p>
+
+        <p>© 2021 QuantumLearn</p>
+    </div>
+</div>
+
+<div id="contact-dialog" [class.active]="contactActive">
+    <div class="contact-content" (click)="$event.stopPropagation()">
+        <form>
+            <h2 class="dialog-title">Problems and suggestions</h2>
+            <p>Leave any problem or suggestion you have in our mailbox and if you have an account our staff will be in charge of sending you a response</p>
+            <textarea type="text" id="text" name="text" placeholder="Your comment" formControlName="text" required></textarea>
+            <div class="button-container">
+                <button class="oval-lg spaced-container" (click)="contactActive=!contactActive"> Cancel</button>
+                <button class="oval-lg spaced-container" (click)="$event.stopPropagation()"> Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

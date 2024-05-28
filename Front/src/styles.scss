@@ -1,32 +1,40 @@
+// Importación de fuentes
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
 
-body.mat-typography {
-    margin: 0;
-    padding: 0;
-    background-color: #ebecf0;
+// Estilos de selección
+::selection {
+    background: transparent; 
+    color: #26c3b2; 
 }
 
+::-moz-selection {
+    background: transparent; 
+    color: #26c3b2; 
+}
 
-$font-family: 'Google Sans',  sans-serif;
+// Variables de fuentes
+$fontFamily: 'Montserrat', sans-serif;
+$secondFontFamily: 'Google Sans',  sans-serif;
+$body-font: $secondFontFamily;
+$titleFontFamily: $fontFamily;
 
-// Font Family
-$body-font: $font-family;
+$fontSize: 18px;
+$textColor: #6C7587;
 
-// Font Weights
-$thin: 100;
-$light: 300;
-$regular: 400;
-$semibold: 500;
-$bold: 700;
-$ultra: 800;
+// Variables de dimensiones
+$height: 84px;
+$width: 84px;
 
-// Base Font
-$base-font-family: $body-font, sans-serif;
-$base-font-size: 14px;
-$base-font-weight: $regular;
-$base-line-height: 1.6em;
-
-// Colors
+// Variables de color
+$bgColor: white;
+$iconColor: #8992A5;
+$accentBlue: #1657F0;
+$brightBlue: #36D7E0;
+$darkShadow: #484f60;
+$lightShadow: #FFFFFF;
 $black: #000000;
 $dark-gray: rgba($black, 0.8);
 $gray: rgba($black, 0.6);
@@ -35,12 +43,78 @@ $lighter-gray: rgba($black, 0.2);
 $white:  #f9f9f9;
 $accent:  #1ca485;
 
-// Form Settings
+// Variables de sombras
+$dropShadow: 8px 8px 12px -2px rgba($darkShadow, 0.4),
+-6px -6px 12px -1px rgba($lightShadow, 1);
+$dropShadow0: 8px 8px 12px -2px rgba($darkShadow, 0),
+-6px -6px 12px -1px rgba($lightShadow, 0);
+$innerShadow: inset -4px -4px 6px -1px rgba($lightShadow, 1),
+inset 2px 2px 8px -1px rgba($darkShadow, 0.5);
+$innerShadow0: inset -4px -4px 6px -1px rgba($lightShadow, 0),
+inset 2px 2px 8px -1px rgba($darkShadow, 0);
+
+// Variables de peso de fuente
+$thin: 100;
+$light: 300;
+$regular: 400;
+$semibold: 500;
+$bold: 700;
+$ultra: 800;
+
+// Variables de fuente base
+$base-font-family: $body-font, sans-serif;
+$base-font-size: 14px;
+$base-font-weight: $regular;
+$base-line-height: 1.6em;
+
+// Variables de configuración de formulario
 $max-width: 600px;
 $max-height: 400px;
 $gutters: 24px;
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Mixins
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin applyFontStyle() {
+  font-family: $fontFamily;
+  font-size: $fontSize;
+  line-height: $fontSize;
+  color: $textColor;
+}
+
+@mixin gridPlacement($direction, $start, $end) {
+  grid-#{$direction}-start: $start;
+  grid-#{$direction}-end: $end;
+}
+
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Estilos generales
+html, body { 
+    height: 100%; 
+}
+
+body { 
+    margin: 0; 
+    font-family: Roboto, 
+    "Helvetica Neue", 
+    sans-serif; 
+}
+
 html.no-scroll {
     overflow: hidden;
+}
+
+body.mat-typography {
+    margin: 0;
+    padding: 0;
+    background-color: #ebecf0;
 }

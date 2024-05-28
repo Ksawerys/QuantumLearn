@@ -5,7 +5,7 @@ import { MatIcon } from "@angular/material/icon";
 import { MatButton, MatIconButton } from "@angular/material/button";
 import { MatInput } from "@angular/material/input";
 import { Router, RouterLink } from "@angular/router";
-import { UserAccess, User } from "../../../interfaces/Interface-user";
+import { UserAccess, User } from "../../../interfaces/interface-user";
 import { UserService } from "../../../services/user.service";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";

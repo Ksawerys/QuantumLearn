@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
-import { UserAccess, User } from "../../../interfaces/Interface-user";
+import { UserAccess, User } from "../../../interfaces/interface-user";
 import { UserService } from "../../../services/user.service";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 // import { NotificationComponent } from '../../notifications/notification/notification.component';
@@ -198,7 +198,7 @@ export class LoginComponenteComponent implements OnInit {
       });
     }
   }
-  
+
   constructor(private userService: UserService, private router: Router, private http: HttpClient, private authService: AuthService) {
   }
 
