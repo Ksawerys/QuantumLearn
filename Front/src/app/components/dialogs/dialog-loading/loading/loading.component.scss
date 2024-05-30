@@ -1,4 +1,4 @@
-@import '../../../../styles.scss';
+@import '../../../../../styles.scss';
 
 
 body {
@@ -8,11 +8,11 @@ body {
     height: 100vh;
     overflow: hidden;
   }
-  .gegga {
+  .blur-filter {
     width: 0;
   }
   .snurra {
-    filter: url(#gegga);
+    filter: url(#blur-filter);
   }
   .stopp1 {
     stop-color: #f700a8;

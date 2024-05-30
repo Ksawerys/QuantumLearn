@@ -6,18 +6,18 @@
 
 // Estilos de selección
 ::selection {
-    background: transparent; 
-    color: #26c3b2; 
+  background: transparent;
+  color: #26c3b2;
 }
 
 ::-moz-selection {
-    background: transparent; 
-    color: #26c3b2; 
+  background: transparent;
+  color: #26c3b2;
 }
 
 // Variables de fuentes
 $fontFamily: 'Montserrat', sans-serif;
-$secondFontFamily: 'Google Sans',  sans-serif;
+$secondFontFamily: 'Google Sans', sans-serif;
 $body-font: $secondFontFamily;
 $titleFontFamily: $fontFamily;
 
@@ -40,18 +40,18 @@ $dark-gray: rgba($black, 0.8);
 $gray: rgba($black, 0.6);
 $light-gray: rgba($black, 0.4);
 $lighter-gray: rgba($black, 0.2);
-$white:  #f9f9f9;
-$accent:  #1ca485;
+$white: #f9f9f9;
+$accent: #1ca485;
 
 // Variables de sombras
 $dropShadow: 8px 8px 12px -2px rgba($darkShadow, 0.4),
--6px -6px 12px -1px rgba($lightShadow, 1);
+  -6px -6px 12px -1px rgba($lightShadow, 1);
 $dropShadow0: 8px 8px 12px -2px rgba($darkShadow, 0),
--6px -6px 12px -1px rgba($lightShadow, 0);
+  -6px -6px 12px -1px rgba($lightShadow, 0);
 $innerShadow: inset -4px -4px 6px -1px rgba($lightShadow, 1),
-inset 2px 2px 8px -1px rgba($darkShadow, 0.5);
+  inset 2px 2px 8px -1px rgba($darkShadow, 0.5);
 $innerShadow0: inset -4px -4px 6px -1px rgba($lightShadow, 0),
-inset 2px 2px 8px -1px rgba($darkShadow, 0);
+  inset 2px 2px 8px -1px rgba($darkShadow, 0);
 
 // Variables de peso de fuente
 $thin: 100;
@@ -62,7 +62,7 @@ $bold: 700;
 $ultra: 800;
 
 // Variables de fuente base
-$base-font-family: $body-font, sans-serif;
+$base-fontFamily: $body-font, sans-serif;
 $base-font-size: 14px;
 $base-font-weight: $regular;
 $base-line-height: 1.6em;
@@ -98,23 +98,24 @@ $gutters: 24px;
 }
 
 // Estilos generales
-html, body { 
-    height: 100%; 
+html,
+body {
+  height: 100%;
 }
 
-body { 
-    margin: 0; 
-    font-family: Roboto, 
-    "Helvetica Neue", 
-    sans-serif; 
+body {
+  margin: 0;
+  font-family: Roboto,
+    "Helvetica Neue",
+    sans-serif;
 }
 
 html.no-scroll {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 body.mat-typography {
-    margin: 0;
-    padding: 0;
-    background-color: #ebecf0;
+  margin: 0;
+  padding: 0;
+  background-color: #ebecf0;
 }

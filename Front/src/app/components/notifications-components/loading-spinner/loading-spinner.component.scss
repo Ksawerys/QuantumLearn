@@ -1,5 +1,5 @@
 $stop-color-1: #40c38f;
-$stop-color-2: #00b3ff;
+$stop-color-2: #0ab5ff;
 $circle-radius: 64;
 
 #loading-container {
@@ -17,23 +17,22 @@ $circle-radius: 64;
     height: 150px;
   }
 
-  .gegga {
+  .blur-effect {
     width: 0;
   }
 
-  .snurra {
-    filter: url(#gegga);
+  .spinner {
+    filter: url(#blur-effect);
   }
-
-  .stopp1 {
+  .stop1 {
     stop-color: $stop-color-1;
   }
 
-  .stopp2 {
+  .stop2 {
     stop-color: $stop-color-2;
   }
 
-  .halvan, .strecken {
+  .half-circle, .circle-outline {
     animation: Snurra1 10s infinite linear;
     stroke-dasharray: 180 800;
     fill: none;
@@ -41,7 +40,7 @@ $circle-radius: 64;
     stroke-width: 23;
     stroke-linecap: round;
 
-    &.strecken {
+    &.circle-outline {
       animation: Snurra1 3s infinite linear;
       stroke-dasharray: 26 54;
     }

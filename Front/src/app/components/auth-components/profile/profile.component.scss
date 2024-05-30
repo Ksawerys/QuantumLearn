@@ -10,7 +10,7 @@ html {
 body {
   background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
   color: $gray;
-  font-family: $base-font-family;
+  font-family: $base-fontFamily;
   font-size: $base-font-size;
   line-height: $base-line-height;
   -webkit-font-smoothing: antialiased;
@@ -40,31 +40,38 @@ body {
   transition: height 0.3s ease-out, box-shadow 0.5s ease-out;
   border: none;
   height: calc(69vh + 19%);
+
   @media (max-width: 376px) {
     height: calc(82vh + 19%);
   }
+
   @media (min-width: 700px) and (max-width: 900px) {
     height: calc(63vh + 19%);
   }
-  transition: height 0.3s ease-out, box-shadow 0.5s ease-out;
-  transition-delay: 0s, 0.1s;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;    
-  
-  
+
+  transition: height 0.3s ease-out,
+  box-shadow 0.5s ease-out;
+  transition-delay: 0s,
+  0.1s;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+  rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+
+
   .image-container {
     display: flex;
     justify-content: center;
     margin-bottom: -5%;
     margin-top: -7%;
-  
+
     img {
       width: 180px;
       height: 180px;
-      border-radius: 50%; 
+      border-radius: 50%;
       object-fit: cover;
       border: 5px solid transparent;
       transition: all 0.3s ease;
-      &:hover { 
+
+      &:hover {
         border-color: #41b6f5;
       }
     }
@@ -126,16 +133,18 @@ body {
     position: relative;
     flex-grow: 1;
     border: none;
+
     @media (max-width: 376px) {
       margin: 0 0 10vh;
     }
+
     .error-login {
       color: rgb(221, 0, 0);
       font-size: 12px;
       position: absolute;
       top: 100%;
       transition: all 0.7s ease-out;
-      font-family: $font-family;
+      font-family: $fontFamily;
       font-weight: 550;
     }
 
@@ -145,7 +154,7 @@ body {
       position: absolute;
       top: 100%;
       transition: all 0.7s ease-out;
-      font-family: $font-family;
+      font-family: $fontFamily;
       font-weight: 550;
     }
 
@@ -285,14 +294,14 @@ body {
     padding: 5vh;
     box-sizing: border-box;
     height: 100%;
-  border: none;
+    border: none;
 
     .content {
       flex-grow: 1;
       border: none;
     }
 
-    
+
 
     // Panel Two
     &.two {
@@ -338,7 +347,7 @@ body {
       }
 
       .roles-group {
-        overflow: visible; 
+        overflow: visible;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -352,39 +361,41 @@ body {
 
         .role-option {
           border: none;
-          border-radius: 10px; 
+          border-radius: 10px;
           box-shadow: rgba(0, 0, 0, 0.4) 0px 7px 15px;
           width: auto;
           height: auto;
-          position: relative; 
+          position: relative;
           overflow: auto;
           display: inline-block;
           cursor: pointer;
           user-select: none;
           margin: auto;
           margin-bottom: 1vh;
-          transition: all 0.2s ease-out; 
+          transition: all 0.2s ease-out;
+
           @media (max-width: 425px) {
             position: relative;
             left: 50%;
             transform: translateX(-50%);
-            min-width: 120%; 
+            min-width: 120%;
           }
+
           h3 {
             border: none;
-            font-size: 24px; 
-            margin: 10px 15px 10px 20px; 
+            font-size: 24px;
+            margin: 10px 15px 10px 20px;
             color: $white;
-            font-family: $font-family;
+            font-family: $fontFamily;
             font-weight: bold;
           }
 
           p {
             border: none;
-            font-size: 14px; 
-            margin: 10px 15px 10px 20px; 
+            font-size: 14px;
+            margin: 10px 15px 10px 20px;
             color: $white;
-            font-family: $font-family;
+            font-family: $fontFamily;
           }
 
           &:hover {
@@ -398,9 +409,9 @@ body {
 
           &.selected {
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1),
-            0 0 20px rgba(255, 255, 255, 0.1),
-            0 0 30px rgba(255, 255, 255, 0.1),
-            0 0 40px rgba(255, 255, 255, 0.1);
+              0 0 20px rgba(255, 255, 255, 0.1),
+              0 0 30px rgba(255, 255, 255, 0.1),
+              0 0 40px rgba(255, 255, 255, 0.1);
             background-color: #49ccad;
             border: none;
           }
@@ -416,7 +427,7 @@ body {
 
     h1 {
       border: none;
-      font-family: $font-family;
+      font-family: $fontFamily;
       font-size: 4vh;
       text-align: center;
       color: $accent;
@@ -433,6 +444,7 @@ body {
   }
 
 }
+
 .logout-button {
   position: absolute;
   left: 0;
@@ -456,7 +468,7 @@ body {
 
   &:hover {
     transform: translateY(-40%);
-    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;  
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
     background-color: red;
     color: white;
   }
