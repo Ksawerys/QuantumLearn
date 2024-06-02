@@ -119,3 +119,20 @@ body.mat-typography {
   padding: 0;
   background-color: #ebecf0;
 }
+
+
+%shared-styles {
+  @include applyFontStyle;
+  padding: 0 8px;
+  position: relative;
+  border: 3px solid rgba($lightShadow, 0);
+  outline: none;
+  text-align: center;
+  background-color: $bgColor;
+  transition: all 250ms ease-in-out;
+
+  &:hover {
+    box-shadow: none;
+    border-color: rgba($lightShadow, 0.5);
+  }
+}

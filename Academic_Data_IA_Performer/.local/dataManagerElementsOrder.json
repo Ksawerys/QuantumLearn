@@ -12,10 +12,10 @@
       "Path": "Framework/Process.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
+        "strIADataSet&Sequence_3",
         "strPageText&Sequence_1"
       ],
       "ArgumentsSectionElementsOrder": [
-        "out_strIADataSet",
         "in_TransactionItem",
         "in_dictConfig"
       ],

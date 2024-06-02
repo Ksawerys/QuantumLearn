@@ -287,7 +287,6 @@ body {
 
   }
 
-  // Panel
   &-panel {
     display: flex;
     flex-direction: column;
@@ -303,7 +302,6 @@ body {
 
 
 
-    // Panel Two
     &.two {
       z-index: 5;
       position: absolute;

@@ -147,7 +147,7 @@ export class LoginComponenteComponent implements OnInit {
   ngAfterViewInit(): void {
     if (window['google']) {
       window['google'].accounts.id.initialize({
-        client_id: 'YOUR_CLIENT_ID',
+        client_id: '...',
         callback: (response: any) => {
           const body = {
             id_token: response.credential
@@ -165,7 +165,6 @@ export class LoginComponenteComponent implements OnInit {
           );
         }
       });
-      // ...
     }
   }
 
@@ -175,7 +174,6 @@ export class LoginComponenteComponent implements OnInit {
     }
     this.loadScript();
     if (window['google']) {
-      // Use Google Sign-In library
     }
   }
 
