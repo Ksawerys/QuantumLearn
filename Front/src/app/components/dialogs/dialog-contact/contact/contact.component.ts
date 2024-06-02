@@ -8,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
+  visible = false;
+  dialog=false;
 
+  constructor() {}
+
+  open(): void {
+    this.dialog = true;
+    setTimeout(() => {
+      this.visible = true;
+    });    
+  }
 }

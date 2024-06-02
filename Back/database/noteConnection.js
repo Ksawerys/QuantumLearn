@@ -1,4 +1,4 @@
-const DatabaseConnection = require('../database/DatabaseConnection')
+const DatabaseConnection = require('./databaseConnection')
 const model = require('../models/index')
 const bcrypt = require("bcrypt");
 const { Sequelize } = require("sequelize");
@@ -68,7 +68,7 @@ class NoteConnection {
         try {
           const notes = await model.UserNote.findAll({
             where: { user_id: userId },
-            include: model.Note
+            include: model.Note,
           });
       
           return notes.map(userNote => userNote.Note);

@@ -99,5 +99,41 @@ const insertTag = async (req, res, next) => {
         next(error);
     }
 }
+
+const getExamGrades = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+      const examTag = await getTagByName('exam');
+      const gradeTag = await getTagByName('grade');
+      const studyMethodTag = await getTagByName('study_method');
+      const startDateTag = await getTagByName('start_date');
+      const priorityTag = await getTagByName('priority');
+      const examNotes = await getNotesByTagIdsAndUserId([examTag.id, gradeTag.id, studyMethodTag.id, startDateTag.id, priorityTag.id], userId);
+      const examGrades = getGradesFromNotes(examNotes, gradeTag.id);
+      return examGrades;
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.toString() });
+}
+}
+
+const getHomeworkGrades = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+      const homeworkTag = await getTagByName('homework');
+      const gradeTag = await getTagByName('grade');
+      const studyMethodTag = await getTagByName('study_method');
+      const startDateTag = await getTagByName('start_date');
+      const endDateTag = await getTagByName('end_date');
+      const priorityTag = await getTagByName('priority');
+      const homeworkNotes = await getNotesByTagIdsAndUserId([homeworkTag.id, gradeTag.id, studyMethodTag.id, startDateTag.id, endDateTag.id, priorityTag.id], userId);
+      const homeworkGrades = getGradesFromNotes(homeworkNotes, gradeTag.id);
+      return homeworkGrades;
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.toString() });
+}
+}
+
   
-module.exports = { updateTag, deleteTag,insertNoteTag, deleteNoteTag, updateNoteTag, getNoteTags, insertTag};
+module.exports = { updateTag, deleteTag,insertNoteTag, deleteNoteTag, updateNoteTag, getNoteTags, insertTag, getExamGrades, getHomeworkGrades};

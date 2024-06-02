@@ -10,3 +10,4 @@ const generarJWT = (uid = '', roles = [], nombre='') => {
 module.exports = {
     generarJWT
 }
+

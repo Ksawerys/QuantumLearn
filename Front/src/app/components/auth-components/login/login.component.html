@@ -1,5 +1,3 @@
-<!-- No he podido hacer los cambios de codigo con el @if porque dejarian de funcionar las transiciones -->
-
 <div class="form" [class.active]="showRegister">
     @if (!showRegister) {
     <div class="form-toggle"></div>
@@ -13,6 +11,21 @@
         <h1>Account Login</h1>
       </div>
       <div class="form-content">
+        <div id="g_id_onload"
+          data-client_id="529907728554-scl0indscp1qfiok1de3lon2f666cir5.apps.googleusercontent.com"
+          data-callback="handleCredentialResponse"
+          data-auto_prompt="false"
+          data-auto_select="true">
+        </div>
+        <div class="g_id_signin"
+          data-type="standard"
+          data-size="large"
+          data-theme="outline"
+          data-text="sign_in_with"
+          data-shape="rectangular"
+          data-logo_alignment="left">
+        </div>
+        
         <form [formGroup]="loginFormulario">
           <div class="form-group">
             <input type="text" id="email" name="email" formControlName="email" required>
@@ -39,7 +52,7 @@
             }
            </div>
           <div class="form-group">
-            <a class="form-link" href="#">Forgot Password?</a>
+            <a class="form-link"  (click)="openDialog()">Forgot Password?</a>
             @if (!showRegister) {
               <a class="form-link" (click)="showRegister = true">You don't have an account yet?</a>
             }
@@ -143,3 +156,5 @@
   @if(errorRegistro==true){
     <app-notification [warning]="true" [title]="'Error'" [message]="'Usuario o contraseña incorrectos'" [additionalInfo]="'Revisa los campos introducidos, revisa la conexion y vuelve a intentarlo'" (close)="errorRegistro = false"  ></app-notification>
   } -->
+
+  <app-dialog-password #dialogPasswordComponent></app-dialog-password>

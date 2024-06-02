@@ -2,14 +2,27 @@ const express = require('express');
 const router = express.Router();
 const tagController = require('../controllers/tagController');
 
-router.put('/:tagId', tagController.updateTag);
-router.delete('/:tagId', tagController.deleteTag);
-router.post('/note/:noteId/:tagId', tagController.insertNoteTag);
-router.put('/noteTag/:noteTagId', tagController.updateNoteTag);
-router.delete('/notetag/:noteTagId', tagController.deleteNoteTag);
-router.get('/note/:noteId', tagController.getNoteTags);
-router.post('/', tagController.insertTag);
+router.route('/:tagId')
+  .put(tagController.updateTag)
+  .delete(tagController.deleteTag);
 
+router.route('/note/:noteId/:tagId')
+  .post(tagController.insertNoteTag);
 
+router.route('/noteTag/:noteTagId')
+  .put(tagController.updateNoteTag)
+  .delete(tagController.deleteNoteTag);
+
+router.route('/note/:noteId')
+  .get(tagController.getNoteTags);
+
+router.route('/')
+  .post(tagController.insertTag);
+
+router.route('/exam-grades/:userId')
+  .get(tagController.getExamGrades);
+
+router.route('/homework-grades/:userId')
+  .get(tagController.getHomeworkGrades);
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const DatabaseConnection = require('../database/DatabaseConnection')
+const DatabaseConnection = require('./databaseConnection')
 const model = require('../models/index')
 const bcrypt = require("bcrypt");
 const { Sequelize } = require("sequelize");
@@ -184,6 +184,21 @@ class QuestionConnection {
     
             await questionChoice.save();
     
+            return questionChoice;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    getQuestionChoice = async (questionId, choiceId) => {
+        try {
+            const questionChoice = await model.QuestionChoice.findOne({
+                where: {
+                    question_id: questionId,
+                    choice_id: choiceId
+                }
+            });
             return questionChoice;
         } catch (error) {
             console.error(error);

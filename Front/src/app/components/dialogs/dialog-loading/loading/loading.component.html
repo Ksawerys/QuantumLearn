@@ -1,17 +1,17 @@
-<svg class="gegga">
+<svg class="blur-filter">
     <defs>
-      <filter id="gegga">
+      <filter id="blur-filter">
         <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" />
         <feColorMatrix
           in="blur"
           mode="matrix"
           values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -10"
-          result="inreGegga"
+          result="inre-blur-filter"
         />
-        <feComposite in="SourceGraphic" in2="inreGegga" operator="atop" />
+        <feComposite in="SourceGraphic" />
       </filter>
     </defs>
-  </svg>
+</svg>
 <svg class="snurra" width="200" height="200" viewBox="0 0 200 200">
     <defs>
       <linearGradient id="linjärGradient">

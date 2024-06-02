@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import '../../../../../styles.scss';
 
 *,
 *:before,
@@ -67,6 +67,7 @@ a {
 	display: flex;
 	flex-direction: column;
 	box-shadow: 0 15px 30px 0 rgba(#000, 0.25);
+
 	@media (max-width: 600px) {
 		width: 90%;
 	}
@@ -87,6 +88,7 @@ a {
 	line-height: 1;
 	font-weight: 700;
 	font-size: 1.125;
+
 	svg {
 		width: 32px;
 		height: 32px;
@@ -100,6 +102,7 @@ a {
 }
 
 .rtf {
+
 	h1,
 	h2,
 	h3,
@@ -124,15 +127,15 @@ a {
 		line-height: 1.5;
 	}
 
-	& > * + * {
+	&>*+* {
 		margin-top: 1em;
 	}
 
-	& > * + :is(h1, h2, h3) {
+	&>*+ :is(h1, h2, h3) {
 		margin-top: 2em;
 	}
 
-	& > :is(h1, h2, h3) + * {
+	&> :is(h1, h2, h3)+* {
 		margin-top: 0.75em;
 	}
 
@@ -159,6 +162,7 @@ a {
 	border-top: 1px solid #ddd;
 	gap: 12px;
 	position: relative;
+
 	&:after {
 		content: "";
 		display: block;
@@ -183,6 +187,7 @@ a {
 	transition: 0.15s ease;
 
 	&.is-ghost {
+
 		&:hover,
 		&:focus {
 			background-color: #dfdad7;
@@ -192,6 +197,7 @@ a {
 	&.is-primary {
 		background-color: #750550;
 		color: #fff;
+
 		&:hover,
 		&:focus {
 			background-color: #4a0433;
@@ -212,6 +218,7 @@ a {
 	cursor: pointer;
 	border-radius: 8px;
 	transition: 0.15s ease;
+
 	svg {
 		width: 24px;
 		height: 24px;
