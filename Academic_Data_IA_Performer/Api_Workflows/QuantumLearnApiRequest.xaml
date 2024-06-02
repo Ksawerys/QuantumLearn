@@ -1,0 +1,267 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="QuantumLearnApiRequest" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:isactr="http://schemas.uipath.com/workflow/integration-service-activities/isactr" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uiascb="clr-namespace:UiPath.IntegrationService.Activities.SWEntities.CF637DA401A_v2_sub_chat_sub_completion_Create.Bundle;assembly=CF637DA401A_v2_sub_c.hDEkv2ruSGG1wJjJg9WBJI2" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_strDataSet" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>823.2,1787.2</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>QuantumLearnApiRequest_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models.FilterBuilder</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models</x:String>
+      <x:String>UiPath.Web</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Web.Activities</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Activities</x:String>
+      <x:String>UiPath.Platform.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Web</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="QuantumLearnApiRequest" sap:VirtualizedContainerService.HintSize="513.6,1722.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign sap:VirtualizedContainerService.HintSize="451.2,115.2" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[in_strDataSet]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String" xml:space="preserve">["{""role"": ""user"", ""content"": ""¿Cuál es la mejor manera de estudiar para un examen?""},"+ 
+"{""role"": ""assistant"", ""content"": ""La mejor manera de estudiar para un examen es...""},"+
+"{""role"": ""user"", ""content"": ""¿Cuál es la mejor manera de estudiar para un examen?""},"+ 
+"{""role"": ""assistant"", ""content"": ""La mejor manera de estudiar para un examen es...""},"+
+"{""role"": ""user"", ""content"": ""¿Cuál es la mejor manera de estudiar para un examen?""},"+ 
+"{""role"": ""assistant"", ""content"": ""La mejor manera de estudiar para un examen es...""},"+
+"{""role"": ""user"", ""content"": ""¿Cuál es la mejor manera de estudiar para un examen?""},"+ 
+"{""role"": ""assistant"", ""content"": ""La mejor manera de estudiar para un examen es...""},"+
+"{""role"": ""user"", ""content"": ""¿Cuál es la mejor manera de estudiar para un examen?""},"+ 
+"{""role"": ""assistant"", ""content"": ""La mejor manera de estudiar para un examen es...""},"+
+"{""role"": ""user"", ""content"": ""¿Cuál es la mejor manera de estudiar para un examen?""},"+ 
+"{""role"": ""assistant"", ""content"": ""La mejor manera de estudiar para un examen es...""},"+
+"{""role"": ""user"", ""content"": ""¿Cuál es la mejor manera de estudiar para un examen?""},"+ 
+"{""role"": ""assistant"", ""content"": ""La mejor manera de estudiar para un examen es...""},"+
+"{""role"": ""user"", ""content"": ""¿Cuál es la mejor manera de estudiar para un examen?""},"+ 
+"{""role"": ""assistant"", ""content"": ""La mejor manera de estudiar para un examen es...""},"+
+"{""role"": ""user"", ""content"": ""¿Cuál es la mejor manera de estudiar para un examen?""},"+ 
+"{""role"": ""assistant"", ""content"": ""La mejor manera de estudiar para un examen es...""},"+
+"{""role"": ""user"", ""content"": ""¿Cuál es la mejor manera de estudiar para un examen?""},"+ 
+"{""role"": ""assistant"", ""content"": ""La mejor manera de estudiar para un examen es...""},"]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <If Condition="[in_strDataSet.Length&gt;18800]" sap:VirtualizedContainerService.HintSize="451.2,560.8" sap2010:WorkflowViewState.IdRef="If_3">
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,195.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="353.6,108.8" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Es mayor&quot;+in_strDataSet.Length.ToString]" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,195.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="353.6,108.8" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;Es menor&quot;+in_strDataSet.Length.ToString]" />
+        </Sequence>
+      </If.Else>
+    </If>
+    <Assign sap:VirtualizedContainerService.HintSize="451.2,115.2" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[in_strDataSet]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String" xml:space="preserve">["{""dataset"" : ["+
+in_strDataSet.TrimEnd(","c)+
+"]}"]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="451.2,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[in_strDataSet]" />
+    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="451.2,117.6" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[&quot;Final json sin ser procesado&quot;+in_strDataSet]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="451.2,456" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,345.6" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <isactr:ConnectorActivity Configuration="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" ConnectionId="84c1061d-c2e5-471d-a821-8af637da401a" DisplayName="Generate Chat Completion" sap:VirtualizedContainerService.HintSize="353.6,259.2" sap2010:WorkflowViewState.IdRef="ConnectorActivity_2" UiPathActivityTypeId="296e94c2-5189-3dec-8228-e1d757da7de8">
+            <isactr:ConnectorActivity.Arguments>
+              <isactr:FieldArgument Name="model">
+                <isactr:FieldArgument.Argument>
+                  <InArgument x:TypeArguments="x:String">gpt-4-0613</InArgument>
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="prompt">
+                <isactr:FieldArgument.Argument>
+                  <InArgument x:TypeArguments="x:String">["Corrige este JSON y haz que la respuesta tuya sea solo y exculsivamente un JSON para el body de una petición" + in_strDataSet]</InArgument>
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="image_type" />
+              <isactr:FieldArgument Name="_file" />
+              <isactr:FieldArgument Name="image_url" />
+              <isactr:FieldArgument Name="instruction">
+                <isactr:FieldArgument.Argument>
+                  <InArgument x:TypeArguments="x:String" />
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="max_tokens">
+                <isactr:FieldArgument.Argument>
+                  <InArgument x:TypeArguments="x:Int32">1920</InArgument>
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="n">
+                <isactr:FieldArgument.Argument>
+                  <InArgument x:TypeArguments="x:Int32">1</InArgument>
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="temperature">
+                <isactr:FieldArgument.Argument>
+                  <InArgument x:TypeArguments="x:Double">1</InArgument>
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="top_p">
+                <isactr:FieldArgument.Argument>
+                  <InArgument x:TypeArguments="x:Double">1</InArgument>
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="stop">
+                <isactr:FieldArgument.Argument>
+                  <InArgument x:TypeArguments="x:String" />
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="presence_penalty">
+                <isactr:FieldArgument.Argument>
+                  <InArgument x:TypeArguments="x:Double">0</InArgument>
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="frequency_penalty">
+                <isactr:FieldArgument.Argument>
+                  <InArgument x:TypeArguments="x:Double">0</InArgument>
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="user">
+                <isactr:FieldArgument.Argument>
+                  <InArgument x:TypeArguments="x:String" />
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="out_text">
+                <isactr:FieldArgument.Argument>
+                  <OutArgument x:TypeArguments="x:String">[in_strDataSet]</OutArgument>
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+              <isactr:FieldArgument Name="Jit_v2_sub_chat_sub_completion">
+                <isactr:FieldArgument.Argument>
+                  <OutArgument x:TypeArguments="uiascb:v2_sub_chat_sub_completion_Create" />
+                </isactr:FieldArgument.Argument>
+              </isactr:FieldArgument>
+            </isactr:ConnectorActivity.Arguments>
+          </isactr:ConnectorActivity>
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
+    <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" Result="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" StatusCode="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" Body="[in_strDataSet]" BodyFormat="application/xml" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="http://localhost:9090/openai/create-training-file" sap:VirtualizedContainerService.HintSize="451.2,94.4" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" TimeoutMS="6000">
+      <ui:HttpClient.Attachments>
+        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+      </ui:HttpClient.Attachments>
+      <ui:HttpClient.Cookies>
+        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+      </ui:HttpClient.Cookies>
+      <ui:HttpClient.Headers>
+        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+      </ui:HttpClient.Headers>
+      <ui:HttpClient.Parameters>
+        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+      </ui:HttpClient.Parameters>
+      <ui:HttpClient.UrlSegments>
+        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+      </ui:HttpClient.UrlSegments>
+    </ui:HttpClient>
+  </Sequence>
+</Activity>

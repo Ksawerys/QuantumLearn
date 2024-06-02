@@ -8,4 +8,7 @@ router.route('/generate-text')
 router.route('/evaluate-image')
     .post(openaiController.evaluateImage);
 
+router.route('/create-training-file')
+    .post(openaiController.createTrainingModel);
+
 module.exports = router;

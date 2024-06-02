@@ -3,6 +3,9 @@ const OpenAI = require('openai');
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 const fs = require('fs');
 const path = require('path');
+const util = require('util');
+const writeFile = util.promisify(fs.writeFile);
+
 
 async function generateText(req, res) {
   const prompt = req.body.text;
@@ -72,4 +75,33 @@ async function evaluateImage(req) {
   }
 }
 
-module.exports = { generateText, evaluateImage };
+
+const createTrainingModel = async (req, res, next) => {
+  const messages = req.body;
+
+  try {
+    console.log(req.body)
+    console.log("Creating training file..."+messages);
+    await writeFile("academic_advice_dataset.jsonl", messages.map(example => JSON.stringify(example)).join('\n'));
+    const uploadResponse = await openai.files.create({
+        file: fs.createReadStream("academic_advice_dataset.jsonl"),
+        purpose: "fine-tune"
+    });
+
+    const fineTuningJob = await openai.fineTuning.jobs.create({
+        training_file: uploadResponse.id,
+        model: "gpt-3.5-turbo",
+        suffix: "academic-advice"
+    });
+
+    res.json({
+      uploadResponse,
+      fineTuningJobId: fineTuningJob.id
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+module.exports = { generateText, evaluateImage, createTrainingModel };
