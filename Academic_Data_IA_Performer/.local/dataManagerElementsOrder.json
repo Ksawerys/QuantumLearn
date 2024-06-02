@@ -75,6 +75,18 @@
       ],
       "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null
+    },
+    {
+      "Path": "Studies_Data/InsertJSONWord.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "blnFileExist&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "strDataSet"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
     }
   ]
 }
