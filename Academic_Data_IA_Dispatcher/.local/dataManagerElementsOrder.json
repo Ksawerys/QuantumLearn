@@ -12,6 +12,9 @@
       "Path": "Main.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
+        "strGoogleSearch&Sequence_4",
+        "intTotalTransactions&State_2",
+        "blnCorrectInput&Sequence_4",
         "TransactionItem&StateMachine_1",
         "SystemException&StateMachine_1",
         "BusinessException&StateMachine_1",
@@ -105,6 +108,8 @@
       "SortBy": 0,
       "VariablesSectionElementsOrder": [],
       "ArgumentsSectionElementsOrder": [
+        "in_GoogleSearch",
+        "in_intRowsNumber",
         "out_dtStudiesURLs",
         "in_dictConfig"
       ],
