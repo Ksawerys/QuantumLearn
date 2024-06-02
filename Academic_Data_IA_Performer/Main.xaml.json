@@ -40,6 +40,30 @@
       "IsPrincipal": true,
       "ArgumentType": 1,
       "DataSourceItems": null
+    },
+    {
+      "Name": "Studies_Data_InsertJSONWord_xaml__WriteTextConnections_2_Connection0",
+      "DisplayName": "WriteTextConnections_2_Connection",
+      "Category": null,
+      "Tooltip": "Write Text",
+      "Placeholder": null,
+      "Widget": "Connection",
+      "IsRequired": true,
+      "IsPrincipal": true,
+      "ArgumentType": 1,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "Studies_Data_InsertJSONWord_xaml__WriteTextConnections_2_Connection0_Property0_Metadata",
+      "DisplayName": "Document",
+      "Category": null,
+      "Tooltip": "Write Text",
+      "Placeholder": null,
+      "Widget": null,
+      "IsRequired": true,
+      "IsPrincipal": true,
+      "ArgumentType": 2,
+      "DataSourceItems": null
     }
   ]
 }

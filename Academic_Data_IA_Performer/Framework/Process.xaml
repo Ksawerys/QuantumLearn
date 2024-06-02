@@ -2,12 +2,11 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_dictConfig" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="out_strIADataSet" Type="OutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>823.2,2398.4</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>823.2,2604.8</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="100">
@@ -142,9 +141,10 @@
       <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
       <AssemblyReference>CF637DA401A_v2_sub_c.hDEkv2ruSGG1wJjJg9WBJI2</AssemblyReference>
       <AssemblyReference>UiPath.Word.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="688,2333.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="688,2540" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strPageText" />
     </Sequence.Variables>
@@ -191,9 +191,12 @@
         <uix:TargetApp Area="1911, -9, 2578, 1420" BrowserType="Edge" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAKJSURBVDhPhZNdSFNhGMdXVqiBFZSQIeWc5EUfkHnRIOiDIEESCyqKrG6K8KIuuoluJJKuujE0utTZh7LKbS5GGPvIjNzO2dm35+xsc5ubroIRQRDT/Xvesw+3q1748Z7nPc/z53mf8z8qPryISjgpVhXz/4nLAqyQo90TTZRjXo6DjxRiXioWleIiigBL9sdT8MaSmPUsKLs/kQInRuH2S4VkJkZ57gDFdF4WcIlUvLgEg3Ue2u572H3gEto6+/DCaIdknoG0pwOhK/3gVn5CmJlFuFUL7+Q0uFRGESKBKMT0Cs5dH8AOTS+GRk3of/AMbxw8xEkT5NoWRLa2wWOxQXDMI7J5L7xjb8Glv4NfqBDouTGA7SSgM9qQymYRzP6CMKqH3HQEYfUxpQv3HEdiGnjH31cKxOCjKxitThw6eRuqnWdw+vx9fApFEXw1hXDjYfgHhyA3d8L3XAd518HqDtggWBeRzA9I6QwGhydQ19SFvocjiBoskOpaIdi/QTx7FVJHl9KRd0xf3UGAJj6sM2Pk5QeYbE407r+A3rtPEZuyILxlH4QvLnhfGxCpVSOyrZ2u8K5aIJhI4/KdJ6hv7kaDugeao9cKQ9SbEW5oh/DRoUxdPHWxMAMSq7oCw03f2WR3YZyG+FlYQCCZBucTlfb5oAyevOF2ByBYv+Z5v7RKvshR3VqVlQNkptDSsuJGNhfFdfE0M1GeTJTjo8kcT90qpirWMIF8KWCOZIW0s7NVIkeFa6X3yn8gxv7Ss5N4TJxgAiyxJMKe1wvWWSYmiJtEi6py0UGQYEnlTog/xBzxiDhO1BfTlUXxBmITUcMCLcFEfhPTxC1CXcwtLzqrIVjRxuIRLZXqH1Yu/7hFM6+VAAAAAElFTkSuQmCC" InformativeScreenshot="0fecaac5ef07c9d908b6529a9779117a.jpg" Selector="&lt;html app='msedge.exe' title='A Computational Model of School Achievement | Educational Psychology Review' /&gt;" Title="A Computational Model of School Achievement | Educational Psychology Review" Url="[in_TransactionItem.SpecificContent(&quot;StudieURL&quot;).ToString]" />
       </uix:NApplicationCard.TargetApp>
     </uix:NApplicationCard>
-    <If Condition="[strPageText.Length&gt;700]" sap:VirtualizedContainerService.HintSize="625.6,1196" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[strPageText.Length&gt;700]" sap:VirtualizedContainerService.HintSize="625.6,1402.4" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="592,923.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="592,1129.6" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="strIADataSet" />
+          </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -296,7 +299,7 @@ con la siguiente estructura: " +
               </isactr:FieldArgument>
               <isactr:FieldArgument Name="out_text">
                 <isactr:FieldArgument.Argument>
-                  <OutArgument x:TypeArguments="x:String">[out_strIADataSet]</OutArgument>
+                  <OutArgument x:TypeArguments="x:String">[strIADataSet]</OutArgument>
                 </isactr:FieldArgument.Argument>
               </isactr:FieldArgument>
               <isactr:FieldArgument Name="Jit_v2_sub_chat_sub_completion">
@@ -306,14 +309,19 @@ con la siguiente estructura: " +
               </isactr:FieldArgument>
             </isactr:ConnectorActivity.Arguments>
           </isactr:ConnectorActivity>
-          <Assign sap:VirtualizedContainerService.HintSize="529.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_2">
+          <Assign sap:VirtualizedContainerService.HintSize="529.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_2">
             <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[out_strIADataSet]</OutArgument>
+              <OutArgument x:TypeArguments="x:String">[strIADataSet]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[out_strIADataSet.Trim("["c, "]"c) &amp; ","]</InArgument>
+              <InArgument x:TypeArguments="x:String">[strIADataSet.Trim("["c, "]"c) &amp; ","]</InArgument>
             </Assign.Value>
           </Assign>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="InsertJSONWord - Invoke Workflow File (Studies_Data\InsertJSONWord.xaml)" sap:VirtualizedContainerService.HintSize="529.6,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Studies_Data\InsertJSONWord.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_strDataSet">[strIADataSet]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
         </Sequence>
       </If.Then>
       <If.Else>

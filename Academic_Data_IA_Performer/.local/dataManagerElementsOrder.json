@@ -80,10 +80,12 @@
       "Path": "Studies_Data/InsertJSONWord.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
+        "gdDocumentID&Sequence_5",
+        "strDocumentID&Sequence_1",
         "blnFileExist&Sequence_1"
       ],
       "ArgumentsSectionElementsOrder": [
-        "strDataSet"
+        "in_strDataSet"
       ],
       "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null
