@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { Router, RouterLink } from "@angular/router";
 import { UserAccess, User } from "../../../interfaces/interface-user";
 import { UserService } from "../../../services/user.service";
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpResponse, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 // import { NotificationComponent } from '../../notifications/notification/notification.component';
 // import { NotificationsService } from '../../../services/notifications.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,19 +12,12 @@ import { AfterViewInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 declare let window: any;
 
-@Component({
-  selector: 'app-login-componente',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    RouterLink,
-    // NotificationComponent,
-    HttpClientModule,
-    DialogPasswordComponent
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
-})
+@Component({ selector: 'app-login-componente',
+    standalone: true,
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss', imports: [ReactiveFormsModule,
+        RouterLink,
+        DialogPasswordComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class LoginComponenteComponent implements OnInit {
   @ViewChild('dialogPasswordComponent') dialogPasswordComponent!: DialogPasswordComponent;
   hide = true

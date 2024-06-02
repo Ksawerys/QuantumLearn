@@ -7,7 +7,7 @@ import { MatInput } from "@angular/material/input";
 import { Router, RouterLink } from "@angular/router";
 import { UserAccess, User } from "../../../interfaces/interface-user";
 import { UserService } from "../../../services/user.service";
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpResponse, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogPasswordComponent } from "../../dialogs/dialog-password/dialog-password.component";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
@@ -15,27 +15,20 @@ import { MatProgressSpinner } from "@angular/material/progress-spinner";
 // import { NotificationsService } from '../../../services/notifications.service';
 import { HttpClientModule } from '@angular/common/http';
 
-@Component({
-  selector: 'app-profile',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatError,
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatLabel,
-    MatSuffix,
-    RouterLink,
-    MatButton,
-    MatProgressSpinner,
-    // NotificationComponent,
-    HttpClientModule
-  ],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
-})
+@Component({ selector: 'app-profile',
+    standalone: true,
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.scss', imports: [ReactiveFormsModule,
+        MatError,
+        MatFormField,
+        MatIcon,
+        MatIconButton,
+        MatInput,
+        MatLabel,
+        MatSuffix,
+        RouterLink,
+        MatButton,
+        MatProgressSpinner], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class ProfileComponent implements OnInit {
 
   hide = true
