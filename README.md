@@ -1,4 +1,34 @@
 # QuantumLearn
+
+## Dominio
+http://quantumlearn.net
+(Puede que de error ya que tiene un cupo maximo de una persona)
+
+## Despliegue
+### Aplicaciones necesarias
+Para las carpetas QuantumLearn/Academic_Data_IA_Dispatcher y QuantumLearn/Academic_Data_IA_Performer hará falta crear una cuenta en Uipath e instalar Uipath Studio. En adición hará falta crear queue del Orchestrator especificada en el config de ambos procesos (carpetas). En adición haria falta elazar Uipath con tu cuenta de google y con una Api de OpenAI. 
+
+### Instalación de dependencias
+Para la instalación de dependencias en el proyecto, es necesario ejecutar el siguiente comando en la ruta QuantumLearn/BACK/
+
+    npm install
+
+### Configuración del entorno
+Para ajustar el **entorno**, hay que configurar el archivo **.env.example**, se elimina '.example' quedando un archivo '.env'. Dentro se encuentran las **descripciones** de todas las **variables de entorno**.
+
+### Ejecución de Migraciones y Seeders
+Las migraciones y lo seeders, crean las tablas en la BBDD y las rellenan con datos de prueba.
+Para ejecutar ambos script a la vez, ejecutar el comando
+
+    npm run m
+Para ejecutar solo las migrations
+
+    npx sequelize-cli db:migrate
+
+# Endpoints
+## Explicación JWT
+Todas las rutas protegidas, usando JWT, usan la KEY 'x-token' en el header con el valor del token.
+
 The academic organizer that helps you improve.
 | | | | | | | | | |
 |-|-|-|-|-|-|-|-|-|
