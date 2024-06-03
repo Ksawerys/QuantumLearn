@@ -1,0 +1,57 @@
+$stop-color-1: #40c38f;
+$stop-color-2: #0ab5ff;
+$circle-radius: 64;
+
+#loading-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 150px;
+    height: 150px;
+  }
+
+  .blur-effect {
+    width: 0;
+  }
+
+  .spinner {
+    filter: url(#blur-effect);
+  }
+  .stop1 {
+    stop-color: $stop-color-1;
+  }
+
+  .stop2 {
+    stop-color: $stop-color-2;
+  }
+
+  .half-circle, .circle-outline {
+    animation: Snurra1 10s infinite linear;
+    stroke-dasharray: 180 800;
+    fill: none;
+    stroke: url(#gradient);
+    stroke-width: 23;
+    stroke-linecap: round;
+
+    &.circle-outline {
+      animation: Snurra1 3s infinite linear;
+      stroke-dasharray: 26 54;
+    }
+  }
+}
+
+@keyframes Snurra1 {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -403px;
+  }
+}

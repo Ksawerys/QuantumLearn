@@ -1,0 +1,145 @@
+<div class="form" [class.active]="showRegister">
+  @if (!showRegister) {
+  <div class="form-toggle"></div>
+  }@else{
+  <div class="form-toggle visible" (click)="showRegister = false; showRoles = false;"></div>
+  }
+  <div class="form-arrow" [class.visible]="showRoles" (click)="showRoles = false"></div>
+
+  <div class="form-panel one" [class.hidden]="showRegister">
+    <div class="form-header">
+      <h1>Account Login</h1>
+    </div>
+    <div class="fontFamily">
+      <form [formGroup]="loginFormulario">
+        <div class="form-group">
+          <input type="text" id="email" name="email" formControlName="email" required>
+          <label for="email">Email</label>
+          @if (loginFormulario.get('email')?.touched && loginFormulario.get('email')?.hasError('required')) {
+          <p class="error-login"> El nombre es obligatorio </p>
+          }@else if (loginFormulario.get('email')?.hasError('maxlength')) {
+          <p class="error-login"> La longitud máxima son cincuenta caracteres </p>
+          }@else if (loginFormulario.get('email')?.hasError('email')) {
+          <p class="error-login"> Debes introducir un email válido </p>
+          }
+        </div>
+        <div class="form-group">
+          <input type="password" id="password" name="password" formControlName="password" required>
+          <label for="password">Password</label>
+          @if (loginFormulario.get('password')?.touched && loginFormulario.get('password')?.hasError('required')) {
+          <p class="error-login"> La contraseña es obligatoria </p>
+          }@else if (loginFormulario.get('password')?.hasError('minlength')) {
+          <p class="error-login"> La longitud mínima son ocho caracteres </p>
+          }@else if (loginFormulario.get('password')?.hasError('maxlength')) {
+          <p class="error-login"> La longitud máxima son treinta caracteres </p>
+          }@else if (loginFormulario.get('password')?.hasError('pattern')) {
+          <p class="error-login"> La contraseña debe y puede contener al menos una letra minúscula, una mayúscula, un
+            número y un caracter especial válido. </p>
+          }
+        </div>
+        <div class="form-group">
+          <a class="form-link" (click)="openDialog()">Forgot Password?</a>
+          @if (!showRegister) {
+          <a class="form-link" (click)="showRegister = true">You don't have an account yet?</a>
+          }
+        </div>
+        <div class="form-group">
+          <button type="submit" (click)="login()">Log In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="form-panel two" [class.active]="showRegister">
+    <div class="form-header">
+      <h1>Register Account</h1>
+    </div>
+    <div class="form-content">
+      <form [formGroup]="registerForm">
+        <div class="form-register-inputs" [class.hidden]="showRoles">
+          <div class="form-group">
+            <input type="text" id="email" name="email" formControlName="email" required>
+            <label for="email">Email Address</label>
+            @if (registerForm.get('email')?.touched && registerForm.get('email')?.hasError('required')) {
+            <p class="error-register"> Email is required </p>
+            }@else if (registerForm.get('email')?.hasError('maxlength')) {
+            <p class="error-register"> The maximum length is fifty characters </p>
+            }@else if (registerForm.get('email')?.hasError('email')) {
+            <p class="error-register"> You must enter a valid email </p>
+            }
+          </div>
+
+          <div class="form-group">
+            <input type="text" id="name" name="name" formControlName="name" required>
+            <label for="username">Name</label>
+            @if (registerForm.get('name')?.touched && registerForm.get('name')?.hasError('required')) {
+            <p class="error-register"> The name is required </p>
+            }@else if (registerForm.get('name')?.hasError('minlength')) {
+            <p class="error-register"> The minimum length is two characters </p>
+            }@else if (registerForm.get('name')?.hasError('maxlength')) {
+            <p class="error-register"> The maximum length is thirty characters </p>
+            }@else if (registerForm.get('name')?.hasError('pattern')) {
+            <p class="error-register"> The name can only contain uppercase, lowercase and spaces </p>
+            }
+          </div>
+
+          <div class="form-group">
+            <input type="text" id="second_name" name="second_name" formControlName="second_name" required>
+            <label for="second_name">Second Name</label>
+            @if (registerForm.get('second_name')?.touched && registerForm.get('second_name')?.hasError('required')) {
+            <p class="error-register"> Password is required </p>
+            }@else if (registerForm.get('second_name')?.hasError('minlength')) {
+            <p class="error-register"> The minimum length is two characters </p>
+            }@else if (registerForm.get('second_name')?.hasError('maxlength')) {
+            <p class="error-register"> The maximum length is thirty characters </p>
+            }@else if (registerForm.get('second_name')?.hasError('pattern')) {
+            <p class="error-register"> Last names can only contain uppercase, lowercase and spaces </p>
+            }
+          </div>
+
+          <div class="form-group">
+            <input type="password" id="password" name="password" formControlName="password" required>
+            <label for="password">Password</label>
+            @if (registerForm.get('password')?.touched && registerForm.get('password')?.hasError('required')) {
+            <p class="error-register"> Last names are required </p>
+            }@else if (registerForm.get('password')?.hasError('minlength')) {
+            <p class="error-register"> The minimum length is eight characters </p>
+            }@else if (registerForm.get('password')?.hasError('maxlength')) {
+            <p class="error-register"> The maximum length is thirty characters </p>
+            }@else if (registerForm.get('password')?.hasError('pattern')) {
+            <p class="error-register"> The password must at least one lowercase letter, one uppercase letter, a number and a valid special character</p>
+            }
+          </div>
+          @if (registerForm.get('email')?.valid && registerForm.get('name')?.valid && registerForm.get('second_name')?.valid && registerForm.get('password')?.valid) {          
+            <div class="form-group">
+            <button type="submit" (click)="showRoles = true">Select Roles</button>
+          </div>
+          }
+        </div>
+        <div class="roles-group" [class.active]="showRoles">
+          <div class="role-option" id="role-teacher" (click)="rolesSelection($event)">
+            <h3>Teacher</h3>
+            <p>Empower your teaching with QuantumLearn. Gain insights into student progress, receive personalized
+              feedback, and adapt teaching materials effortlessly with AI assistance.</p>
+          </div>
+          <div class="role-option" id="role-student" (click)="rolesSelection($event)">
+            <h3>Student</h3>
+            <p>Achieve academic success with QuantumLearn. Set and track goals, access personalized guidance, and
+              visualize progress with intuitive graphs and statistics.</p>
+          </div>
+          <div class="role-option" id="role-guardian" (click)="rolesSelection($event)">
+            <h3>Guardian</h3>
+            <p>Support student success with QuantumLearn. Monitor progress, communicate with teachers, and facilitate
+              collaboration for academic growth.</p>
+          </div>
+          @if(selectedRoles.length > 0) {
+          <div class="form-group">
+            <button type="submit" (click)="showRoles = true" (click)="register()">Register</button>
+          </div>
+           }
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-dialog-password #dialogPasswordComponent></app-dialog-password>

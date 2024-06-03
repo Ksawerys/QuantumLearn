@@ -1,0 +1,219 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+<div class="menu-container">
+    <div class="menu">
+        <a href="#" class="menu-item">
+            <div class="icon-container">
+            <mat-icon  class="material-symbols-outlined">home</mat-icon> 
+            </div>
+            <span >HOME</span>
+        </a>		 
+        <a routerLink="/notes" class="menu-item">
+            <div class="icon-container">
+            <mat-icon  class="material-symbols-outlined">checklist</mat-icon> 
+        </div>
+            <span >NOTES</span>
+        </a>		
+        <a href="#" class="menu-item">
+            <div class="icon-container">
+            <mat-icon  class="material-symbols-outlined">query_stats</mat-icon> 
+            </div>
+            <span>DATA</span>
+        </a>		 
+        <a href="#" class="menu-item">
+            <div class="icon-container">
+            <mat-icon  class="material-symbols-outlined">forum</mat-icon> 
+            </div>
+            <span >CHAT</span>
+        </a>		
+        <a href="#" class="menu-item">
+            <div class="icon-container">
+            <mat-icon  class="material-symbols-outlined">event_available</mat-icon> 
+            </div>
+            <span>CALENDAR</span>
+        </a>		
+        <a href="#" class="menu-item">
+            <div class="icon-container">
+            <mat-icon  class="material-symbols-outlined">admin_panel_settings</mat-icon> 
+            </div>
+            <span>ADMIN</span>
+        </a>		
+        <a routerLink="/error" class="menu-item">
+            <div class="icon-container">
+            <mat-icon  class="material-symbols-outlined">settings</mat-icon> 
+            </div>
+            <span>SETTINGS</span>
+        </a>		
+        <a [routerLink]="link" class="menu-item">
+            <div class="icon-container">
+            <mat-icon  class="material-symbols-outlined">person</mat-icon> 
+            </div>
+            <span>PROFILE</span>
+        </a>
+    </div>
+</div>
+
+<div class="full-width-panel">
+    <img src="assets/image/LogoQuantumLearn.jpg" class="full-width-image">
+    <h1>QuantumLearn</h1>
+</div>
+
+<div id="home-content">
+    <div class="ag-format-container">
+        <div class="ag-courses_box">
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div id="first-title" class="ag-courses-item_title">
+                Academic Organization
+              </div>
+              <div class="hover-text">
+                Use our colourfull notes, calendars and sections to organize your studies</div>
+            </a>
+            
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div id="second-title" class="ag-courses-item_title">
+                AI Progress Tracking
+              </div>
+              <div class="hover-text">
+                We help you see your progress and give you advice thanks to the GPT-4 integration
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div id="third-title" class="ag-courses-item_title">
+                Real-Time Communication
+              </div>
+              <div class="hover-text">
+                Our page promotes the communication of teachers, parents and guardians
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <h1 id="colourfull-text">QuantumLearn te ayudará a definir tus objetivos
+          académicos a corto y largo plazo, proporcionándote el necesario para
+          comprender y seguir el camino hacia tus metas, ayudándote a lograr tus metas.</h1>
+
+
+<section class="plans__container">
+  <div class="plans">
+  
+    <div class="planItem__container">
+      <div class="planItem planItem--free">
+
+        <div class="card">
+          <div class="card__header">
+            <mat-icon  class="material-symbols-outlined symbol title">keyboard_arrow_up</mat-icon> 
+            <h2>Free</h2>
+          </div>
+          <div class="card__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do</div>
+        </div>
+
+        <div class="price">$0<span>/ month</span></div>
+
+        <ul class="featureList">
+          <mat-icon  class="material-symbols-outlined  symbol check">check</mat-icon><li>2 links</li>
+          <mat-icon  class="material-symbols-outlined  symbol check">check</mat-icon><li>Own analytics platform</li>
+          <mat-icon  class="material-symbols-outlined  symbol close">close</mat-icon><li class="disabled">Chat support</li>
+          <mat-icon  class="material-symbols-outlined  symbol close">close</mat-icon><li class="disabled">Mobile application</li>
+          <mat-icon  class="material-symbols-outlined  symbol close">close</mat-icon><li class="disabled">Unlimited users</li>
+        </ul>
+      </div>
+
+      <div class="planItem planItem--pro">
+        <div class="card">
+          <div class="card__header">
+            <mat-icon  class="material-symbols-outlined symbol title">keyboard_double_arrow_up</mat-icon> 
+            <h2>Pro</h2>
+          </div>
+          <div class="card__desc">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</div>
+        </div>
+
+        <div class="price">$18<span>/ month</span></div>
+
+        <ul class="featureList">
+          <mat-icon  class="material-symbols-outlined  symbol check">check</mat-icon><li>2 links</li>
+          <mat-icon  class="material-symbols-outlined  symbol check">check</mat-icon><li>Own analytics platform</li>
+          <mat-icon  class="material-symbols-outlined  symbol check">check</mat-icon><li>Chat support</li>
+          <mat-icon  class="material-symbols-outlined  symbol close">close</mat-icon><li class="disabled">Mobile application</li>
+          <mat-icon  class="material-symbols-outlined  symbol close">close</mat-icon><li class="disabled">Unlimited users</li>
+        </ul>
+
+        <button class="button" routerLink="/payments">Get Started</button>
+      </div>
+
+      <div class="planItem planItem--entp">
+        <div class="card">
+          <div class="card__header">
+            <mat-icon  class="material-symbols-outlined symbol title">work</mat-icon> 
+            <h2>Enterprise</h2>
+          </div>
+          <div class="card__desc">Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor</div>
+        </div>
+
+        <div class="price">Let's Talk</div>
+
+        <ul class="featureList">
+          <mat-icon  class="material-symbols-outlined  symbol check">check</mat-icon><li>2 links</li>
+          <mat-icon  class="material-symbols-outlined  symbol check">check</mat-icon><li>Own analytics platform</li>
+          <mat-icon  class="material-symbols-outlined  symbol check">check</mat-icon><li>Chat support</li>
+          <mat-icon  class="material-symbols-outlined  symbol check">check</mat-icon><li>Mobile application</li>
+          <mat-icon  class="material-symbols-outlined  symbol check">check</mat-icon><li>Unlimited users</li>
+          <mat-icon  class="material-symbols-outlined  symbol check">check</mat-icon><li>Customize Panel</li>
+        </ul>
+
+        <button class="button">Get Started</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="creator">
+<a href="" class="card-creator">
+  <img src="../../../assets/image/CreatorImage.jpg" class="card__image" alt="" />
+  <div class="card__overlay">
+    <div class="card__header">
+      <svg class="card__arc"><path /></svg>                     
+      <img class="card__thumb" src="../../../assets/image/CreatorImage2.jpg" alt="" />
+      <div class="card__header-text">
+        <h3 class="card__title">Javier Velasco</h3>            
+        <span class="card__status">Si desea ver mis proyectos o contactar conmigo:</span>
+      </div>
+    </div>
+    <ul class="sci">
+      <li style="--i:1">
+        <a href="https://twitter.com/_javidev"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+      </li>
+      <li style="--i:2">
+        <a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+      </li>
+      <li style="--i:3">
+        <a href="https://github.com/Ksawerys"><i class="fa fa-github" aria-hidden="true"></i></a>
+      </li>
+  </ul>  
+</div>
+</a> 
+<div id="creator-text">
+<h1>Soy Javier Velasco Alcalde el creador de esta pagina web, me encantaria saber vuestras opinion y sugerencias que tengais sobre la pagina. Podeis enviar preguntas y sugerencias al con un enlace que dejare al fondo de la pagina. Si quereis saber mas sobre mi, podeis dejar el cursor sobre mi foto de perfil.</h1>
+</div>     
+</div>
+</div>
+</div>
+<app-footer></app-footer>
+
+
+

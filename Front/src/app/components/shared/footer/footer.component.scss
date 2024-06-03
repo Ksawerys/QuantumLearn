@@ -1,0 +1,299 @@
+@import '../../../../styles.scss';
+
+::selection {
+    background: transparent;
+    color: #26c3b2;
+}
+
+::-moz-selection {
+    background: transparent;
+    color: #26c3b2;
+}
+
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    background-color: $bgColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
+    width: 745px;
+    padding: 40px 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 32px 40px;
+}
+
+.spaced-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+%shared-styles {
+    @include applyFontStyle;
+    padding: 0 8px;
+    position: relative;
+    border: 3px solid rgba($lightShadow, 0);
+    outline: none;
+    text-align: center;
+    background-color: $bgColor;
+    transition: all 250ms ease-in-out;
+
+    &:hover {
+        box-shadow: none;
+        border-color: rgba($lightShadow, 0.5);
+    }
+}
+
+.anchor-container {
+    display: flex;
+    justify-content: space-between;
+
+    a,
+    button {
+        @extend %shared-styles;
+        box-shadow: $dropShadow, $innerShadow0;
+        cursor: pointer;
+        padding: 20px;
+        align-items: center;
+        background-color: $bgColor;
+        margin: 10px;
+
+        &:active {
+            box-shadow: $innerShadow;
+            border-color: rgba($lightShadow, 0);
+        }
+
+        &>* {
+            vertical-align: middle;
+        }
+
+        &>span:last-child {
+            padding-left: 8px;
+        }
+    }
+
+    button {
+        border-radius: 50%;
+    }
+
+    .buttons-container,
+    .links-container {
+        display: flex;
+    }
+
+    .links-container {
+        display: flex;
+    }
+
+}
+
+.spaced-container {}
+
+.icon {
+    width: 100%;
+    height: 100%;
+    fill: $textColor;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+%oval-btn {
+    height: $height;
+    width: $width;
+    border-radius: 10px;
+}
+
+.oval-lg {
+    @extend %oval-btn;
+    overflow: hidden;
+
+    &--with-icon {
+        @extend .oval-lg;
+        text-align: left;
+    }
+}
+
+#background-dialog,
+#contact-dialog {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    display: none;
+
+    .terms,
+    .contact-content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40%;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 20px;
+        background-color: $bgColor;
+        border-radius: 10px;
+        z-index: 11;
+        padding: 3%;
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 24px;
+            margin-bottom: 20px;
+        }
+    }
+
+    &.active {
+        display: block;
+    }
+}
+
+#contact-dialog {
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+
+
+        p {
+            font-size: 16px;
+            line-height: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        textarea {
+            @extend %shared-styles;
+            font-size: 1.5em;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.5em;
+            border: none;
+            border-bottom: 2px solid #ffffff;
+            background: transparent;
+            outline: none;
+            transition: all 0.3s cubic-bezier(.64, .09, .08, 1);
+            z-index: 1;
+            position: relative;
+            user-select: none;
+            border-radius: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                @extend %shared-styles;
+                box-shadow: $dropShadow, $innerShadow0;
+                cursor: pointer;
+                padding: 20px;
+                margin: 20px;
+                align-items: center;
+                background-color: transparent !important;
+
+                &:active {
+                    box-shadow: $innerShadow;
+                    border-color: rgba($lightShadow, 0);
+                }
+
+                &>* {
+                    vertical-align: middle;
+                }
+
+                &>span:last-child {
+                    padding-left: 8px;
+                }
+            }
+        }
+
+        .active {
+            box-shadow: $dropShadow0, $innerShadow;
+            border-color: rgba($lightShadow, 0);
+            transition: all 990ms ease-in-out;
+
+            button {}
+
+            &:hover {
+                box-shadow: $innerShadow;
+                border-color: none;
+            }
+        }
+
+        .spaced-container {}
+
+        .icon {
+            @include size(24px);
+            fill: $textColor;
+        }
+
+        textarea {
+            @extend %shared-styles;
+            box-shadow: $innerShadow;
+
+            &:focus {
+                box-shadow: none;
+                border-color: rgba($lightShadow, 0.5);
+            }
+
+            &::placeholder {
+                @include applyFontStyle;
+                opacity: 1;
+                margin-left: 40px;
+            }
+        }
+
+        %oval-btn {
+            height: 54px;
+            border-radius: 40px;
+        }
+
+        .oval-lg {
+            @extend %oval-btn;
+            width: 210px;
+            overflow: hidden;
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+
+            &--with-icon {
+                @extend .oval-lg;
+                text-align: left;
+            }
+        }
+    }
+}
