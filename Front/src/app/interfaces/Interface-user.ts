@@ -5,7 +5,7 @@ export interface User {
     password?: string | null,
     url_photo?: string | null,
     extension?: string | null,
-    roles?: Role[] | null
+    roles?: [] | null
   }
   
   export interface UserAccess {
@@ -16,8 +16,8 @@ export interface User {
   }
   
   export interface Role {
-    id:     number;
-    name: string;
+    id?:     number;
+    name?: string;
   }
   
   export interface UserSessionStorage {

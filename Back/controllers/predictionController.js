@@ -11,19 +11,15 @@ class PredictionController {
           const userId = req.params.userId;
           const examNotes = await tagController.getExamGrades(userId);
 
-          // Convertir las notas de examen a un array de notas
           const trainingData = examNotes.map(note => {
             const gradeTag = note.note_tags.find(tag => tag.tag_id === gradeTag.id);
             return gradeTag ? gradeTag.data : null;
           }).filter(grade => grade !== null);
 
-          // Entrenar el modelo
-          // Necesitas dividir trainingData en X y y
-          const X = trainingData.slice(0, -2); // todas las notas excepto las dos últimas
-          const y = trainingData.slice(-2); // las dos últimas notas
+          const X = trainingData.slice(0, -2); 
+          const y = trainingData.slice(-2); // las dos últimas notas de forma que luego intente predecirlas y vea la precision
           await PredictionModel.train(X, y);
 
-          // Guardar el modelo en un archivo
           const modelJson = JSON.stringify(PredictionModel);
           fs.writeFileSync(path.join(__dirname, '../mlModels/saved_model.json'), modelJson);
 
@@ -39,12 +35,10 @@ class PredictionController {
             const userId = req.params.userId;
             const examNotes = await tagController.getExamGrades(userId);
   
-            // Convertir las notas de examen a un array de notas
         const trainingData = examNotes.map(note => {
              const gradeTag = note.note_tags.find(tag => tag.tag_id === gradeTag.id);
              return gradeTag ? gradeTag.data : null;
         }).filter(grade => grade !== null);
-          // Necesitas definir la función transformInputData
           const transformedInput = transformInputData(trainingData);
 
           const prediction = PredictionModel.predict(transformedInput);

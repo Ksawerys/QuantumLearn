@@ -11,61 +11,6 @@
 }
 
 
-$fontFamily: 'Montserrat', sans-serif;
-$fontSize: 18px;
-$textColor: #6C7587;
-
-$height: 84px;
-$width: 84px;
-
-$bgColor: white;
-$iconColor: #8992A5;
-
-$accentBlue: #1657F0;
-$brightBlue: #36D7E0;
-
-$darkShadow: #484f60;
-$lightShadow: #FFFFFF;
-
-$dropShadow: 8px 8px 12px -2px rgba($darkShadow, 0.4),
-    -6px -6px 12px -1px rgba($lightShadow, 1);
-
-$dropShadow0: 8px 8px 12px -2px rgba($darkShadow, 0),
-    -6px -6px 12px -1px rgba($lightShadow, 0);
-
-$innerShadow: inset -4px -4px 6px -1px rgba($lightShadow, 1),
-    inset 2px 2px 8px -1px rgba($darkShadow, 0.5);
-
-$innerShadow0: inset -4px -4px 6px -1px rgba($lightShadow, 0),
-    inset 2px 2px 8px -1px rgba($darkShadow, 0);
-
-// Mixins
-
-@mixin size($width, $height: $width) {
-    width: $width;
-    height: $height;
-}
-
-@mixin applyFontStyle() {
-    font-family: $fontFamily;
-    font-size: $fontSize;
-    line-height: $fontSize;
-    color: $textColor;
-}
-
-@mixin gridPlacement($direction, $start, $end) {
-    grid-#{$direction}-start: $start;
-    grid-#{$direction}-end: $end;
-}
-
-@mixin center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-// Layout
 *,
 *:before,
 *:after {
@@ -341,8 +286,8 @@ $innerShadow0: inset -4px -4px 6px -1px rgba($lightShadow, 0),
             @extend %oval-btn;
             width: 210px;
             overflow: hidden;
-            display: flex; // Añade flexbox
-            align-items: center; // Centra el contenido verticalmente
+            display: flex; 
+            align-items: center;
             justify-content: center;
 
             &--with-icon {

@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { Router } from '@angular/router';
 import { ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { MatIcon } from "@angular/material/icon";
-import { RouterLink } from "@angular/router";
 import { FooterComponent } from '../shared/footer/footer.component';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent,MatIcon,RouterLink,FooterComponent],
+  imports: [
+    NavbarComponent,
+    MatIcon,
+    RouterLink,
+    FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -36,29 +39,3 @@ ngAfterViewInit() {
 }
 
 }
-
-
-
-// ngAfterViewInit() {
-//   this.renderer.listen('window', 'mousemove', (e) => {
-//     const x = e.clientX;
-//     const width = window.innerWidth;
-//     const percentage = Math.abs(x - width / 2) / (width / 2);
-
-//     // Define tus colores en formato RGB
-//     const rgbStart = [95, 150, 74];
-//     const rgbEnd = [19, 114, 138];
-
-//     // Interpola entre los colores
-//     const rgbInterpolated = rgbStart.map((start, i) => Math.round(start + percentage * (rgbEnd[i] - start)));
-
-//     // Convierte el color interpolado a formato CSS
-//     const color = `rgb(${rgbInterpolated.join(',')})`;
-
-//     // Aplica el color a los elementos span
-//     const spanElements = this.el.nativeElement.querySelectorAll('.menu-item span');
-//     spanElements.forEach((span: HTMLElement) => {
-//       this.renderer.setStyle(span, 'backgroundColor', color);
-//     });
-//   });
-// }

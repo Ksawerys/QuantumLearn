@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { RouterLink } from "@angular/router";
 import { HttpResponse } from "@angular/common/http";
 import { MatIcon } from "@angular/material/icon";
-;
+import { Router, RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-navbar',
   standalone: true,

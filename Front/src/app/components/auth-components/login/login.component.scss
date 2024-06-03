@@ -56,13 +56,11 @@
     transition-delay: 0s,
     0.1s;
 
-    .form-header{
-      margin-top: 8%;
-    }
 
-    .form-content{
-      margin-top: 4%;
-    }
+
+  }
+  .form-content{
+    margin-top: 4%;
   }
 
   &-toggle {
@@ -113,9 +111,7 @@
     }
   }
 
-  .form-content{
-    margin-top: 2%;
-  }
+
 
   &-arrow {
     z-index: 10;
@@ -327,7 +323,6 @@
 
   }
 
-  // Panel
   &-panel {
     display: flex;
     flex-direction: column;
@@ -341,7 +336,7 @@
       border: none;
     }
 
-    // Panel One
+    // Login
     &.one {
       &:before {
         @extend .overlay;
@@ -365,7 +360,7 @@
       }
     }
 
-    // Panel Two
+    // Register
     &.two {
       z-index: 5;
       position: absolute;
@@ -498,7 +493,6 @@
     }
   }
 
-  // Header
   &-header {
     margin: 0 0 40px;
     border: none;
@@ -522,3 +516,4 @@
   }
 
 }
+

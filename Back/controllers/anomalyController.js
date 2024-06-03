@@ -8,7 +8,6 @@ class AnomalyController {
             const userId = req.params.userId;
             const examNotes = await tagController.getExamGrades(userId);
   
-            // Convertir las notas de examen a un array de notas
             const data = examNotes.map(note => {
               const gradeTag = note.note_tags.find(tag => tag.tag_id === gradeTag.id);
               return gradeTag ? gradeTag.data : null;

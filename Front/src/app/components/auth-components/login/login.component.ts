@@ -1,42 +1,45 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
-import { UserAccess, User } from "../../../interfaces/interface-user";
-import { UserService } from "../../../services/user.service";
-import { HttpClient, HttpResponse, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
-// import { NotificationComponent } from '../../notifications/notification/notification.component';
-// import { NotificationsService } from '../../../services/notifications.service';
-import { HttpClientModule } from '@angular/common/http';
+import { UserAccess, User, Role } from "../../../interfaces/interface-user";
+import { HttpClient, HttpResponse, withInterceptorsFromDi } from "@angular/common/http";
 import { DialogPasswordComponent } from '../../dialogs/dialog-password/dialog-password.component';
-import { AfterViewInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 declare let window: any;
 
 @Component({ selector: 'app-login-componente',
     standalone: true,
     templateUrl: './login.component.html',
-    styleUrl: './login.component.scss', imports: [ReactiveFormsModule,
-        RouterLink,
-        DialogPasswordComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
+    styleUrl: './login.component.scss', 
+    imports: [
+      ReactiveFormsModule,
+      RouterLink,
+      DialogPasswordComponent,
+    ], 
+    providers: [],
+    encapsulation: ViewEncapsulation.None
+  })
+
 export class LoginComponenteComponent implements OnInit {
   @ViewChild('dialogPasswordComponent') dialogPasswordComponent!: DialogPasswordComponent;
   hide = true
   showRegister = false;
   showRoles = false;
-  selectedRoles: string[] = [];
-
-  errorLogin!: Boolean
-  errorRegistro!: Boolean
+  selectedRoles: string[] = [];  
   titleError = 'Error'
   messageError = ''
   descriptionError = 'Revisa los campos introducidos, revisa la conexion y vuelve a intentarlo'
 
   loginFormulario = new FormGroup({
-    email: new FormControl('', [
+    email: new FormControl('', {
+      updateOn: 'blur', validators: [
       Validators.required,
       Validators.maxLength(50),
       Validators.email
-    ]),
+      ]
+  }),
     password: new FormControl('', {
       updateOn: 'blur', validators: [
         Validators.required,
@@ -49,14 +52,13 @@ export class LoginComponenteComponent implements OnInit {
 
   registerForm = new FormGroup({
     email: new FormControl('', {
-      updateOn: 'blur', validators: [
+      updateOn: 'change', validators: [
         Validators.required,
-        Validators.maxLength(50),
         Validators.email
       ]
     }),
     name: new FormControl('', {
-      updateOn: 'blur', validators: [
+      updateOn: 'change', validators: [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(30),
@@ -64,7 +66,7 @@ export class LoginComponenteComponent implements OnInit {
       ]
     }),
     second_name: new FormControl('', {
-      updateOn: 'blur', validators: [
+      updateOn: 'change', validators: [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(30),
@@ -72,15 +74,14 @@ export class LoginComponenteComponent implements OnInit {
       ]
     }),
     password: new FormControl('', {
-      updateOn: 'blur', validators: [
+      updateOn: 'change', validators: [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(30),
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])[a-zA-Z0-9!@#\$%\^&\*]*$')
       ]
     }),
-
-    roles: new FormControl([], Validators.required)
+    roles: new FormControl([] as string[], Validators.required)
   });
 
   rolesSelection(event: Event) {
@@ -101,9 +102,11 @@ export class LoginComponenteComponent implements OnInit {
     }
 
     target.classList.toggle('selected');
+    this.registerForm.get('roles')?.setValue(this.selectedRoles);  
   }
+
   login() {
-    this.userService.login(this.loginFormulario.value).subscribe(
+    this.authService.login(this.loginFormulario.value).subscribe(
       response => {
         console.log(response)
         if (response.body) {
@@ -112,13 +115,17 @@ export class LoginComponenteComponent implements OnInit {
         }
       },
       error => {
-        this.errorRegistro = true;
+        this.openSnackBar('Error de login', 'Cerrar');
       }
     );
   }
 
   register() {
-    this.userService.register(this.registerForm.value).subscribe(
+    const registerValue = { ...this.registerForm.value };
+  
+    const roles: string[] = registerValue.roles!;
+  
+    this.authService.register({ ...registerValue, roles } as User).subscribe(
       response => {
         if (response.body) {
           sessionStorage.setItem('token', response.body!.token!);
@@ -126,71 +133,31 @@ export class LoginComponenteComponent implements OnInit {
         }
       },
       error => {
-        this.errorLogin = true;
+        this.openSnackBar('Error de registro', 'Cerrar');
       }
     );
   }
-
-
 
   openDialog() {
     this.dialogPasswordComponent.open();
   }
 
   ngAfterViewInit(): void {
-    if (window['google']) {
-      window['google'].accounts.id.initialize({
-        client_id: '...',
-        callback: (response: any) => {
-          const body = {
-            id_token: response.credential
-          };
-          this.authService.handleCredentialResponse(body).subscribe(
-            res => {
-              console.log(res);
-              const userNameElement = document.getElementById('user_name');
-              if (userNameElement) {
-                userNameElement.innerText = res.body.correo;
-              }
-              localStorage.setItem('email', res.body.correo);
-            },
-            err => console.error(err)
-          );
-        }
-      });
-    }
   }
 
   ngOnInit(): void {
     if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('token')) {
       this.router.navigate(['/inicio'])
     }
-    this.loadScript();
-    if (window['google']) {
-    }
   }
 
-  loadScript() {
-    const node = document.createElement('script');
-    node.src = 'https://accounts.google.com/gsi/client';
-    node.type = 'text/javascript';
-    node.async = true;
-    node.charset = 'utf-8';
-    document.getElementsByTagName('head')[0].appendChild(node);
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
-  signOut(): void {
-    if (window['google'] && window['google'].accounts && window['google'].accounts.id) {
-      window['google'].accounts.id.disableAutoSelect();
-      window['google'].accounts.id.revoke(localStorage.getItem('email'), () => {
-        console.log('consent revoked');
-        localStorage.clear();
-        location.reload();
-      });
-    }
-  }
-
-  constructor(private userService: UserService, private router: Router, private http: HttpClient, private authService: AuthService) {
+  constructor(private router: Router, private http: HttpClient, private authService: AuthService, private snackBar: MatSnackBar) {
   }
 
 }

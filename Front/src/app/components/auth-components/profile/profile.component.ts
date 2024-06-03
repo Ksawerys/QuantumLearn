@@ -4,21 +4,19 @@ import { MatError, MatFormField, MatLabel, MatSuffix } from "@angular/material/f
 import { MatIcon } from "@angular/material/icon";
 import { MatButton, MatIconButton } from "@angular/material/button";
 import { MatInput } from "@angular/material/input";
-import { Router, RouterLink } from "@angular/router";
 import { UserAccess, User } from "../../../interfaces/interface-user";
 import { UserService } from "../../../services/user.service";
 import { HttpClient, HttpResponse, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogPasswordComponent } from "../../dialogs/dialog-password/dialog-password.component";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
-// import { NotificationComponent } from '../../notifications/notification/notification.component';
-// import { NotificationsService } from '../../../services/notifications.service';
-import { HttpClientModule } from '@angular/common/http';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({ selector: 'app-profile',
     standalone: true,
     templateUrl: './profile.component.html',
-    styleUrl: './profile.component.scss', imports: [ReactiveFormsModule,
+    styleUrl: './profile.component.scss', imports: [
+      ReactiveFormsModule,
         MatError,
         MatFormField,
         MatIcon,
@@ -28,7 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
         MatSuffix,
         RouterLink,
         MatButton,
-        MatProgressSpinner], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        MatProgressSpinner], 
+        providers: [] 
+    })
 export class ProfileComponent implements OnInit {
 
   hide = true
@@ -114,31 +114,31 @@ export class ProfileComponent implements OnInit {
     target.classList.toggle('selected');
   }
   login() {
-    this.userService.login(this.loginFormulario.value).subscribe(
-      response => {
-        if (response.body) {
-          sessionStorage.setItem('token', response.body!.token!);
-          this.router.navigate(['/inicio']);
-        }
-      },
-      error => {
-        this.errorRegistro = true;
-      }
-    );
+    // this.userService.login(this.loginFormulario.value).subscribe(
+    //   response => {
+    //     if (response.body) {
+    //       sessionStorage.setItem('token', response.body!.token!);
+    //       this.router.navigate(['/inicio']);
+    //     }
+    //   },
+    //   error => {
+    //     this.errorRegistro = true;
+    //   }
+    // );
   }
 
   register() {
-    this.userService.register(this.registerForm.value).subscribe(
-      response => {
-        if (response.body) {
-          sessionStorage.setItem('token', response.body!.token!);
-          this.router.navigate(['/inicio']);
-        }
-      },
-      error => {
-        this.errorLogin = true;
-      }
-    );
+    // this.userService.register(this.registerForm.value).subscribe(
+    //   response => {
+    //     if (response.body) {
+    //       sessionStorage.setItem('token', response.body!.token!);
+    //       this.router.navigate(['/inicio']);
+    //     }
+    //   },
+    //   error => {
+    //     this.errorLogin = true;
+    //   }
+    // );
   }
 
 

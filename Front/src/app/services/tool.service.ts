@@ -6,7 +6,6 @@ import { jwtDecode } from "jwt-decode";
   providedIn: 'root'
 })
 export class ToolsService {
-  //JavierMorales y JavierVelasco
   constructor() { }
   toUpperCase(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -25,7 +24,7 @@ export class ToolsService {
     const decodedToken = jwtDecode(token);
     const currentTime = Date.now() / 1000;
 
-    //Se comprueba que exista exp para posteriormente poder entrar en el atributo que contiene la fecha de expiracion
+
     if (decodedToken && 'exp' in decodedToken && decodedToken.exp && decodedToken.exp < currentTime) {
       return true;
     }

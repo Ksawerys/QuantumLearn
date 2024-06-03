@@ -103,5 +103,23 @@ const createTrainingModel = async (req, res, next) => {
   }
 };
 
+const useFineTunedModel = async (req, res, next) => {
+  const messages = req.body.messages;
+  const modelName = "ft:gpt-3.5-turbo:my-org:custom_suffix:id"; 
+
+  try {
+    const completion = await openai.ChatCompletion.create({
+      model: modelName,
+      messages: messages
+    });
+
+    res.json({
+      message: completion.choices[0].message
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 module.exports = { generateText, evaluateImage, createTrainingModel };

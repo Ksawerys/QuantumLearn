@@ -36,22 +36,24 @@
 
 <br><br><br><br><br><br><br>
 
-<div  class="note-container">
-  @for(categorie of categories; track categories.indexOf){
-    <div class="categorie">
-      <h2>{{categorie.content}}</h2>
+<div class="note-container">
+  @for(category of categories; track categories.indexOf){
+    <div class="category">
+      <h2>{{ category }}</h2>
       <div class="notes">
-    @for(note of notes; track notes.indexOf){
-      <a [routerLink]="['/sub-notes']" class="note-link">
-        <!-- <a [routerLink]="['/sub-notes', note.id]" class="note-link"> -->
-    <div  class="note">
-      <input readonly type="text" value="{{note.content}}">
-      <textarea readonly>{{note.content}}</textarea>
+        @for (note of notesByCategory[category]; track note) {
+          <a [routerLink]="['/sub-notes']" class="note-link">
+            <div class="note">
+              <input readonly type="text" [value]="note.title">
+              <textarea readonly>{{ note.description }}</textarea>
+            </div>
+          </a>
+        }
+      </div>
     </div>
-  </a>
-    }
-  </div>
-  </div>
   }
 </div>
+
+
+
 

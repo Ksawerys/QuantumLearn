@@ -1,53 +1,16 @@
 @import '../../../styles.scss';
 
 
-$fontFamily: 'Montserrat', sans-serif;
-$fontSize: 18px;
-$textColor: #6C7587;
 
 $height: 54px;
 
-$bgColor: #EBECF0;
 
-$darkShadow: #484f60;
-$lightShadow: #FFFFFF;
-
-$dropShadow: 8px 8px 12px -2px rgba($darkShadow, 0.4),
-  -6px -6px 12px -1px rgba($lightShadow, 1);
-
-$innerShadow: inset -4px -4px 6px -1px rgba($lightShadow, 1),
-  inset 2px 2px 8px -1px rgba($darkShadow, 0.5);
-
-@mixin size($width, $height: $width) {
-  width: $width;
-  height: $height;
-}
-
-@mixin applyFontStyle() {
-  font-family: $fontFamily;
-  font-size: $fontSize;
-  line-height: $fontSize;
-  color: $textColor;
-}
-
-/*base*/
-#root {
+#container {
   font-family: Inter, sans-serif;
   --stripe-color: #fff;
   --bg: var(--stripe-color);
   --maincolor: var(--bg);
 }
-
-#body {
-  width: 100cqw;
-  min-height: 100cqh;
-  display: flex;
-  place-content: center;
-  place-items: flex-start center;
-  background: var(--bg);
-}
-
-/*custom*/
 
 @keyframes smoothBg {
   from {
@@ -65,7 +28,7 @@ $innerShadow: inset -4px -4px 6px -1px rgba($lightShadow, 1),
   position: relative;
 }
 
-.hero {
+.blur-effect {
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -119,36 +82,11 @@ $innerShadow: inset -4px -4px 6px -1px rgba($lightShadow, 1),
   text-align: center;
 }
 
-.h1--scalingSize {
+.title {
   font-size: calc(10rem - -5vw);
   position: relative;
   color: white;
   text-shadow: 8px 8px 12px rgba($darkShadow, 0.6);
-}
-
-
-h1,
-button {
-  margin: 0;
-}
-
-// Global
-
-%shared-styles {
-  @include applyFontStyle;
-  padding: 0 8px;
-  position: relative;
-  border: 3px solid rgba($lightShadow, 0);
-  outline: none;
-  text-align: center;
-  background-color: white;
-  transition: all 190ms ease-in-out;
-  font-weight: bold;
-
-  &:hover {
-    box-shadow: none;
-    border-color: rgba($lightShadow, 0.5);
-  }
 }
 
 button {
@@ -156,6 +94,7 @@ button {
   box-shadow: $dropShadow;
   cursor: pointer;
   margin-top: 5%;
+  font-weight: bold;
 
   &:active {
     box-shadow: $innerShadow;
@@ -170,8 +109,6 @@ button {
     padding-left: 8px;
   }
 }
-
-// Oval Buttons
 
 %oval-btn {
   height: $height;

@@ -3,7 +3,6 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    // Define las interrelaciones
     const questionChoices = [1, 2, 3].map(choiceId => ({
       question_id: 3,
       choice_id: choiceId,

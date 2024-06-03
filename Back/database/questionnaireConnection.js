@@ -17,7 +17,6 @@ class QuestioonnaireConnection {
         }
     }
 
-    // Update a questionnaire
     updateQuestionnaire = async (questionnaireId, questionnaireData) => {
         try {
             const questionnaire = await model.Questionnaire.update(questionnaireData, { where: { id: questionnaireId } });
@@ -28,7 +27,6 @@ class QuestioonnaireConnection {
         }
     }
 
-    // Set active to 0 (deactivate a questionnaire)
     deactivateQuestionnaire = async (questionnaireId) => {
         try {
             const questionnaire = await model.Questionnaire.update({ active: 0 }, { where: { id: questionnaireId } });
@@ -39,7 +37,6 @@ class QuestioonnaireConnection {
         }
     }
 
-    // Add questions to a questionnaire
     addQuestionsToQuestionnaire = async (questionnaireId, questionIds) => {
         try {
             const questionnaire = await model.Questionnaire.findByPk(questionnaireId);
@@ -56,7 +53,6 @@ class QuestioonnaireConnection {
         }
     }
 
-    // Remove questions from a questionnaire
     removeQuestionsFromQuestionnaire = async (questionnaireId, questionIds) => {
         try {
             const questionnaire = await model.Questionnaire.findByPk(questionnaireId);

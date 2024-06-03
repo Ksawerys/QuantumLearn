@@ -4,13 +4,11 @@ const Server = require('../server');
 describe('Server', () => {
   let server;
 
-  // Antes de cada prueba, inicia un nuevo servidor
   beforeEach(() => {
     server = new Server();
     server.listen();
   });
 
-  // Después de cada prueba, cierra el servidor
   afterEach(() => {
     server.close();
   });
@@ -21,5 +19,4 @@ describe('Server', () => {
       .expect(200, done);
   });
 
-  // Agrega más pruebas para las otras rutas aquí
 });
