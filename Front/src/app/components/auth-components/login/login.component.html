@@ -35,7 +35,7 @@
           }@else if (loginFormulario.get('password')?.hasError('pattern')) {
           <p class="error-login"> La contraseña debe y puede contener al menos una letra minúscula, una mayúscula, un
             número y un caracter especial válido. </p>
-          }
+          }@else {}
         </div>
         <div class="form-group">
           <a class="form-link" (click)="openDialog()">Forgot Password?</a>

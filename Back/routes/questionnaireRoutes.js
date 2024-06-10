@@ -3,6 +3,7 @@ const router = express.Router();
 const questionnaireController = require('../controllers/questionnaireController');
 
 router.route('/')
+  .get(questionnaireController.getQuestionnaires)
   .post(questionnaireController.createQuestionnaire);
 
 router.route('/:id')

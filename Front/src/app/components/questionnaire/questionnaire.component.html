@@ -1,0 +1,39 @@
+<div class="questionnaire-container">
+    <div class="questionnaire-header">
+        <div class="image-container">
+        <img [src]="questionnaire?.image">
+        <h1 class="title">{{questionnaire?.title}}</h1>
+    </div>
+        <p class="description">{{questionnaire?.description}}</p>
+    </div>
+    <form [formGroup]="form">
+        <div class="questionnaire-body"  formArrayName="questions">
+            @if(questionnaire?.Questions){
+                @for(question of questionnaire?.Questions; track question.id){
+                    @if(question.questionType && question.questionType.name == 'open'){
+                        <h2>{{question.question}}</h2>
+                        <textarea formControlName="response"></textarea>
+                    }@else if(question.questionType && question.questionType.name == 'rating'){
+                        <h2>{{question.question}}</h2>
+                        <mat-slider class="custome-slider" min="1" max="5" step="1" showTickMarks discrete [displayWith]="formatLabel" formControlName="rating">
+                            <input matSliderThumb [formControl]="sliderValue" >
+                        </mat-slider>    
+                    }@else if(question.questionType && question.questionType.name == 'choice'){
+                        <h2>{{question.question}}</h2>
+                        @for(questionChoice of question.questionChoices; track questionChoice.id ){
+                            <div class="choice-container">
+                                <div class="radio">
+                                    <input class="radio-input" id="radio-1" type="radio" name="choiceId" formControlName="choiceId" value={{questionChoice.choice.id}}>
+                                    <label class="radio-btn" for="radio-1">{{questionChoice.choice.description}}</label>
+                                </div>
+                                
+                            </div>
+                        }
+                    }
+                }
+            }
+            <button>Cancel</button>
+            <button type="button" (click)="submit()">Save</button>
+        </div>
+    </form>
+</div>

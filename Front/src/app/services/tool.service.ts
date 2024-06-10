@@ -30,4 +30,15 @@ export class ToolsService {
     }
     return false;
   }
+  getTokenFromSessionStorage(): string | null {
+    return sessionStorage.getItem('token');
+  }
+
+  getUserIdFromToken(token: string): number | null {
+    let userSession = null;
+    if (token && !this.isTokenExpired(token)) { 
+      userSession = this.getUsuarioSession(token); 
+    }
+    return userSession ? userSession.uid : null;
+  }
 }

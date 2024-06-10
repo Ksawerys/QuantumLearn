@@ -1,0 +1,17 @@
+<div class="card-container">
+    @for(questionnaire of questionnaires; track questionnaire.id ){
+        <div class="card" >
+            <a routerLink="/questionrie" (click)="saveQuestionnaire(questionnaire)"></a>
+            <div class="card-body">
+                <div class="card-title">
+                    <div class="card-image">
+                        <img [src]="questionnaire.image">
+                        <div class="overlay"></div>
+                    </div>
+                    <h5 class="title">{{questionnaire.title}}</h5>
+                </div>
+                <p class="card-description">{{questionnaire.description}}</p>
+            </div>
+        </div>
+    }
+</div>

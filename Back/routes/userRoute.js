@@ -34,7 +34,7 @@ router.route('/reset-password')
   .post(authController.sendVerificationCode
   );
 
-router.post('/:userId/response', userController.insertUserResponseAndUpdateCount);
+router.post('/:userId/response', userController.insertUserResponsesAndUpdateCounts);
 
 router.post('/google', autentucateService.googleSignin);
 

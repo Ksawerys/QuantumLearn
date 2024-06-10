@@ -29,7 +29,7 @@ class IsolationTree {
     this.root.right.fit(right, currentHeight + 1);
   }
 
-  pathLength(point, currentHeight = 0) {
+pathLength(point, currentHeight = 0) {
     if (this.root.size !== undefined) {
       return currentHeight + c(this.root.size);
     }

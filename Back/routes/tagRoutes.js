@@ -17,6 +17,7 @@ router.route('/note/:noteId')
   .get(tagController.getNoteTags);
 
 router.route('/')
+  .get(tagController.getTags)
   .post(tagController.insertTag);
 
 router.route('/exam-grades/:userId')

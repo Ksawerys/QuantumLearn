@@ -98,8 +98,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    user-select: none;
+
+
+    .dropdown-content {
+      max-height: 150px; 
+      overflow-y: auto;
+    } 
 
     ul {
+      width: 160px;
       list-style-type: none;
       padding: 0;
       margin: 0;
@@ -201,7 +209,6 @@
     h2 {
       width: 100%;
       font-family: $fontFamily;
-      ;
       text-align: center;
     }
 
@@ -227,10 +234,24 @@
         box-shadow: $dropShadow;
         cursor: pointer;
 
+        .delete-icon {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 10px;
+          cursor: pointer;
+          user-select: none;
+          font-weight: bold;
+
+          &:hover {
+            color: #ff0000;
+          }
+        }
+
         input {
           font-family: $fontFamily;
           font-size: 17px;
-          width: 100%;
+          width: 90%;
           box-sizing: border-box;
           border: none;
           text-align: center;
@@ -250,7 +271,53 @@
           user-select: none;
           pointer-events: none;
         }
+        .tag-container{
+          position: absolute; // Added this line
+          bottom: 0; // Added this line
+          left: 0; // Added this line
+          display: flex;
+          justify-content: flex-start; // Added this line
+          flex-wrap: wrap; // Added this line          width: 100%; // Adjusted to fit container
+          width: 100%;
+          height: 20%;
+          background-color: $bgColor2;
+          border-radius: 1%; // Changed to percentage
+          padding: 1%; // Reduced from 2%
+          overflow: hidden;
+          
+          .tag{
+              width: 20%;
+              height: 40%;
+              display: flex;
+              align-items: center;
+              margin-right: 1%;
+              margin-bottom: 1%; 
+              margin-top: 1%;
+              padding: 1%; 
+              border-radius: 16px;
+              background-color: #ffffff;
+              text-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2);            
+              font-weight: bold;
+              color: #ffffff;
+              font-size: 42%; 
+              cursor: pointer;
+              transition: background-color 0.3s;
+              transition: all 0.1s ease-in-out;
+              flex-direction: row;
+              &:active {
+                box-shadow: none;
+              }
+      
+              mat-icon {
+                margin-top: 10%;
+                font-size: 220%; 
+                height: 150%; 
+                width: 100%; 
+              }
+          }
+      }
       }
     }
   }
 }
+

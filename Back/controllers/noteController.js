@@ -36,7 +36,9 @@ const createNoteAndTags = async (req, res, next) => {
             await tagConx.insertNoteTag(newNote.id, tagData.tag_id, tagData.data);
         }
 
-        res.status(200).json({ message: 'Note and tags created successfully', data: newNote });
+        const noteTags = await tagConx.getNoteTags(newNote.id);
+
+        res.status(200).json({ message: 'Note and tags created successfully', data: { ...newNote.dataValues, NoteTags: noteTags } });
     } catch (error) {
         console.error(error);
         next(error);
@@ -52,8 +54,9 @@ const updateNoteContent = async (req, res, next) => {
       };
   
       const updatedNote = await noteConx.updateNote(noteId, noteData);
-  
-      res.status(200).json({ message: 'Note content updated successfully', data: updatedNote });
+      const noteTags = await tagConx.getNoteTags(noteId);
+
+      res.status(200).json({ message: 'Note content updated successfully', data: { ...updatedNote.dataValues, NoteTags: noteTags } });
     } catch (error) {
       console.error(error);
       next(error);
@@ -66,7 +69,7 @@ const getUserNotes = async (req, res, next) => {
       const notes = await noteConx.getUserNotes(userId);
   
       for (let note of notes) {
-        note.dataValues.Tags = await tagConx.getNoteTags(note.id);
+        note.dataValues.NoteTags = await tagConx.getNoteTags(note.id);
       }
   
       res.status(200).json({ message: 'User notes and tags fetched successfully', data: notes });

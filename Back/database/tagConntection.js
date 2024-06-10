@@ -8,20 +8,30 @@ const { Op } = require('sequelize');
 
 class TagConnection {
 
-    getNoteTags = async (noteId) => {
+  getNoteTags = async (noteId) => {
+    try {
+        const note = await model.Note.findOne({
+            where: { id: noteId },
+            include: [{
+                model: model.NoteTag,
+                include: model.Tag
+            }]
+        });
+
+        return note ? note.NoteTags.map(noteTag => ({...noteTag.dataValues, Tag: noteTag.Tag.dataValues})) : [];
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+    getTags= async () => {
         try {
-            const note = await model.Note.findOne({
-                where: { id: noteId },
-                include: [{
-                    model: model.NoteTag,
-                    include: model.Tag
-                }]
-            });
-    
-            return note ? note.NoteTags.map(noteTag => ({...noteTag.Tag.dataValues, data: noteTag.data})) : [];
+          const tags = await model.Tag.findAll();
+          return tags;
         } catch (error) {
-            console.error(error);
-            throw error;
+          console.error(error);
+          throw error;
         }
     }
     

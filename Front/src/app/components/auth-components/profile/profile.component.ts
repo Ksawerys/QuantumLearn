@@ -12,23 +12,24 @@ import { DialogPasswordComponent } from "../../dialogs/dialog-password/dialog-pa
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { Router, RouterLink } from '@angular/router';
 
-@Component({ selector: 'app-profile',
-    standalone: true,
-    templateUrl: './profile.component.html',
-    styleUrl: './profile.component.scss', imports: [
-      ReactiveFormsModule,
-        MatError,
-        MatFormField,
-        MatIcon,
-        MatIconButton,
-        MatInput,
-        MatLabel,
-        MatSuffix,
-        RouterLink,
-        MatButton,
-        MatProgressSpinner], 
-        providers: [] 
-    })
+@Component({
+  selector: 'app-profile',
+  standalone: true,
+  templateUrl: './profile.component.html',
+  styleUrl: './profile.component.scss', imports: [
+    ReactiveFormsModule,
+    MatError,
+    MatFormField,
+    MatIcon,
+    MatIconButton,
+    MatInput,
+    MatLabel,
+    MatSuffix,
+    RouterLink,
+    MatButton,
+    MatProgressSpinner],
+  providers: []
+})
 export class ProfileComponent implements OnInit {
 
   hide = true

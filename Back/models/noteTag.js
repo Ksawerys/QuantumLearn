@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       data: {
+        //por si en un futuro la estructura de datos se vuelve mas compleja
         type: DataTypes.JSON,
         allowNull: false
       }

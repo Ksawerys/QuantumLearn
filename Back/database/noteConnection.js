@@ -52,11 +52,13 @@ class NoteConnection {
       
     updateNote = async (noteId, updatedNote) => {
         try {
-          const note = await model.Note.update(
+          await model.Note.update(
             { ...updatedNote },
             { where: { id: noteId } }
           );
-      
+    
+          const note = await model.Note.findByPk(noteId);
+    
           return note;
         } catch (error) {
           console.error(error);
@@ -65,18 +67,22 @@ class NoteConnection {
     }
       
     getUserNotes = async (userId) => {
-        try {
-          const notes = await model.UserNote.findAll({
-            where: { user_id: userId },
-            include: model.Note,
-          });
-      
-          return notes.map(userNote => userNote.Note);
-        } catch (error) {
-          console.error(error);
-          throw error;
-        }
-    }
+      try {
+        const notes = await model.UserNote.findAll({
+          where: { user_id: userId },
+          include: {
+            model: model.Note,
+            where: { active: 1 }
+          },
+          order: [['updated_at', 'DESC']],
+        });
+    
+        return notes.map(userNote => userNote.Note);
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    };
 
     insertSubnote = async (noteId, subnoteId) => {
         try {

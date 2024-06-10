@@ -32,6 +32,17 @@ const deleteTag = async (req, res, next) => {
       next(error);
     }
   }
+
+  const getTags = async (req, res, next) => {
+    try {
+        const tags = await tagConx.getTags();
+
+        res.status(200).json({ message: 'Tags fetched successfully', data: tags });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+}
   
 
 const insertNoteTag = async (req, res, next) => {
@@ -136,4 +147,4 @@ const getHomeworkGrades = async (req, res) => {
 }
 
   
-module.exports = { updateTag, deleteTag,insertNoteTag, deleteNoteTag, updateNoteTag, getNoteTags, insertTag, getExamGrades, getHomeworkGrades};
+module.exports = { updateTag, deleteTag,insertNoteTag, deleteNoteTag, updateNoteTag, getNoteTags, insertTag, getExamGrades, getHomeworkGrades, getTags};

@@ -2,7 +2,7 @@ import {
   CdkScrollableModule,
   ScrollDispatcher,
   ViewportRuler
-} from "./chunk-NFQXMS4E.js";
+} from "./chunk-G2ZIM265.js";
 import {
   Directionality,
   _getEventTarget,
@@ -13,15 +13,18 @@ import {
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader,
   normalizePassiveListenerOptions
-} from "./chunk-ZBN42LM6.js";
+} from "./chunk-OGZZ7TFQ.js";
 import {
   DOCUMENT
-} from "./chunk-ZXXU3F62.js";
+} from "./chunk-UI6HVM6F.js";
 import {
-  BehaviorSubject,
+  ApplicationRef,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
+  Component,
   Directive,
   ElementRef,
+  EnvironmentInjector,
   EventEmitter,
   Inject,
   Injectable,
@@ -29,48 +32,58 @@ import {
   Input,
   NgModule,
   NgZone,
-  Observable,
   Optional,
   Output,
   Self,
   SkipSelf,
-  Subject,
-  Subscription,
   TemplateRef,
   ViewContainerRef,
-  animationFrameScheduler,
+  ViewEncapsulation$1,
   booleanAttribute,
+  createComponent,
   inject,
-  interval,
-  map,
-  merge,
   setClassMetadata,
-  startWith,
-  switchMap,
-  take,
-  takeUntil,
-  tap,
   ɵɵInputTransformsFeature,
   ɵɵNgOnChangesFeature,
   ɵɵProvidersFeature,
+  ɵɵStandaloneFeature,
   ɵɵattribute,
   ɵɵclassProp,
+  ɵɵdefineComponent,
   ɵɵdefineDirective,
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵdirectiveInject,
   ɵɵinject
-} from "./chunk-Y4SCNN5M.js";
+} from "./chunk-APIB444I.js";
+import "./chunk-SAVXX6OM.js";
+import {
+  animationFrameScheduler,
+  merge
+} from "./chunk-SG3BCSKH.js";
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  Subscription,
+  interval,
+  map,
+  startWith,
+  switchMap,
+  take,
+  takeUntil,
+  tap
+} from "./chunk-PQ7O3X3G.js";
 import "./chunk-J4B6MK7R.js";
 
 // node_modules/@angular/cdk/fesm2022/drag-drop.mjs
-function extendStyles(dest, source, importantProperties) {
+function extendStyles(dest, source, importantProperties2) {
   for (let key in source) {
     if (source.hasOwnProperty(key)) {
       const value = source[key];
       if (value) {
-        dest.setProperty(key, value, importantProperties?.has(key) ? "important" : "");
+        dest.setProperty(key, value, importantProperties2?.has(key) ? "important" : "");
       } else {
         dest.removeProperty(key);
       }
@@ -90,36 +103,24 @@ function toggleNativeDragInteractions(element, enable) {
     "-moz-user-select": userSelect
   });
 }
-function toggleVisibility(element, enable, importantProperties) {
+function toggleVisibility(element, enable, importantProperties2) {
   extendStyles(element.style, {
     position: enable ? "" : "fixed",
     top: enable ? "" : "0",
     opacity: enable ? "" : "0",
     left: enable ? "" : "-999em"
-  }, importantProperties);
+  }, importantProperties2);
 }
 function combineTransforms(transform, initialTransform) {
   return initialTransform && initialTransform != "none" ? transform + " " + initialTransform : transform;
 }
-function parseCssTimeUnitsToMs(value) {
-  const multiplier = value.toLowerCase().indexOf("ms") > -1 ? 1 : 1e3;
-  return parseFloat(value) * multiplier;
+function matchElementSize(target, sourceRect) {
+  target.style.width = `${sourceRect.width}px`;
+  target.style.height = `${sourceRect.height}px`;
+  target.style.transform = getTransform(sourceRect.left, sourceRect.top);
 }
-function getTransformTransitionDurationInMs(element) {
-  const computedStyle = getComputedStyle(element);
-  const transitionedProperties = parseCssPropertyValue(computedStyle, "transition-property");
-  const property = transitionedProperties.find((prop) => prop === "transform" || prop === "all");
-  if (!property) {
-    return 0;
-  }
-  const propertyIndex = transitionedProperties.indexOf(property);
-  const rawDurations = parseCssPropertyValue(computedStyle, "transition-duration");
-  const rawDelays = parseCssPropertyValue(computedStyle, "transition-delay");
-  return parseCssTimeUnitsToMs(rawDurations[propertyIndex]) + parseCssTimeUnitsToMs(rawDelays[propertyIndex]);
-}
-function parseCssPropertyValue(computedStyle, name) {
-  const value = computedStyle.getPropertyValue(name);
-  return value.split(",").map((part) => part.trim());
+function getTransform(x, y) {
+  return `translate3d(${Math.round(x)}px, ${Math.round(y)}px, 0)`;
 }
 function getMutableClientRect(element) {
   const rect = element.getBoundingClientRect();
@@ -276,6 +277,129 @@ function transferCanvasData(source, clone) {
     }
   }
 }
+function getRootNode(viewRef, _document) {
+  const rootNodes = viewRef.rootNodes;
+  if (rootNodes.length === 1 && rootNodes[0].nodeType === _document.ELEMENT_NODE) {
+    return rootNodes[0];
+  }
+  const wrapper = _document.createElement("div");
+  rootNodes.forEach((node) => wrapper.appendChild(node));
+  return wrapper;
+}
+function parseCssTimeUnitsToMs(value) {
+  const multiplier = value.toLowerCase().indexOf("ms") > -1 ? 1 : 1e3;
+  return parseFloat(value) * multiplier;
+}
+function getTransformTransitionDurationInMs(element) {
+  const computedStyle = getComputedStyle(element);
+  const transitionedProperties = parseCssPropertyValue(computedStyle, "transition-property");
+  const property = transitionedProperties.find((prop) => prop === "transform" || prop === "all");
+  if (!property) {
+    return 0;
+  }
+  const propertyIndex = transitionedProperties.indexOf(property);
+  const rawDurations = parseCssPropertyValue(computedStyle, "transition-duration");
+  const rawDelays = parseCssPropertyValue(computedStyle, "transition-delay");
+  return parseCssTimeUnitsToMs(rawDurations[propertyIndex]) + parseCssTimeUnitsToMs(rawDelays[propertyIndex]);
+}
+function parseCssPropertyValue(computedStyle, name) {
+  const value = computedStyle.getPropertyValue(name);
+  return value.split(",").map((part) => part.trim());
+}
+var importantProperties = /* @__PURE__ */ new Set([
+  // Needs to be important, because some `mat-table` sets `position: sticky !important`. See #22781.
+  "position"
+]);
+var PreviewRef = class {
+  constructor(_document, _rootElement, _direction, _initialDomRect, _previewTemplate, _previewClass, _pickupPositionOnPage, _initialTransform, _zIndex) {
+    this._document = _document;
+    this._rootElement = _rootElement;
+    this._direction = _direction;
+    this._initialDomRect = _initialDomRect;
+    this._previewTemplate = _previewTemplate;
+    this._previewClass = _previewClass;
+    this._pickupPositionOnPage = _pickupPositionOnPage;
+    this._initialTransform = _initialTransform;
+    this._zIndex = _zIndex;
+  }
+  attach(parent) {
+    this._preview = this._createPreview();
+    parent.appendChild(this._preview);
+    if ("showPopover" in this._preview) {
+      this._preview["showPopover"]();
+    }
+  }
+  destroy() {
+    this._preview.remove();
+    this._previewEmbeddedView?.destroy();
+    this._preview = this._previewEmbeddedView = null;
+  }
+  setTransform(value) {
+    this._preview.style.transform = value;
+  }
+  getBoundingClientRect() {
+    return this._preview.getBoundingClientRect();
+  }
+  addClass(className) {
+    this._preview.classList.add(className);
+  }
+  getTransitionDuration() {
+    return getTransformTransitionDurationInMs(this._preview);
+  }
+  addEventListener(name, handler) {
+    this._preview.addEventListener(name, handler);
+  }
+  removeEventListener(name, handler) {
+    this._preview.removeEventListener(name, handler);
+  }
+  _createPreview() {
+    const previewConfig = this._previewTemplate;
+    const previewClass = this._previewClass;
+    const previewTemplate = previewConfig ? previewConfig.template : null;
+    let preview;
+    if (previewTemplate && previewConfig) {
+      const rootRect = previewConfig.matchSize ? this._initialDomRect : null;
+      const viewRef = previewConfig.viewContainer.createEmbeddedView(previewTemplate, previewConfig.context);
+      viewRef.detectChanges();
+      preview = getRootNode(viewRef, this._document);
+      this._previewEmbeddedView = viewRef;
+      if (previewConfig.matchSize) {
+        matchElementSize(preview, rootRect);
+      } else {
+        preview.style.transform = getTransform(this._pickupPositionOnPage.x, this._pickupPositionOnPage.y);
+      }
+    } else {
+      preview = deepCloneNode(this._rootElement);
+      matchElementSize(preview, this._initialDomRect);
+      if (this._initialTransform) {
+        preview.style.transform = this._initialTransform;
+      }
+    }
+    extendStyles(preview.style, {
+      // It's important that we disable the pointer events on the preview, because
+      // it can throw off the `document.elementFromPoint` calls in the `CdkDropList`.
+      "pointer-events": "none",
+      // We have to reset the margin, because it can throw off positioning relative to the viewport.
+      "margin": "0",
+      "position": "fixed",
+      "top": "0",
+      "left": "0",
+      "z-index": this._zIndex + ""
+    }, importantProperties);
+    toggleNativeDragInteractions(preview, false);
+    preview.classList.add("cdk-drag-preview");
+    preview.setAttribute("popover", "manual");
+    preview.setAttribute("dir", this._direction);
+    if (previewClass) {
+      if (Array.isArray(previewClass)) {
+        previewClass.forEach((className) => preview.classList.add(className));
+      } else {
+        preview.classList.add(previewClass);
+      }
+    }
+    return preview;
+  }
+};
 var passiveEventListenerOptions = normalizePassiveListenerOptions({
   passive: true
 });
@@ -626,9 +750,8 @@ var DragRef = class {
   }
   /** Destroys the preview element and its ViewRef. */
   _destroyPreview() {
-    this._preview?.remove();
-    this._previewRef?.destroy();
-    this._preview = this._previewRef = null;
+    this._preview?.destroy();
+    this._preview = null;
   }
   /** Destroys the placeholder element and its ViewRef. */
   _destroyPlaceholder() {
@@ -700,10 +823,10 @@ var DragRef = class {
       const anchor = this._anchor = this._anchor || this._document.createComment("");
       parent.insertBefore(anchor, element);
       this._initialTransform = element.style.transform || "";
-      this._preview = this._createPreviewElement();
+      this._preview = new PreviewRef(this._document, this._rootElement, this._direction, this._initialDomRect, this._previewTemplate || null, this.previewClass || null, this._pickupPositionOnPage, this._initialTransform, this._config.zIndex || 1e3);
+      this._preview.attach(this._getPreviewInsertionPoint(parent, shadowRoot));
       toggleVisibility(element, false, dragImportantProperties);
       this._document.body.appendChild(parent.replaceChild(placeholder, element));
-      this._getPreviewInsertionPoint(parent, shadowRoot).appendChild(this._preview);
       this.started.next({
         source: this,
         event
@@ -852,56 +975,6 @@ var DragRef = class {
     }
   }
   /**
-   * Creates the element that will be rendered next to the user's pointer
-   * and will be used as a preview of the element that is being dragged.
-   */
-  _createPreviewElement() {
-    const previewConfig = this._previewTemplate;
-    const previewClass = this.previewClass;
-    const previewTemplate = previewConfig ? previewConfig.template : null;
-    let preview;
-    if (previewTemplate && previewConfig) {
-      const rootRect = previewConfig.matchSize ? this._initialDomRect : null;
-      const viewRef = previewConfig.viewContainer.createEmbeddedView(previewTemplate, previewConfig.context);
-      viewRef.detectChanges();
-      preview = getRootNode(viewRef, this._document);
-      this._previewRef = viewRef;
-      if (previewConfig.matchSize) {
-        matchElementSize(preview, rootRect);
-      } else {
-        preview.style.transform = getTransform(this._pickupPositionOnPage.x, this._pickupPositionOnPage.y);
-      }
-    } else {
-      preview = deepCloneNode(this._rootElement);
-      matchElementSize(preview, this._initialDomRect);
-      if (this._initialTransform) {
-        preview.style.transform = this._initialTransform;
-      }
-    }
-    extendStyles(preview.style, {
-      // It's important that we disable the pointer events on the preview, because
-      // it can throw off the `document.elementFromPoint` calls in the `CdkDropList`.
-      "pointer-events": "none",
-      // We have to reset the margin, because it can throw off positioning relative to the viewport.
-      "margin": "0",
-      "position": "fixed",
-      "top": "0",
-      "left": "0",
-      "z-index": `${this._config.zIndex || 1e3}`
-    }, dragImportantProperties);
-    toggleNativeDragInteractions(preview, false);
-    preview.classList.add("cdk-drag-preview");
-    preview.setAttribute("dir", this._direction);
-    if (previewClass) {
-      if (Array.isArray(previewClass)) {
-        previewClass.forEach((className) => preview.classList.add(className));
-      } else {
-        preview.classList.add(previewClass);
-      }
-    }
-    return preview;
-  }
-  /**
    * Animates the preview element from its current position to the location of the drop placeholder.
    * @returns Promise that resolves when the animation completes.
    */
@@ -910,9 +983,9 @@ var DragRef = class {
       return Promise.resolve();
     }
     const placeholderRect = this._placeholder.getBoundingClientRect();
-    this._preview.classList.add("cdk-drag-animating");
+    this._preview.addClass("cdk-drag-animating");
     this._applyPreviewTransform(placeholderRect.left, placeholderRect.top);
-    const duration = getTransformTransitionDurationInMs(this._preview);
+    const duration = this._preview.getTransitionDuration();
     if (duration === 0) {
       return Promise.resolve();
     }
@@ -1090,7 +1163,7 @@ var DragRef = class {
   _applyPreviewTransform(x, y) {
     const initialTransform = this._previewTemplate?.template ? void 0 : this._initialTransform;
     const transform = getTransform(x, y);
-    this._preview.style.transform = combineTransforms(transform, initialTransform);
+    this._preview.setTransform(combineTransforms(transform, initialTransform));
   }
   /**
    * Gets the distance that the user has dragged during the current drag sequence.
@@ -1231,28 +1304,11 @@ var DragRef = class {
     });
   }
 };
-function getTransform(x, y) {
-  return `translate3d(${Math.round(x)}px, ${Math.round(y)}px, 0)`;
-}
 function clamp$1(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 function isTouchEvent(event) {
   return event.type[0] === "t";
-}
-function getRootNode(viewRef, _document) {
-  const rootNodes = viewRef.rootNodes;
-  if (rootNodes.length === 1 && rootNodes[0].nodeType === _document.ELEMENT_NODE) {
-    return rootNodes[0];
-  }
-  const wrapper = _document.createElement("div");
-  rootNodes.forEach((node) => wrapper.appendChild(node));
-  return wrapper;
-}
-function matchElementSize(target, sourceRect) {
-  target.style.width = `${sourceRect.width}px`;
-  target.style.height = `${sourceRect.height}px`;
-  target.style.transform = getTransform(sourceRect.left, sourceRect.top);
 }
 function shadowDomSelectStart(event) {
   event.preventDefault();
@@ -2038,9 +2094,47 @@ var activeCapturingEventOptions = normalizePassiveListenerOptions({
   passive: false,
   capture: true
 });
+var activeApps = /* @__PURE__ */ new Set();
+var __ResetsLoader = class __ResetsLoader {
+};
+__ResetsLoader.ɵfac = function _ResetsLoader_Factory(t) {
+  return new (t || __ResetsLoader)();
+};
+__ResetsLoader.ɵcmp = ɵɵdefineComponent({
+  type: __ResetsLoader,
+  selectors: [["ng-component"]],
+  hostAttrs: ["cdk-drag-resets-container", ""],
+  standalone: true,
+  features: [ɵɵStandaloneFeature],
+  decls: 0,
+  vars: 0,
+  template: function _ResetsLoader_Template(rf, ctx) {
+  },
+  styles: ["@layer cdk-resets{.cdk-drag-preview{background:none;border:none;padding:0;color:inherit}}"],
+  encapsulation: 2,
+  changeDetection: 0
+});
+var _ResetsLoader = __ResetsLoader;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(_ResetsLoader, [{
+    type: Component,
+    args: [{
+      standalone: true,
+      encapsulation: ViewEncapsulation$1.None,
+      template: "",
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      host: {
+        "cdk-drag-resets-container": ""
+      },
+      styles: ["@layer cdk-resets{.cdk-drag-preview{background:none;border:none;padding:0;color:inherit}}"]
+    }]
+  }], null, null);
+})();
 var _DragDropRegistry = class _DragDropRegistry {
   constructor(_ngZone, _document) {
     this._ngZone = _ngZone;
+    this._appRef = inject(ApplicationRef);
+    this._environmentInjector = inject(EnvironmentInjector);
     this._dropInstances = /* @__PURE__ */ new Set();
     this._dragInstances = /* @__PURE__ */ new Set();
     this._activeDragInstances = [];
@@ -2100,6 +2194,7 @@ var _DragDropRegistry = class _DragDropRegistry {
     if (this._activeDragInstances.indexOf(drag) > -1) {
       return;
     }
+    this._loadResets();
     this._activeDragInstances.push(drag);
     if (this._activeDragInstances.length === 1) {
       const isTouchEvent2 = event.type.startsWith("touch");
@@ -2182,6 +2277,22 @@ var _DragDropRegistry = class _DragDropRegistry {
       this._document.removeEventListener(name, config.handler, config.options);
     });
     this._globalListeners.clear();
+  }
+  // TODO(crisbeto): abstract this away into something reusable.
+  /** Loads the CSS resets needed for the module to work correctly. */
+  _loadResets() {
+    if (!activeApps.has(this._appRef)) {
+      activeApps.add(this._appRef);
+      const componentRef = createComponent(_ResetsLoader, {
+        environmentInjector: this._environmentInjector
+      });
+      this._appRef.onDestroy(() => {
+        activeApps.delete(this._appRef);
+        if (activeApps.size === 0) {
+          componentRef.destroy();
+        }
+      });
+    }
   }
 };
 _DragDropRegistry.ɵfac = function DragDropRegistry_Factory(t) {

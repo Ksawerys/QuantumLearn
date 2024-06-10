@@ -1,0 +1,158 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<div class="tag-panel" [class.open]="open">
+    <div class="tag-container">
+        @if(note_tags && note_tags.length > 0){
+        @for( note_tag of note_tags; track note_tag.id){
+            <div class="tag" [style]="getNoteTagStyle(note_tag)"(click)="contentHasChanges = false; selectTag(note_tag)">
+                    @if(note_tag.Tag?.type === 'string'){
+                        <mat-icon class="material-symbols-outlined">
+                        short_text
+                    </mat-icon>
+                    {{note_tag.data ?? '' | parseJson}}
+                    <mat-icon class="material-symbols-outlined">
+                        close
+                    </mat-icon>
+                    }@else if (note_tag.Tag?.type === 'date') {
+                        <mat-icon class="material-symbols-outlined">
+                        calendar_month
+                    </mat-icon>
+                    @if (note_tag.Tag?.name === 'Start date') {
+                        Start {{note_tag.data ?? '' | parseJson}}
+                    }@else if (note_tag.Tag?.name === 'End date') {
+                        End  {{note_tag.data ?? '' | parseJson}}
+                    }
+                    <mat-icon class="material-symbols-outlined">
+                        close
+                    </mat-icon>
+                    }@else if (note_tag.Tag?.type === 'boolean') {
+                        <mat-icon class="material-symbols-outlined">
+                        check 
+                    </mat-icon>
+                    {{note_tag.Tag?.name}}
+                    <mat-icon class="material-symbols-outlined">
+                        close
+                    </mat-icon>
+                    }@else if (note_tag.Tag?.type === 'priority') {
+                        @if((note_tag.data ?? '' | parseJson) == '1'){
+                            <mat-icon class="material-symbols-outlined">
+                            stat_minus_2
+                        </mat-icon>
+                        Low
+                        }@else if((note_tag.data ?? '' | parseJson) == '2'){
+                            <mat-icon class="material-symbols-outlined">
+                            stat_minus_1
+                        </mat-icon>
+                        Medium
+                        }@else if((note_tag.data ?? '' | parseJson) == '3'){
+                            <mat-icon class="material-symbols-outlined">
+                            stat_1
+                        </mat-icon>
+                        High
+                        }@else if((note_tag.data ?? '' | parseJson) == '4'){
+                            <mat-icon class="material-symbols-outlined">
+                            stat_2
+                        </mat-icon>
+                        Critical
+                        }@else if((note_tag.data ?? '' | parseJson) == '5'){
+                        <mat-icon class="material-symbols-outlined">
+                            priority_high
+                        </mat-icon>
+                        Urgent
+                        }
+                        <mat-icon class="material-symbols-outlined">
+                            close
+                        </mat-icon>
+                    }@else if (note_tag.Tag?.type === 'grade') {
+                        <mat-icon class="material-symbols-outlined">
+                            description
+                        </mat-icon>    
+                        Grade {{note_tag.data ?? '' | parseJson}}  
+                        <mat-icon class="material-symbols-outlined">
+                            close
+                        </mat-icon>              
+                    }
+            </div>
+        }
+    }
+        <div class="tag" id="add-tag" (click)="getAvailableTags()">
+            <mat-icon class="material-symbols-outlined">add</mat-icon>
+        </div>
+
+    </div>
+
+    @if (selectedNoteTag != null  && visibleAddTag !=true) {
+    <div class="tag-content">
+        <div class="tag-name">
+            <h1 class="title">{{selectedNoteTag.Tag?.name}}</h1>
+        </div>
+        <div class="tag-description">
+            <h2 class="sub-title"> {{selectedNoteTag.Tag?.description}}</h2>
+        </div>
+        @if(selectedNoteTag.Tag?.type === 'string'){
+            <div class="tag-data">
+                <input type="text"  class="input-text"  placeholder="Text" value={{data}} required maxlength="20" #inputElement (input)="onInputChange(inputElement.value);contentHasChanges = true">
+            </div>
+            <button  [class.visible]="contentHasChanges" (click)="saveTag(this.data)">Save</button>
+        }@else if (selectedNoteTag.Tag?.type === 'date') {
+            <div class="tag-data">
+                <mat-card class="calendar">
+                    <mat-calendar [(selected)]="selectedDate" [startAt]="selectedDate" (selectedChange)="contentHasChanges = true"></mat-calendar>
+                </mat-card>
+            </div>
+            <button [class.visible]="contentHasChanges" (click)="saveDateTag(selectedDate!)">Save</button>        
+        }@else if (selectedNoteTag.Tag?.type  === 'boolean') {
+            <button class="visible" (click)="saveTag('true')">Save</button>
+        }@else if (selectedNoteTag.Tag?.type  === 'priority') {
+            <div class="tag-data">
+                <mat-slider class="custome-slider" min="1" max="5" step="1" showTickMarks discrete [displayWith]="formatLabel">
+                    <input matSliderThumb [formControl]="sliderValue" value={{data}} (input)="contentHasChanges = true">
+                </mat-slider>            
+            </div>
+            <button  [class.visible]="contentHasChanges" (click)="saveTag(sliderValue.value?.toString())">Save</button>
+        }@else if (selectedNoteTag.Tag?.type  === 'grade') {
+            <div class="tag-data">
+                <input type="text" class="input-grade"  value={{data}} (keypress)="validateInput($event)" #inputGrade (input)="onInputChange(inputGrade.value);contentHasChanges = true">
+                <span id="division-bar">/</span>
+                <input type="text" class="input-grade" id="input-grade-read" value="10" readonly>           
+            </div>
+            <button  [class.visible]="contentHasChanges" (click)="saveTag(this.data)">Save</button>
+        }@else{}
+    </div>
+    
+    }@else if (visibleAddTag ==true) {
+        <div class="add-tag-container">
+        @if(tags.length <=0){
+        <h1 class="title">No new tags</h1>
+        <h2 class="sub-title">You have already used all the available tags</h2>
+        }@else {
+        <h1 class="title">Select a tag</h1>
+        <h2 class="sub-title">Choose the tag type that best fits your needs</h2>
+        }
+            @for( tag of tags; track tag.id){
+                <div class="tag-content">
+                <div class="tag-name" [style]="getTagStyle(tag)"(click)="contentHasChanges = false; selectNewTag(tag)">
+                    <mat-icon class="material-symbols-outlined">
+                        @if(tag.type === 'string'){
+                            short_text
+                        }@else if (tag.type === 'date') {
+                            calendar_month
+                        }@else if (tag.type === 'boolean') {
+                            check
+                        }@else if (tag.type === 'priority') {
+                                priority_high
+                        }@else if (tag.type === 'grade') {
+                            description
+                        }
+                    </mat-icon>
+                    {{tag.name}}
+                </div>
+                <div class="tag-description">
+                    {{tag.description}}
+                </div>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -39,5 +39,4 @@ const validateSubnote = async (req, res, next) => {
     next();
   };
   
-  module.exports = { validateSubnote, validateUser, validateTags };
-module.exports = { validateEntities };
+module.exports = { validateSubnote, validateUser, validateTags };

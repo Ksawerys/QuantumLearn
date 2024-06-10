@@ -5,26 +5,35 @@ let userConx = new UserConnection();
 let questionConx = new QuestionConnection();
 let questionnaireConx = new QuestionnaireConnection();
 
-const insertUserResponseAndUpdateCount = async (req, res, next) => {
+const insertUserResponsesAndUpdateCounts = async (req, res, next) => {
     try {
         const userId = req.params.userId;
-        const { questionId, choiceId, response } = req.body;
+        const responses = req.body.responses;
+        const userAnswers = [];
+        const updatedQuestionChoices = [];
 
-        const userAnswer = await userConx.insertUserAnswer(userId, questionId, response);
-        const questionChoice = await questionConx.getQuestionChoice(questionId, choiceId);
-        const updatedQuestionChoice = await questionConx.updateQuestionChoice(questionId, choiceId, questionChoice.answer_count + 1);
+        for (let responseObj of responses) {
+            const { questionId, choiceId, response } = responseObj;
+            const userAnswer = await userConx.insertUserAnswer(userId, questionId, response);
+            userAnswers.push(userAnswer);
+
+            if (choiceId) {
+                const updatedQuestionChoice = await questionConx.incrementAnswerCount(questionId, choiceId);
+                updatedQuestionChoices.push(updatedQuestionChoice);
+            }
+        }
 
         res.status(200).json({ 
-            message: 'User response inserted and answer count updated successfully', 
-            data: { userAnswer, updatedQuestionChoice } 
+            message: 'User responses inserted and answer counts updated successfully', 
+            data: { userAnswers, updatedQuestionChoices } 
         });
     } catch (error) {
         console.error(error);
         next(error);
+    
     }
 }
 
 
 
-
-module.exports = { insertUserResponseAndUpdateCount};
+module.exports = { insertUserResponsesAndUpdateCounts};

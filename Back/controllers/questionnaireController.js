@@ -54,5 +54,15 @@ const removeQuestionsFromQuestionnaire = async (req, res, next) => {
     }
 }
 
+const getQuestionnaires = async (req, res, next) => {
+    try {
+        const questionnaires = await questionnaireConx.getQuestionnaires();
+        res.status(200).json({ message: 'Questionnaires fetched successfully', data: questionnaires });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+}
 
-module.exports = { createQuestionnaire, updateQuestionnaire, deactivateQuestionnaire, addQuestionsToQuestionnaire, removeQuestionsFromQuestionnaire};
+
+module.exports = {getQuestionnaires, createQuestionnaire, updateQuestionnaire, deactivateQuestionnaire, addQuestionsToQuestionnaire, removeQuestionsFromQuestionnaire};

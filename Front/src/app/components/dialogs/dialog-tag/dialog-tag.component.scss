@@ -1,0 +1,263 @@
+@import '../../../../styles.scss';
+
+
+.tag-panel {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background-color: #ffffff;
+    transition: right 0.5s ease-in-out;
+    overflow-x: hidden;
+    padding: 2%;
+    padding-top: 1.5%;
+    border-top-left-radius: 10px;
+    user-select: none;
+
+    &.open {
+      display: block;
+    }
+
+    .tag-description{
+      @include applyFontStyle;
+      font-size: 16px;
+      color: #b2b2b2;
+      font-weight: bold;
+    }
+
+    .title{
+      @include applyFontStyle;
+      font-size: 30px;
+      font-weight: 500;
+      color: $textColor;
+      font-weight: bold;
+      margin-top: 5%;
+      margin-bottom: 2%;
+      text-align: center;
+    }
+
+    .sub-title{
+      @include applyFontStyle;
+      font-size: 24px;
+      font-weight: 500;
+      color: #cacaca;
+      margin-top: 2%;
+      margin-bottom: 2%;
+      line-height: 1.5;
+      text-align: center;
+    }
+    
+
+    .tag-container{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        width: 95%;
+        height: auto;
+        background-color: $bgColor2;
+        border-radius: 10px;
+        padding: 2%;
+        box-shadow: $innerShadow;
+        .tag{
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background-color: #ffffff;
+            text-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2);            
+            font-weight: bold;
+            color: #ffffff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: $dropShadow;
+            transition: all 0.1s ease-in-out;
+
+            &:active {
+              box-shadow: none;
+            }
+
+            mat-icon {
+              font-size: 19px; 
+              height: 19px; 
+              width: 24px; 
+            }
+        }
+        #add-tag{
+          display: flex;
+          align-items: center;
+          justify-content: center;          
+
+          mat-icon {
+            font-weight: bolder;
+            font-size: 19px; 
+            height: 19px; 
+            width: auto; 
+            margin: auto;
+            color: #e0e0e0;
+          }
+        }
+    }
+
+    .tag-content{
+
+      .tag-data{
+        margin-top: 7%;
+        display: flex;
+        align-items: center;
+        justify-content: center;     
+        
+        .input-text{
+          @extend %shared-styles;
+          font-size: 1.5em;
+          width: 100%;
+          box-sizing: border-box;
+          padding: 0.5em;
+          border: none;
+          border-bottom: 2px solid #ffffff;
+          background: $bgColor;
+          outline: none;
+          transition: all 0.3s cubic-bezier(.64, .09, .08, 1);
+          z-index: 1;
+          position: relative;
+          user-select: none;
+          border-radius: 16px;
+          @extend %shared-styles;
+          box-shadow: $dropShadow;
+          color: #b2b2b2;
+          
+          &:focus {
+            box-shadow: $innerShadow;
+            border-color: rgba($lightShadow, 0.5);
+          }
+  
+          &::placeholder {
+            @include applyFontStyle;
+            opacity: 1;
+            margin-left: 40px;
+          }
+        }
+
+        .input-grade{
+          @extend %shared-styles;
+          font-size: 1.5em;
+          width: 10%;
+          box-sizing: border-box;
+          padding: 0.5em;
+          border: none;
+          border-bottom: 2px solid #ffffff;
+          background: $bgColor;
+          outline: none;
+          transition: all 0.3s cubic-bezier(.64, .09, .08, 1);
+          z-index: 1;
+          position: relative;
+          user-select: none;
+          border-radius: 50px;
+          @extend %shared-styles;
+          box-shadow: $dropShadow;
+          color: #b2b2b2;
+
+          &:focus {
+            box-shadow: none;
+            border-color: rgba($lightShadow, 0.5);
+          }
+  
+          &::placeholder {
+            @include applyFontStyle;
+            opacity: 1;
+            margin-left: 40px;
+          }
+        }
+
+        #division-bar{
+          margin-left: 2%;
+          margin-right: 2%;
+          font-size: 4.5em;
+          color: $bgColor2;
+        }
+
+        #input-grade-read{
+          box-shadow: $innerShadow;
+          background-color: $bgColor2;
+          font-weight: bold;
+        }
+      }      
+
+      button{
+        display: none;
+        &.visible{
+          display: block;
+        }
+
+      }
+
+    
+    }
+
+    .add-tag-container{
+      .tag-content{
+        display: flex;  
+        flex-direction: row; 
+        cursor: pointer;
+
+        &:hover {
+          .tag-description{
+            opacity: 1;
+          
+          } 
+        }
+        .tag-name  {
+          display: flex;
+            align-items: center;
+            margin-left: 4%;
+            margin-right: 4%;
+            margin-top: 3%;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background-color: #ffffff;
+            text-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2);            
+            font-weight: bold;
+            color: #ffffff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: $dropShadow;
+            transition: all 0.1s ease-in-out;
+
+            &:active {
+              box-shadow: none;
+            }
+
+            mat-icon {
+              font-size: 19px; 
+              height: 19px; 
+              width: 24px; 
+            }
+        }
+    
+        .tag-description {
+          padding: 5px 10px;
+          display: inline-block;  
+          margin-top: 3%;
+          margin-left: 10px;  
+          opacity: 0;
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+    .custome-slider {
+      margin-top: 2%;
+      width: 500px;
+    }
+
+    .calendar {
+      width: 300px;
+      ::ng-deep .mat-calendar-body-selected {
+        background-color: $accent !important;
+      }
+    }
+}
