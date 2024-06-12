@@ -18,6 +18,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class HomeComponent implements AfterViewInit {
   link = '';
+  hasToken: boolean=false;
 
   
   constructor(private el: ElementRef, private renderer: Renderer2, private router:Router) {}
@@ -26,7 +27,8 @@ ngAfterViewInit() {
   this.link = sessionStorage.getItem('token') ? '/profile' : '/login';
   const body = this.el.nativeElement.ownerDocument.body;
   const input = this.el.nativeElement.querySelector('.day-night input');
-
+  const hasToken = !!sessionStorage.getItem('token');
+  this.hasToken = hasToken;
   if (input) {
     input.addEventListener('change', () => {
       if (body.classList.contains('light')) {

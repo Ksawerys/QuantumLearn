@@ -11,6 +11,7 @@
             </div>
             <span>HOME</span>
         </a>		 
+        @if(hasToken){
         <a routerLink="/notes" class="menu-item">
             <div class="icon-container">
             <mat-icon  class="material-symbols-outlined">checklist</mat-icon> 
@@ -29,6 +30,7 @@
             </div>
             <span>QUESTIONAIRES</span>
         </a>		
+      }
         <a [routerLink]="link" class="menu-item">
             <div class="icon-container">
             <mat-icon  class="material-symbols-outlined">person</mat-icon> 
