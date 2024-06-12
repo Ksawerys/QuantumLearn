@@ -92,7 +92,6 @@ class QuestioonnaireConnection {
                     through: model.QuestionnaireQuestion,
                     include: [{
                         model: model.UserAnswer,
-                        as: 'alias', // replace 'alias' with the actual alias you used when defining the association
                         required: false
                     }]
                 }]

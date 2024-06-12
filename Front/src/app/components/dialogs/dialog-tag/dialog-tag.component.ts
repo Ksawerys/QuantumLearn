@@ -57,11 +57,9 @@ export class DialogTagComponent {
   }
   ngOnInit() {
     this.colors = this.noteService.getColors();
-    console.log(this.note_tags)
     this.getAvailableTags()
   }
   noteTagStringParseData() {
-    console.log('sdrgasdfgas',this.selectedNoteTag,this.parseJson(this.selectedNoteTag?.data ? this.selectedNoteTag.data : '{"data":""}') )
     this.data=this.parseJson(this.selectedNoteTag?.data ? this.selectedNoteTag.data : '{"data":""}')
   }
   selectedDateValue() {
@@ -77,11 +75,8 @@ export class DialogTagComponent {
   }
 
   parseJson(data: string): any {
-    console.log('sdrgdfgsdfgsdfg', this.selectedNoteTag)
     try {
-        console.log('parseJson', data);
         const parsedData = JSON.parse(data);
-        console.log('parseJson2', parsedData.data);
         return parsedData.data;
     } catch (error) {
         console.error('Invalid JSON:', data);
@@ -100,28 +95,22 @@ export class DialogTagComponent {
     if (this.selectedNoteTag && content) {
       this.selectedNoteTag.data = content;
     }
-    console.log("start savetag", this.selectedNoteTag, content)
     if (this.selectedNoteTag && this.selectedNoteTag?.data != null && this.noteId !== null && this.selectedNoteTag?.Tag?.id && formattedContent && this.selectedNoteTag) {
       if (this.selectedNoteTag.id) {
-        console.log("modifyNoteTag savetag", this.selectedNoteTag.id);
         
         this.tagService.modifyNoteTag(this.selectedNoteTag.id, this.selectedNoteTag.data || '')
           .subscribe((response: HttpResponse<ServerResponse>) => {
-            console.log("modifyNoteTag savetag", response);
             let noteTagToUpdate = this.note_tags.find(noteTag => noteTag.id === this.selectedNoteTag!.id);
             if (noteTagToUpdate) {
               noteTagToUpdate.data = formattedContent;
             }
           });
       } else {
-        console.log("createNoteTag savetag", this.selectedNoteTag.id);
         this.tagService.createNoteTag(this.noteId, this.selectedNoteTag.Tag?.id, this.selectedNoteTag.data || '')
           .subscribe((response: HttpResponse<ServerResponse>) => {
-            console.log("createNoteTag savetag", response);
             this.selectedNoteTag!.id = response.body!.data!.id;
             this.selectedNoteTag!.data = formattedContent;
             this.note_tags.push(this.selectedNoteTag!);
-            console.log("createNoteTag savetag", this.selectedNoteTag);
             this.selectedNoteTag = undefined;
           });
       }
@@ -138,7 +127,6 @@ export class DialogTagComponent {
       let noteTagIds = this.note_tags.map(noteTag => noteTag.Tag?.id);
       this.tags = allTags.filter(tag => !noteTagIds.includes(tag.id));
     });
-    console.log('------',this.tags,this.open,this.visibleAddTag)
     this.visibleAddTag = true
   }
 
@@ -182,19 +170,15 @@ export class DialogTagComponent {
     this.selectedNoteTag = note_tag;
     switch (note_tag.Tag?.type) {
       case 'string':
-        console.log('string',note_tag.Tag?.type)
         this.noteTagStringParseData();
         break;
       case 'date':
-        console.log('date',note_tag.Tag?.type)
         this.selectedDateValue();
         break;
       case 'priority':
-        console.log('priority',note_tag.Tag?.type)
         this.sliderValueData();
         break;
       case 'grade':
-        console.log('grade',note_tag.Tag?.type)
         this.gradeInputValue();
         break;
     }
@@ -222,9 +206,7 @@ export class DialogTagComponent {
       Tag: tag,
     };
     if (this.selectedNoteTag != null) {
-      console.log(this.selectedNoteTag)
     }
-    console.log(this.selectedNoteTag)
   }
 }
 

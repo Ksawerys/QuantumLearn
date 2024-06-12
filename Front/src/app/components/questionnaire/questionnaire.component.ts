@@ -38,21 +38,16 @@ export class QuestionnaireComponent implements OnInit {
 
   ngOnInit() {
     const token = sessionStorage.getItem('token'); 
-    console.log('Token from session storage:', token);
     if (token && !this.toolsService.isTokenExpired(token)) { 
-      console.log('Token is valid and not expired');
       const userSession = this.toolsService.getUsuarioSession(token); 
-      console.log('User session:', userSession);
       if (userSession) {
         this.userId = userSession.uid;
         this.userAnswers.userId = this.userId;
-        console.log('User ID:', this.userId);
       }
     }
   
     this.questionrieService.currentQuestionnaire.subscribe(questionnaire => {
       this.questionnaire = questionnaire;
-      console.log('ngOnInit', this.questionnaire);
     });
   }
 
@@ -69,7 +64,6 @@ export class QuestionnaireComponent implements OnInit {
     this.questionrieService.postInsertResponse(this.userAnswers.userId, {responses: this.userAnswers.responses})
       .subscribe(
         response => {
-          console.log('Response from server:', response);
           this.router.navigate(['/questionrie_menu']);
         },
         error => {
@@ -83,18 +77,14 @@ export class QuestionnaireComponent implements OnInit {
     if (index !== -1) {
       if (choiceId == null || choiceId == undefined) {
         this.userAnswers.responses[index] = {questionId, response};
-        console.log({questionId, response}); 
       } else {
         this.userAnswers.responses[index] = {questionId, choiceId, response};
-        console.log({questionId, choiceId, response}); 
       }
     } else {
       if (choiceId == null || choiceId == undefined) {
         this.userAnswers.responses.push({questionId, response});
-        console.log({questionId, response});
       } else {
         this.userAnswers.responses.push({questionId, choiceId, response});
-        console.log({questionId, choiceId, response}); 
       }
     }
   }

@@ -63,16 +63,12 @@ export class DialogNoteComponent implements OnInit {
       debounceTime(500),
       distinctUntilChanged(),
       switchMap(([title, description]) => {
-        console.log('wrqwerqwerqwer',this.note);
         if (!title && !description) {
-          console.log('Cannot create or update note with empty title and description');
           return of(null);
         }
         if (this.note.id != null && this.note.id != undefined) {
-          console.log('updateNote');
           return this.noteService.updateNote(this.note.id, { title, description });
         } else if (this.note.id == null || this.note.id == undefined) {
-          console.log('create note' + this.note.id);
           return this.noteService.createNote(this.userId!, { title, description, tags: [] });
         }
         return of(null);
@@ -85,10 +81,7 @@ export class DialogNoteComponent implements OnInit {
           const note: Note = response.body.data;
           this.note = note
           this.emptyNote=false
-          console.log('note1', note);
-          console.log('note2', response.body);
-          console.log('note3', response.body.data);
-          console.log('note4',this.note);
+      
         }
       }
     });
@@ -116,8 +109,8 @@ export class DialogNoteComponent implements OnInit {
   adjustSize(element: any) {
     const text = this.noteForm.get('description')?.value || '';
     const numberOfCharacters = text.length;
-    const charactersPerLine = 50; // This is an estimate, adjust as needed
-    const lineHeight = 20; // This is an estimate, adjust as needed
+    const charactersPerLine = 50; 
+    const lineHeight = 20;
     const numberOfLines = Math.ceil(numberOfCharacters / charactersPerLine);
     const newHeight = numberOfLines * lineHeight;
     element.style.height = newHeight + 'px';
@@ -127,7 +120,6 @@ export class DialogNoteComponent implements OnInit {
     this.userId = userId;
     if (note) {
       this.note = note;
-      console.log('noentoen',userId,  this.note.NoteTags);
       this.noteForm.patchValue({
         title: note.title || '',
         description: note.description || ''
@@ -141,7 +133,6 @@ export class DialogNoteComponent implements OnInit {
     }
   }
 
-  //cambiar para que no tener que hacer esta memez
   getNoteId(note: Note, userId: number) {
     return note.id ? note.id : userId;
   }
@@ -178,15 +169,12 @@ export class DialogNoteComponent implements OnInit {
   }
 
   dataDialogTag() {
-    console.log('----dataDialogTag',this.note.NoteTags);
 
     if (this.dialogTag && this.note) {
       this.dialogTag.note_tags = this.note.NoteTags || [];
       this.dialogTag.noteId = this.note.id || null;
     }
-    console.log('dataDialogTag',this.note);
-    console.log('dataDialogTag',this.note.NoteTags);
-    console.log('dataDialogTag',this.note.id);
+
     this.dialogTag.getAvailableTags();
   }
 
@@ -195,7 +183,6 @@ export class DialogNoteComponent implements OnInit {
       const userId = this.userId;
       const noteId = this.getNoteId(this.note, userId);
       const body = this.getRequestBody(this.noteForm, this.note);
-      console.log("body" + body);
 
       this.dialogTag.open = false; 
       this.visibility = false

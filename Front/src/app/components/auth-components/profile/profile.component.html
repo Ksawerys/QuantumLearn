@@ -1,5 +1,3 @@
-<!-- No he podido hacer los cambios de codigo con el @if porque dejarian de funcionar las transiciones -->
-
 <div class="form" [class.active]="showRegister">
     @if (!showRegister) {    
       <div class="form-toggle visible" (click)="showRegister = false; showRoles = false;"></div>  
@@ -9,12 +7,6 @@
     <div class="form-panel two" [class.active]="showRegister">
       <div class="form-header">
         <div class="form-content">
-            <div class="image-container">
-              <img [src]="profileUrl || baseURL" alt="Profile" (click)="fileInput.click()">
-              <input #fileInput type="file" id="profileImage"
-                     accept="image/png, image/jpeg, image/jpg, image/PNG, image/JPEG, image/JPG"
-                     (change)="onFileSelected($event)" style="display: none;">
-            </div>
           </div>
         </div>
         <div class="form-content">
@@ -92,7 +84,7 @@
               <p>Support student success with QuantumLearn. Monitor progress, communicate with teachers, and facilitate collaboration for academic growth.</p>
           </div>
           <div class="form-group">
-            <button type="submit" (click)="showRoles = true" (click)="register()">Update profile</button>
+            <button type="submit" (click)="showRoles = true" (click)="this.collectAndSendData(this.userId, this.profileForm.value);">Update profile</button>
           </div>
         </div>
         </form>

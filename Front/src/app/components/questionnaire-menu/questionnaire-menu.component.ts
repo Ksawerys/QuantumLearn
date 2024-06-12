@@ -25,7 +25,7 @@ export class QuestionnaireMenuComponent  implements OnInit  {
     this.questionrieService.getQuestionnaires().subscribe(response => {
       this.questionnaires = response.body?.data || [];
       this.questionnaires.forEach(questionnaire => {
-        questionnaire.image = this.getNextImage(); // Asigna una imagen a cada cuestionario
+        questionnaire.image = this.getNextImage();
       });
     });
   }
@@ -37,7 +37,6 @@ export class QuestionnaireMenuComponent  implements OnInit  {
   }
 
   saveQuestionnaire(questionnaire: Questionnaire) {
-    console.log('saveQuestionnaire',questionnaire)
     this.questionrieService.changeQuestionnaire(questionnaire);
   }
 }

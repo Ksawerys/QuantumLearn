@@ -9,7 +9,6 @@ const googleVerify = async( idToken = '' ) => {
       audience: process.env.GOOGLE_CLIENT_ID,  
   });
 
-  console.log(ticket);
   
   const { name: nombre, 
           picture: img, 

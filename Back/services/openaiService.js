@@ -12,7 +12,6 @@ async function generateText(req, res) {
   if (!prompt) {
     return res.status(400).json({ error: "No text provided" });
   }
-  console.log("Generating text with prompt: " + prompt);
   try {
     const response = await openai.chat.completions.create({
         messages: [{ role: "system", content: prompt }],
@@ -80,8 +79,6 @@ const createTrainingModel = async (req, res, next) => {
   const messages = req.body;
 
   try {
-    console.log(req.body)
-    console.log("Creating training file..."+messages);
     await writeFile("academic_advice_dataset.jsonl", messages.map(example => JSON.stringify(example)).join('\n'));
     const uploadResponse = await openai.files.create({
         file: fs.createReadStream("academic_advice_dataset.jsonl"),

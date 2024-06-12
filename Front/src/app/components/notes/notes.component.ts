@@ -47,11 +47,8 @@ export class NotesComponent implements OnInit,AfterViewInit  {
       const userSession = this.toolsService.getUsuarioSession(token); 
       if (userSession) {
         this.userId = userSession.uid;
-        console.log(this.userId);
         this.noteService.getUserNotes(this.userId).subscribe((response: any) => { 
           this.notes = response.body && response.body.data ? response.body.data : [];
-          console.log(response);
-          console.log(this.notes);
           if (Array.isArray(this.notes)) {
             this.categories = Array.from(new Set(([] as Array<string | undefined>).concat(...this.notes.map(note => 
               note.NoteTags ? note.NoteTags.map(tag => tag.Tag?.name) : [])).filter((tag): tag is string => tag !== undefined)));
@@ -85,12 +82,10 @@ export class NotesComponent implements OnInit,AfterViewInit  {
       }
     }
   }
-//revisar hasta que putno es necesario el event.stopPropagation() para que no se propague al elemento padre
 deleteNote(event: Event, note: Note) {
   event.stopPropagation(); 
   this.noteService.deleteNote(note.id!).subscribe(
     response => {
-      console.log(response);
       this.notes = this.notes.filter(n => n.id !== note.id);
       this.notesByCategory = this.notesByCategory.filter(n => n.id !== note.id);
     },
@@ -105,8 +100,6 @@ getNoteTagStyle(note_tag: NoteTag) {
     'background-color': note_tag && note_tag.Tag && note_tag.Tag.id ? this.colors[note_tag.Tag.id % this.colors.length] : 'defaultColor'
   };
 }
-
- // No queria hacer de categoria una interfaz ya que solo se utiliza aqui. Asique le deoy un "id" con esta funcion
   generateUniqueKey(value: string): string {
     return value.split('').reduce((prev, curr) => prev + curr.charCodeAt(0), '');
   }
@@ -115,11 +108,8 @@ getNoteTagStyle(note_tag: NoteTag) {
     const noteIndex = this.notesByCategory.findIndex(note => note.id === newNote.id);
 
     if (noteIndex !== -1) {
-      console.log(newNote.id!)
-      console.log("dddddddd"+noteIndex)
       this.notesByCategory[noteIndex] = newNote;
     } else {
-      console.log("aaaaaaaaaaaaa")
       this.notesByCategory.unshift(newNote);
     }
   }
@@ -140,15 +130,12 @@ getNoteTagStyle(note_tag: NoteTag) {
 
   filterNotesByCategory(category: string | null) {
     this.selectedCategory = category;
-    console.log(category);
     if (category) {
       this.notesByCategory = this.notes.filter(note => note.NoteTags && note.NoteTags.some(tag => tag.Tag?.name === category));
       localStorage.setItem('Filterby', category);
-      console.log("vvvvvv");  
     } else {
       this.notesByCategory = this.notes;
       localStorage.setItem('Filterby', '');  
-      console.log("zdfvdfvzfvdfv");  
     }
   }
 

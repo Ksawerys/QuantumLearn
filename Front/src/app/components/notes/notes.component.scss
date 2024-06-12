@@ -352,10 +352,10 @@
           resize: none;
           user-select: none;
           pointer-events: none;
-          overflow-y: auto; // Agrega esta línea
+          overflow-y: auto;
           scrollbar-width: none; 
         }
-        
+
         .tag-container{
           position: absolute; 
           bottom: 0; 

@@ -16,14 +16,12 @@ class Conexion {
 
     connect = () => {
         this.db.authenticate().then(() => {
-            console.log('Connection has been established successfully.')
         }).catch(() => {
             console.error('Unable to connect to the database: ')
         })
     }
 
     desconectar = () => {
-        console.log('Connection has been closed successfully.')
         process.on('SIGINT', () => Conexion.close())
     }
 

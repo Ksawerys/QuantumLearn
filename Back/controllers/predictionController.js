@@ -17,7 +17,7 @@ class PredictionController {
           }).filter(grade => grade !== null);
 
           const X = trainingData.slice(0, -2); 
-          const y = trainingData.slice(-2); // las dos últimas notas de forma que luego intente predecirlas y vea la precision
+          const y = trainingData.slice(-2); 
           await PredictionModel.train(X, y);
 
           const modelJson = JSON.stringify(PredictionModel);

@@ -108,20 +108,6 @@ export class ProfileComponent implements OnInit {
     target.classList.toggle('selected');
   }
 
-  register() {
-    // this.userService.register(this.registerForm.value).subscribe(
-    //   response => {
-    //     if (response.body) {
-    //       sessionStorage.setItem('token', response.body!.token!);
-    //       this.router.navigate(['/inicio']);
-    //     }
-    //   },
-    //   error => {
-    //     this.errorLogin = true;
-    //   }
-    // );
-  }
-
   profilePictureUrl: SafeUrl = '';
 
   onFileSelected(event: Event) {
@@ -138,7 +124,6 @@ export class ProfileComponent implements OnInit {
         };
         reader.readAsDataURL(file);
 
-        // Upload the image automatically after selecting it
         const formData = new FormData();
         formData.append('file', file, file.name);
         if (this.user?.id !== undefined) {
@@ -170,7 +155,6 @@ openSnackBar(message: string, action: string) {
     if (token && !this.toolsService.isTokenExpired(token)) { 
       const userSession = this.toolsService.getUsuarioSession(token); 
       if (userSession) {
-        console.log('User session:', userSession);  
         this.userId = userSession.uid;
       }
     }
@@ -192,7 +176,7 @@ openSnackBar(message: string, action: string) {
     });
   }
 
-  constructor(private userService: UserService, private router: Router, public dialog: MatDialog, private http: HttpClient, private sanitizer: DomSanitizer, private snackBar: MatSnackBar, private authService: AuthService,private formBuilder: FormBuilder, private toolsService: ToolsService) {
+  constructor(private router: Router, public dialog: MatDialog, private http: HttpClient, private sanitizer: DomSanitizer, private snackBar: MatSnackBar, private authService: AuthService,private formBuilder: FormBuilder, private toolsService: ToolsService) {
     this.profileImageForm = this.formBuilder.group({
       profilePicture: [null, Validators.required]
     });
@@ -202,4 +186,17 @@ openSnackBar(message: string, action: string) {
     sessionStorage.removeItem('token');
     this.router.navigate(['/home']);
   }
+
+  collectAndSendData(id: number, form: any): void {
+    let formData = new FormData();
+
+    for (let key in form) {
+        formData.append(key, form[key]);
+    }
+
+    this.authService.updateProfile(id, formData).subscribe(response => {
+    }, error => {
+        console.error(error);
+    });
+}
 }

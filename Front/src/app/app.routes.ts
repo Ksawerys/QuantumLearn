@@ -5,21 +5,21 @@ import { ProfileComponent } from './components/auth-components/profile/profile.c
 import { ErrorComponent } from './components/error/error.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { NotesComponent } from './components/notes/notes.component';
-import { SubNotesComponent } from './components/sub-notes/sub-notes.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { QuestionnaireMenuComponent } from './components/questionnaire-menu/questionnaire-menu.component';
 import { GraphComponent } from './components/graph/graph.component';
+import { TokenExpirationGuard } from './guards/token-expiration.guard'; 
+
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'login', component: LoginComponenteComponent },
     { path: 'home', component: HomeComponent },
-    { path: 'profile', component:  ProfileComponent},
+    { path: 'profile', component:  ProfileComponent, canActivate: [TokenExpirationGuard] },
     { path: 'error', component:  ErrorComponent},
-    { path: 'payments', component:  PaymentComponent},
-    { path: 'notes', component:  NotesComponent},
-    { path: 'sub-notes', component:  SubNotesComponent},
-    { path: 'questionrie_menu', component:  QuestionnaireMenuComponent},
-    { path: 'questionrie', component:  QuestionnaireComponent},
-    { path: 'graph', component:  GraphComponent},
+    { path: 'payments', component:  PaymentComponent, canActivate: [TokenExpirationGuard] },
+    { path: 'notes', component:  NotesComponent, canActivate: [TokenExpirationGuard] },
+    { path: 'questionrie_menu', component:  QuestionnaireMenuComponent, canActivate: [TokenExpirationGuard] },
+    { path: 'questionrie', component:  QuestionnaireComponent, canActivate: [TokenExpirationGuard] },
+    { path: 'graph', component:  GraphComponent, canActivate: [TokenExpirationGuard] },
 ];

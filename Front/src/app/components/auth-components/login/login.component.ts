@@ -108,7 +108,6 @@ export class LoginComponenteComponent implements OnInit {
   login() {
     this.authService.login(this.loginFormulario.value).subscribe(
       response => {
-        console.log(response)
         if (response.body) {
           sessionStorage.setItem('token', response.body!.token!);
           this.router.navigate(['/home']);

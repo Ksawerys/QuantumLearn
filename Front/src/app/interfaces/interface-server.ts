@@ -45,6 +45,7 @@ export  interface InterfaceServerResponse {
 }
 
 export interface IAResponse {
-  generated_text: string;
+  generated_text?: string;
+  data?: any;
 }
 

@@ -18,7 +18,6 @@ export class QuestionrieService {
   }
 
   changeQuestionnaire(questionnaire: Questionnaire) {
-    console.log('changeQuestionnaire',questionnaire)
     this.questionnaireSource.next(questionnaire);
   }
 

@@ -10,7 +10,6 @@ class StatisticController {
 
     getUserNotesWithTags = async (userId) => {
         try {
-            console.log('comenzar conexion',userId);
 
             const notes = await model.Note.findAll({
                 include: [
