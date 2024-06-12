@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserSessionStorage } from "../interfaces/interface-user";
+import { UserSessionStorage } from "../interfaces/Interface-user";
 import { jwtDecode } from "jwt-decode";
 
 @Injectable({

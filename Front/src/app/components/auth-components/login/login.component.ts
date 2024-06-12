@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
-import { UserAccess, User, Role } from "../../../interfaces/interface-user";
+import { UserAccess, User, Role } from "../../../interfaces/Interface-user";
 import { HttpClient, HttpResponse, withInterceptorsFromDi } from "@angular/common/http";
 import { DialogPasswordComponent } from '../../dialogs/dialog-password/dialog-password.component';
 import { AuthService } from '../../../services/auth.service';

@@ -4,7 +4,7 @@ import { MatError, MatFormField, MatLabel, MatSuffix } from "@angular/material/f
 import { MatIcon } from "@angular/material/icon";
 import { MatButton, MatIconButton } from "@angular/material/button";
 import { MatInput } from "@angular/material/input";
-import { UserAccess, User } from "../../../interfaces/interface-user";
+import { UserAccess, User } from "../../../interfaces/Interface-user";
 import { UserService } from "../../../services/user.service";
 import { HttpClient, HttpResponse, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
