@@ -43,7 +43,6 @@ const login = async (req, res) => {
     const token = await generarJWT(user.id, user.name);
     res.status(200).json({ token });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ 'msg': 'Error retrieving user', error });
   }
 }
@@ -115,10 +114,8 @@ const updateProfileImage = async (req, res, next) => {
     }
 
     const fileId = await uploadFile(file.tempFilePath, file.name, file.mimetype);
-    console.log('fileId:', fileId);
 
     const updatedUser = await saveImage(userId, fileId);
-    console.log('updatedUser:', updatedUser);
 
     res.json(updatedUser);
   } catch (error) {

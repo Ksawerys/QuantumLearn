@@ -14,6 +14,7 @@ class Server {
         this.tagPath = '/tag'
         this.questionnairePath = '/questionnaire'
         this.questionPath = '/question'
+        this.statisticPath= '/statistic'
         this.apiLimiter = rateLimit({
             windowMs: 15 * 60 * 1000, 
             max: 100 
@@ -55,6 +56,7 @@ class Server {
         this.app.use(this.tagPath, require('../routes/tagRoutes'));
         this.app.use(this.questionnairePath, require('../routes/questionnaireRoutes'));
         this.app.use(this.questionPath, require('../routes/questionRoutes'));
+        this.app.use(this.statisticPath, require('../routes/statisticRoutes'));
         //Health Check Endpoint
         this.app.get('/health', (req, res) => {
             res.status(200).send('Server is up and running');
@@ -62,7 +64,6 @@ class Server {
         
         this.app.use((err, req, res, next) => {
             ErrorLogger.log(err);
-            console.log('-',err);
             res.status(500).send('¡Algo salió mal!');
         });
     }

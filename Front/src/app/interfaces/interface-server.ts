@@ -44,3 +44,7 @@ export  interface InterfaceServerResponse {
   data: any;
 }
 
+export interface IAResponse {
+  generated_text: string;
+}
+

@@ -1,9 +1,12 @@
 const QuestionnaireConnection = require('../database/questionnaireConnection');
 const QuestionConnection = require('../database/questionConnection');
 const UserConnection = require('../database/userConnection');
+const NoteConnection = require('../database/noteConnection');
+const openaiService = require('../services/openaiService');
 let userConx = new UserConnection();
 let questionConx = new QuestionConnection();
 let questionnaireConx = new QuestionnaireConnection();
+let noteConx = new NoteConnection();
 
 const insertUserResponsesAndUpdateCounts = async (req, res, next) => {
     try {
@@ -33,6 +36,7 @@ const insertUserResponsesAndUpdateCounts = async (req, res, next) => {
     
     }
 }
+
 
 
 

@@ -84,6 +84,35 @@ class QuestioonnaireConnection {
         }
     }
 
+    getUserAnswers = async (questionnaireId) => {
+        try {
+            const questionnaire = await model.Questionnaire.findByPk(questionnaireId, {
+                include: [{
+                    model: model.Question,
+                    through: model.QuestionnaireQuestion,
+                    include: [{
+                        model: model.UserAnswer,
+                        as: 'alias', // replace 'alias' with the actual alias you used when defining the association
+                        required: false
+                    }]
+                }]
+            });
+    
+            if (!questionnaire) throw new Error('Questionnaire not found');
+    
+            return questionnaire.Questions.map(question => ({
+                question: question.question,
+                answers: question.UserAnswers.map(answer => ({
+                    userId: answer.user_id,
+                    response: answer.response
+                }))
+            }));
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     removeQuestionsFromQuestionnaire = async (questionnaireId, questionIds) => {
         try {
             const questionnaire = await model.Questionnaire.findByPk(questionnaireId);

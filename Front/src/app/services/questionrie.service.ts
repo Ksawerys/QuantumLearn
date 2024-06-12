@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { InterfaceServerResponse, QuestionnairesResponse } from '../interfaces/interface-server';
+import { IAResponse, InterfaceServerResponse, QuestionnairesResponse } from '../interfaces/interface-server';
 import { Questionnaire } from '../interfaces/interface-questionnaire';
 
 @Injectable({
@@ -25,5 +25,6 @@ export class QuestionrieService {
   postInsertResponse(userId: number, body: {responses: { questionId: number, choiceId?: number, response: string }[] }): Observable<HttpResponse<any>> {
     return this.http.post<any>(`http://localhost:9090/user/${userId}/response`, body, { observe: 'response' as 'response' });
   }
+
 }
 

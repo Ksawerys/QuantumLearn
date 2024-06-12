@@ -13,8 +13,8 @@ class IsolationTree {
     const feature = Math.floor(Math.random() * data[0].length);
     const min = Math.min(...data.map(d => d[feature]));
     const max = Math.max(...data.map(d => d[feature]));
-    const splitValue = Math.random() * (max - min) + min;
-
+    const splitValue = Math.floor(Math.random() * (max - min + 1)) + min;
+    
     const left = data.filter(d => d[feature] < splitValue);
     const right = data.filter(d => d[feature] >= splitValue);
 
@@ -31,7 +31,7 @@ class IsolationTree {
 
 pathLength(point, currentHeight = 0) {
     if (this.root.size !== undefined) {
-      return currentHeight + c(this.root.size);
+      return currentHeight + averageUnsuccessfulPathLength(this.root.size);
     }
 
     const { feature, splitValue, left, right } = this.root;
@@ -43,7 +43,12 @@ pathLength(point, currentHeight = 0) {
   }
 }
 
-function c(size) {
+function averageUnsuccessfulPathLength(size) {
   if (size <= 1) return 0;
   return 2 * (Math.log(size - 1) + 0.5772156649) - (2 * (size - 1) / size);
 }
+
+module.exports = {
+  IsolationTree,
+  averageUnsuccessfulPathLength
+};

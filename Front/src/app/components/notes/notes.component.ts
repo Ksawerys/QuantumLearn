@@ -38,8 +38,9 @@ export class NotesComponent implements OnInit,AfterViewInit  {
   @ViewChild('dialogNote') dialogNote!: DialogNoteComponent;
 
   constructor(private dialog: MatDialog, private noteService: NoteService, private toolsService: ToolsService, private renderer: Renderer2) { }  
-
+  link = '';
   ngOnInit() {
+    this.link = sessionStorage.getItem('token') ? '/profile' : '/login';
     this.colors = this.noteService.getColors();
     const token = sessionStorage.getItem('token'); 
     if (token && !this.toolsService.isTokenExpired(token)) { 
@@ -241,10 +242,14 @@ getNoteTagStyle(note_tag: NoteTag) {
   }
 
   openDialogNote(note?:Note) { 
-    console.log('dialogCreateNote');  
     this.selectedNote = {} as Note;
-    console.log("dialogCreateNote", note?.NoteTags, note);
     this.dialogNote.getNote(this.userId,note);
-    console.log("id"+note?.id);
+  }
+
+  getCategories(notes: Note[]): void {
+    const tagNames = notes.flatMap(note => 
+      note.NoteTags?.map(tag => tag.Tag?.name) ?? []
+    ).filter((tagName): tagName is string => tagName !== undefined);
+    this.categories = Array.from(new Set(tagNames));
   }
 }

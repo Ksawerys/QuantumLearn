@@ -1,4 +1,5 @@
 export interface User {
+    id?: number | null,
     email?: string | null,
     name?: string | null,
     second_name?: string | null,

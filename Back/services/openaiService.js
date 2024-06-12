@@ -1,5 +1,5 @@
 const OpenAI = require('openai');
-
+const model_id = process.env.OPENAI_API_ID_TTRAINED
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 const fs = require('fs');
 const path = require('path');
@@ -12,10 +12,10 @@ async function generateText(req, res) {
   if (!prompt) {
     return res.status(400).json({ error: "No text provided" });
   }
-
+  console.log("Generating text with prompt: " + prompt);
   try {
     const response = await openai.chat.completions.create({
-        messages: [{ role: "system", content: "You are a helpful assistant." }],
+        messages: [{ role: "system", content: prompt }],
         model: "gpt-3.5-turbo",
       });
 
@@ -93,7 +93,7 @@ const createTrainingModel = async (req, res, next) => {
         model: "gpt-3.5-turbo",
         suffix: "academic-advice"
     });
-
+create 
     res.json({
       uploadResponse,
       fineTuningJobId: fineTuningJob.id
@@ -105,7 +105,7 @@ const createTrainingModel = async (req, res, next) => {
 
 const useFineTunedModel = async (req, res, next) => {
   const messages = req.body.messages;
-  const modelName = "ft:gpt-3.5-turbo:my-org:custom_suffix:id"; 
+  const modelName = model_id; 
 
   try {
     const completion = await openai.ChatCompletion.create({
@@ -122,4 +122,4 @@ const useFineTunedModel = async (req, res, next) => {
 };
 
 
-module.exports = { generateText, evaluateImage, createTrainingModel };
+module.exports = { generateText, evaluateImage, createTrainingModel, useFineTunedModel };

@@ -20,9 +20,8 @@
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   box-sizing: border-box;
   margin: auto;
-  margin-top: -2%;
   overflow: hidden;
-  height: calc(44vh + 19%);
+  height: calc(47vh + 19%);
   width: min(calc(50vh + 5%), 100vw);
   transition: height 0.3s ease-out, box-shadow 0.5s ease-out;
   border: none;
@@ -30,15 +29,15 @@
   padding-top: 2%;
 
   @media (max-width: 376px) {
-    height: calc(56vh + 19%);
+    height: calc(61vh + 19%);
   }
 
   @media (min-width: 700px) and (max-width: 900px) {
-    height: calc(40vh + 19%);
+    height: calc(45vh + 19%);
   }
 
   &.active {
-    height: calc(63vh + 19%);
+    height: calc(70vh + 19%);
 
     @media (max-width: 376px) {
       height: calc(82vh + 19%);
@@ -375,7 +374,6 @@
       transition: 0.3s ease;
       border: none;
 
-
       &.active {
         visibility: visible;
         height: 100%;
@@ -391,6 +389,7 @@
         overflow: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease, max-height 0.3s ease;
         border: none;
+        padding-top: 3%;
 
         &.hidden {
           visibility: hidden;
@@ -453,7 +452,7 @@
 
           h3 {
             border: none;
-            font-size: 24px;
+            font-size: 18px;
             margin: 10px 15px 10px 20px;
             color: $white;
             font-family: $fontFamily;
@@ -462,7 +461,7 @@
 
           p {
             border: none;
-            font-size: 14px;
+            font-size: 11px;
             margin: 10px 15px 10px 20px;
             color: $white;
             font-family: $fontFamily;

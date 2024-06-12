@@ -1,3 +1,5 @@
+<div class="outer-container">
+
 <div class="menu-container">
     <div class="menu">
         <a href="#" class="menu-item">
@@ -31,22 +33,35 @@
             <span>PROFILE</span>
         </a>
     </div>
-  </div>
-  
-<div class="card-container">
-    @for(questionnaire of questionnaires; track questionnaire.id ){
-        <div class="card" >
-            <a routerLink="/questionrie" (click)="saveQuestionnaire(questionnaire)"></a>
-            <div class="card-body">
-                <div class="card-title">
-                    <div class="card-image">
-                        <img [src]="questionnaire.image">
-                        <div class="overlay"></div>
-                    </div>
-                    <h5 class="title">{{questionnaire.title}}</h5>
-                </div>
-                <p class="card-description">{{questionnaire.description}}</p>
-            </div>
-        </div>
-    }
 </div>
+<!-- @if(dataLoaded==true){ -->
+<div class="data-container">
+    <h1 id="title">Your data</h1>
+    <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
+    <div style="width: 800px;"><canvas id="acquisitions"></canvas></div>
+
+    <!-- <script type="module" src="dimensions.js"></script> -->
+    <script type="module" src="acquisitions.js"></script>
+    <div class="tips">
+        <h2>Tips for your improvement</h2>
+        <div class="content"> 
+            <!-- <p>{{progress}}</p> -->
+             <p>cafnsdlfjnasdifunasdofpaoifnaspodfnpasodfnpaosdinfpaosdnfpasoidnfasodfnapsoidfnaposidfnapsodifnapsoidfnapsoidfnapsoidfnaspoidfn</p>
+        </div>
+    </div>
+    <!-- <div class="statistics">
+        <h2>Your statistics the last month</h2>
+        <div class="content"> 
+            <p>"lkzjsnvlñsaklñasdkvnañlskdnvñalsdkvn añsldkv aslkdv nasñldvknasñdlkvnasldkvnañsldkvnañsldkvnñslkvnañslkdvnañslkdnvñaslknvañlsdkvnñsldkvnk"</p>
+        </div>
+    </div>
+    <div class="observations">
+        <h2>Things to highlight</h2>
+        <div class="content"> 
+            <p></p>
+        </div>
+    </div> -->
+</div>
+<!-- } -->
+</div>
+

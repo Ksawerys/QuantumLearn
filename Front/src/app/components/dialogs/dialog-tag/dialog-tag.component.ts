@@ -25,7 +25,7 @@ import { ParseJsonPipe } from '../../../pipes/parse-json.pipe';
   styleUrl: './dialog-tag.component.scss',
   providers: [provideNativeDateAdapter()],
 })
-export class DialogTagComponent implements OnInit {
+export class DialogTagComponent {
   open = false
   colors: string[] = [];
   selectedNoteTag?: NoteTag;
@@ -104,6 +104,7 @@ export class DialogTagComponent implements OnInit {
     if (this.selectedNoteTag && this.selectedNoteTag?.data != null && this.noteId !== null && this.selectedNoteTag?.Tag?.id && formattedContent && this.selectedNoteTag) {
       if (this.selectedNoteTag.id) {
         console.log("modifyNoteTag savetag", this.selectedNoteTag.id);
+        
         this.tagService.modifyNoteTag(this.selectedNoteTag.id, this.selectedNoteTag.data || '')
           .subscribe((response: HttpResponse<ServerResponse>) => {
             console.log("modifyNoteTag savetag", response);
@@ -131,6 +132,7 @@ export class DialogTagComponent implements OnInit {
   }
 
   getAvailableTags() {
+    this.data=""
     this.tagService.getTags().subscribe(response => {
       let allTags = response.body && response.body.data ? response.body.data : [];
       let noteTagIds = this.note_tags.map(noteTag => noteTag.Tag?.id);
@@ -176,6 +178,7 @@ export class DialogTagComponent implements OnInit {
 
 
   selectTag(note_tag: NoteTag) {
+    this.data=""
     this.selectedNoteTag = note_tag;
     switch (note_tag.Tag?.type) {
       case 'string':
@@ -196,6 +199,21 @@ export class DialogTagComponent implements OnInit {
         break;
     }
     this.visibleAddTag = false;
+  }
+
+  deleteNoteTag(noteTagId: number) {
+    this.tagService.deleteNoteTag(noteTagId).subscribe(
+      (response: HttpResponse<ServerResponse>) => {
+        if (response.status === 200) {
+          this.note_tags = this.note_tags.filter(tag => tag.id !== noteTagId);
+        } else {
+          console.error('Error deleting note tag:', response);
+        }
+      },
+      error => {
+        console.error('Error deleting note tag:', error);
+      }
+    );
   }
 
   selectNewTag(tag: Tag) {

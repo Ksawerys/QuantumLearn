@@ -41,7 +41,7 @@ export class LoginComponenteComponent implements OnInit {
       ]
   }),
     password: new FormControl('', {
-      updateOn: 'blur', validators: [
+      updateOn: 'change', validators: [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(30),

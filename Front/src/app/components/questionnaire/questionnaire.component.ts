@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionrieService } from '../../services/questionrie.service';
-import { Questionnaire } from '../../interfaces/interface-questionnaire';
+import { Questionnaire, UserAnswers } from '../../interfaces/interface-questionnaire';
 import { MatSliderModule } from '@angular/material/slider';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ToolsService } from '../../services/tool.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-questionnaire',
@@ -16,9 +17,20 @@ import { ToolsService } from '../../services/tool.service';
 export class QuestionnaireComponent implements OnInit {
   sliderValue = new FormControl(0);
   form: FormGroup;
-  questionnaire: Questionnaire | null = null;
   userId: number = 0;
-  constructor(private questionrieService: QuestionrieService, private fb: FormBuilder, private toolsService: ToolsService) { 
+  questionnaire: Questionnaire | null = {  
+    title: '',
+    description: '',
+    image: '',
+    createdAt: '',
+    updatedAt: ''
+  };
+  userAnswers: UserAnswers ={
+    userId: 0,
+    responses: []
+  }
+
+  constructor(private questionrieService: QuestionrieService, private fb: FormBuilder, private toolsService: ToolsService, private router: Router,private snackBar: MatSnackBar) {
     this.form = this.fb.group({
       questions: this.fb.array([])
     });
@@ -33,102 +45,78 @@ export class QuestionnaireComponent implements OnInit {
       console.log('User session:', userSession);
       if (userSession) {
         this.userId = userSession.uid;
+        this.userAnswers.userId = this.userId;
         console.log('User ID:', this.userId);
       }
     }
   
     this.questionrieService.currentQuestionnaire.subscribe(questionnaire => {
-      console.log('Received questionnaire:', questionnaire);
-      if (questionnaire) { 
-        this.questionnaire = questionnaire;
-  
-        if (this.questionnaire && this.questionnaire.Questions) {
-          console.log('Questionnaire has questions:', this.questionnaire.Questions);
-          this.form = this.fb.group({
-            questions: this.fb.array(this.questionnaire.Questions.map((question: any) => {
-              console.log('Creating form control for question:', question);
-              return this.createQuestion(question);
-            }))
-          });
-        }
-      }
+      this.questionnaire = questionnaire;
+      console.log('ngOnInit', this.questionnaire);
     });
   }
+
   get questions() {
     return this.form.get('questions') as FormArray;
   }
 
-  createQuestion(question: any) {
-    console.log('Creating question with id:', question.id);
-    if (question.questionType.name === 'multiple_choice') {
-      console.log('Question is of type: multiple_choice');
-      return this.fb.group({
-        questionId: question.id,
-        questionChoices: this.fb.array(question.questionChoices.map((questionChoice: any) => {
-          console.log('Adding choice with id:', questionChoice.choice.id);
-          return this.fb.group({
-            choiceId: questionChoice.choice.id,
-          });
-        })),
-      });
-    } else if (question.questionType.name === 'rating') {
-      console.log('Question is of type: rating');
-      return this.fb.group({
-        questionId: question.id,
-        rating: new FormControl(0)
-      });
-    } else if (question.questionType.name === 'open') {
-      console.log('Question is of type: open');
-      return this.fb.group({
-        questionId: question.id,
-        response: ''
-      });
+
+  submit() {
+    if (this.questionnaire && this.questionnaire.Questions && this.userAnswers.responses.length < this.questionnaire.Questions.length) {
+      this.openSnackBar('Por favor, responde a todas las preguntas antes de enviar.', 'Cerrar');
+      return;
+    }
+    this.questionrieService.postInsertResponse(this.userAnswers.userId, {responses: this.userAnswers.responses})
+      .subscribe(
+        response => {
+          console.log('Response from server:', response);
+          this.router.navigate(['/questionrie_menu']);
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+  }
+  
+  addResponse(questionId: number, response: string, choiceId?: number) {
+    const index = this.userAnswers.responses.findIndex(answer => answer.questionId === questionId);
+    if (index !== -1) {
+      if (choiceId == null || choiceId == undefined) {
+        this.userAnswers.responses[index] = {questionId, response};
+        console.log({questionId, response}); 
+      } else {
+        this.userAnswers.responses[index] = {questionId, choiceId, response};
+        console.log({questionId, choiceId, response}); 
+      }
     } else {
-      console.log('Question is of unknown type');
-      return this.fb.group({
-        questionId: question.id,
-      });
+      if (choiceId == null || choiceId == undefined) {
+        this.userAnswers.responses.push({questionId, response});
+        console.log({questionId, response});
+      } else {
+        this.userAnswers.responses.push({questionId, choiceId, response});
+        console.log({questionId, choiceId, response}); 
+      }
     }
   }
 
-submit() {
-  const responses = this.form.get('questions')?.value.map((question: any, index: number) => {
-    let response = question.response;
-    if (this.questionnaire && this.questionnaire?.Questions && this.questionnaire?.Questions[index]) {
-      response = response || this.questionnaire?.Questions[index]?.question;      
-    }
-    // Check if questionChoices exist
-    if (question.questionChoices) {
-      return question.questionChoices.map((questionChoice: any) => ({
-        questionId: question.questionId,
-        choiceId: questionChoice.choice.id, // Accessing id of choice
-        response: response
-      }));
-    } else {
-      // Handle the case when there are no questionChoices
-      return {
-        questionId: question.questionId,
-        response: response
-      };
-    }
-  }).flat();
-  
-  this.questionrieService.postInsertResponse(this.userId, {responses }).subscribe(response => {
-    console.log(response);
-  });
-}
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
   formatLabel(value: number): string {
     let label = '';
     if (value == 1) {
-      label = 'Low';
+      label = '1';
     } else if (value == 2) {
-      label = 'Medium';
+      label = '2';
     } else if (value == 3) {
-      label = 'High';
+      label = '3';
     } else if (value == 4) {
-      label = 'Critical';
+      label = '4';
     } else if (value == 5) {
-      label = 'Urgent';
+      label = '5';
     }
     return `${label}`;
   }

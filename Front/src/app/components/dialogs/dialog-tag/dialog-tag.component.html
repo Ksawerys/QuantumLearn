@@ -11,7 +11,7 @@
                         short_text
                     </mat-icon>
                     {{note_tag.data ?? '' | parseJson}}
-                    <mat-icon class="material-symbols-outlined">
+                    <mat-icon class="material-symbols-outlined-close" (click)="deleteNoteTag(note_tag.id!)">
                         close
                     </mat-icon>
                     }@else if (note_tag.Tag?.type === 'date') {
@@ -23,7 +23,7 @@
                     }@else if (note_tag.Tag?.name === 'End date') {
                         End  {{note_tag.data ?? '' | parseJson}}
                     }
-                    <mat-icon class="material-symbols-outlined">
+                    <mat-icon class="material-symbols-outlined-close" (click)="deleteNoteTag(note_tag.id!)">
                         close
                     </mat-icon>
                     }@else if (note_tag.Tag?.type === 'boolean') {
@@ -31,7 +31,7 @@
                         check 
                     </mat-icon>
                     {{note_tag.Tag?.name}}
-                    <mat-icon class="material-symbols-outlined">
+                    <mat-icon class="material-symbols-outlined-close" (click)="deleteNoteTag(note_tag.id!)">
                         close
                     </mat-icon>
                     }@else if (note_tag.Tag?.type === 'priority') {
@@ -61,15 +61,15 @@
                         </mat-icon>
                         Urgent
                         }
-                        <mat-icon class="material-symbols-outlined">
+                        <mat-icon class="material-symbols-outlined-close" (click)="deleteNoteTag(note_tag.id!)">
                             close
                         </mat-icon>
                     }@else if (note_tag.Tag?.type === 'grade') {
-                        <mat-icon class="material-symbols-outlined">
+                        <mat-icon class="material-symbols-outlined" >
                             description
                         </mat-icon>    
                         Grade {{note_tag.data ?? '' | parseJson}}  
-                        <mat-icon class="material-symbols-outlined">
+                        <mat-icon class="material-symbols-outlined-close" (click)="deleteNoteTag(note_tag.id!)">
                             close
                         </mat-icon>              
                     }
@@ -102,7 +102,7 @@
                 </mat-card>
             </div>
             <button [class.visible]="contentHasChanges" (click)="saveDateTag(selectedDate!)">Save</button>        
-        }@else if (selectedNoteTag.Tag?.type  === 'boolean') {
+        }@else if (selectedNoteTag.Tag?.type  === 'boolean' && selectedNoteTag.id == null || selectedNoteTag.Tag?.id == undefined || selectedNoteTag.Tag?.id == 0) {
             <button class="visible" (click)="saveTag('true')">Save</button>
         }@else if (selectedNoteTag.Tag?.type  === 'priority') {
             <div class="tag-data">
@@ -117,7 +117,7 @@
                 <span id="division-bar">/</span>
                 <input type="text" class="input-grade" id="input-grade-read" value="10" readonly>           
             </div>
-            <button  [class.visible]="contentHasChanges" (click)="saveTag(this.data)">Save</button>
+            <button class="oval-lg spaced-container"  [class.visible]="contentHasChanges" (click)="saveTag(this.data)">Save</button>
         }@else{}
     </div>
     

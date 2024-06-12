@@ -1,4 +1,4 @@
-const IsolationTree = require('./IsolationTreeModel');
+const { IsolationTree, averageUnsuccessfulPathLength } = require('./IsolationTreeModel');
 
 class IsolationForest {
   constructor(numTrees, sampleSize) {
@@ -29,10 +29,12 @@ class IsolationForest {
   anomalyScore(point) {
     const pathLengths = this.trees.map(tree => tree.pathLength(point));
     const avgPathLength = pathLengths.reduce((a, b) => a + b, 0) / pathLengths.length;
-    return Math.pow(2, -avgPathLength / c(this.sampleSize));
+    return Math.pow(2, -avgPathLength / averageUnsuccessfulPathLength(this.sampleSize));
   }
 
   predict(data) {
     return data.map(point => this.anomalyScore(point));
   }
 }
+
+module.exports = IsolationForest;

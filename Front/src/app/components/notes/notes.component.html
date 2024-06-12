@@ -1,6 +1,39 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
+<div class="menu-container">
+  <div class="menu">
+      <a href="#" class="menu-item">
+          <div class="icon-container">
+          <mat-icon  class="material-symbols-outlined">home</mat-icon> 
+          </div>
+          <span>HOME</span>
+      </a>		 
+      <a routerLink="/notes" class="menu-item">
+          <div class="icon-container">
+          <mat-icon  class="material-symbols-outlined">checklist</mat-icon> 
+      </div>
+          <span >NOTES</span>
+      </a>		
+      <a routerLink="/graph" class="menu-item">
+          <div class="icon-container">
+          <mat-icon  class="material-symbols-outlined">query_stats</mat-icon> 
+          </div>
+          <span>DATA</span>
+      </a>		 
+      <a routerLink="/questionrie_menu" class="menu-item">
+          <div class="icon-container">
+          <mat-icon  class="material-symbols-outlined">assignment</mat-icon> 
+          </div>
+          <span>QUESTIONAIRES</span>
+      </a>		
+      <a [routerLink]="link" class="menu-item">
+          <div class="icon-container">
+          <mat-icon  class="material-symbols-outlined">person</mat-icon> 
+          </div>
+          <span>PROFILE</span>
+      </a>
+  </div>
+</div>
 <div id="tool-bar">
   <div class="search">
     <svg class="search__icon icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
@@ -8,9 +41,10 @@
     </svg>
     <input #searchInput class="search__input oval-xlg" type="text" placeholder="Search for..." (input)="filterNotes(searchInput.value)"/>  
   </div>
+  <button class="oval-lg spaced-container" (click)="openDialogNote()">Add<mat-icon  class="material-symbols-outlined">add</mat-icon></button>
 
   <div class="dropdown" #dropdown1>
-  <button class="oval-lg spaced-container" (click)="this.dropdownVisible1 = !this.dropdownVisible1;">
+  <button class="oval-lg spaced-container" (click)="getCategories(notes);this.dropdownVisible1 = !this.dropdownVisible1;">
     <span>Filter by</span>
     <svg class="icon" [class.rotated]="dropdownVisible1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
       <polygon transform="translate(20.000000, 20.500000) rotate(-90.000000) translate(-20.000000, -20.500000) translate(12.000000, 8.000000)" points="12.8 0 15.6 2.9 5.7 12.2 15.6 22 12.7 24.8 2.8 14.9 2.7 14.9 1.4 13.5 0 12.1 0 12.1 0 12 1.4 10.7 2.8 9.3 2.9 9.3"></polygon>
@@ -49,7 +83,6 @@
     <div class="category">
       <div class="notes">
         @for (note of notesByCategory; track note) {
-          <!-- <a [routerLink]="['/sub-notes']" class="note-link"> -->
           <a class="note-link" (click)="noteDialogVisible=true" (click)="openDialogNote(note)">
             <div class="note">
               <div class="delete-icon" (click)="deleteNote($event, note)">X</div>
@@ -105,8 +138,6 @@
         }
       </div>
 </div>
-
-<button class="oval-lg spaced-container" (click)="openDialogNote()">Añadir</button>
 
 <app-dialog-note   [class.visible]="noteDialogVisible" (close)="noteDialogVisible = false" (noteCreated)="addContent($event)" #dialogNote></app-dialog-note>
 

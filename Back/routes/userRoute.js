@@ -4,6 +4,7 @@ const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
 const { body, validationResult } = require('express-validator');
 const autentucateService = require('../services/autentucateService');
+const statisticController = require('../controllers/statisticController');
 
 
 router.route('/upload/:id')

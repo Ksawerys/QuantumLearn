@@ -10,7 +10,6 @@ import {
   PortalModule,
   TemplatePortal
 } from "./chunk-6CC5WPQZ.js";
-import "./chunk-G2ZIM265.js";
 import {
   animate,
   animateChild,
@@ -21,6 +20,7 @@ import {
   transition,
   trigger
 } from "./chunk-QZ2T4HXB.js";
+import "./chunk-G2ZIM265.js";
 import {
   MatCommonModule
 } from "./chunk-QTSO3NV5.js";

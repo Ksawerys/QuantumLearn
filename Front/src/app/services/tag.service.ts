@@ -26,4 +26,8 @@ export class TagService {
     const body = { data };
     return this.http.put<ServerResponse>(`${env.URL}tag/noteTag/${noteTagId}`, body, { observe: 'response' as 'response' });
   }
+
+  deleteNoteTag(noteTagId: number): Observable<HttpResponse<ServerResponse>> {
+    return this.http.delete<ServerResponse>(`${env.URL}tag/noteTag/${noteTagId}`, { observe: 'response' as 'response' });
+  }
 }

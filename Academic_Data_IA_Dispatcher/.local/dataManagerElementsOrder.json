@@ -12,9 +12,6 @@
       "Path": "Main.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
-        "strGoogleSearch&Sequence_4",
-        "intTotalTransactions&State_2",
-        "blnCorrectInput&Sequence_4",
         "TransactionItem&StateMachine_1",
         "SystemException&StateMachine_1",
         "BusinessException&StateMachine_1",
@@ -26,7 +23,10 @@
         "TransactionID&StateMachine_1",
         "ConsecutiveSystemExceptions&StateMachine_1",
         "dtStudiesURLs&StateMachine_1",
+        "intTotalTransactions&State_2",
         "dt_TransactionData&Sequence_4",
+        "blnCorrectInput&Sequence_4",
+        "strGoogleSearch&Sequence_4",
         "ShouldStop&Sequence_25",
         "variable1&TryCatch_7"
       ],

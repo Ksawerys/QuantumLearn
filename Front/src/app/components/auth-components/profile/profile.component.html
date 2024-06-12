@@ -10,21 +10,24 @@
       <div class="form-header">
         <div class="form-content">
             <div class="image-container">
-              <img src="../../../../assets/image/IMG-20230910-WA0004.jpg" alt="Profile">
+              <img [src]="profileUrl || baseURL" alt="Profile" (click)="fileInput.click()">
+              <input #fileInput type="file" id="profileImage"
+                     accept="image/png, image/jpeg, image/jpg, image/PNG, image/JPEG, image/JPG"
+                     (change)="onFileSelected($event)" style="display: none;">
             </div>
           </div>
         </div>
         <div class="form-content">
-        <form  [formGroup]="registerForm">
+        <form  [formGroup]="profileForm">
           <div class="form-register-inputs" [class.hidden]="showRoles">
           <div class="form-group">
             <input type="text" id="email" name="email" formControlName="email" required>
             <label for="email">Email Address</label>
-            @if (registerForm.get('email')?.touched && loginFormulario.get('email')?.hasError('required')) {
+            @if (profileForm.get('email')?.touched && profileForm.get('email')?.hasError('required')) {
               <p class="error-register">  El nombre es obligatorio </p>
-            }@else if (loginFormulario.get('email')?.hasError('maxlength')) {
+            }@else if (profileForm.get('email')?.hasError('maxlength')) {
               <p class="error-register"> La longitud máxima son cincuenta caracteres </p>
-            }@else if (loginFormulario.get('email')?.hasError('email')) {
+            }@else if (profileForm.get('email')?.hasError('email')) {
               <p class="error-register"> Debes introducir un email válido </p>
             }
           </div>
@@ -32,13 +35,13 @@
           <div class="form-group">
             <input type="text" id="name" name="name" formControlName="name" required>
             <label for="username">Name</label>
-            @if (registerForm.get('name')?.touched && registerForm.get('name')?.hasError('required')) {
+            @if (profileForm.get('name')?.touched && profileForm.get('name')?.hasError('required')) {
               <p class="error-register"> El nombre es obligatorio </p>
-          }@else if (registerForm.get('name')?.hasError('minlength')) {
+          }@else if (profileForm.get('name')?.hasError('minlength')) {
               <p class="error-register"> La longitud mínima son dos caracteres </p>
-          }@else if (registerForm.get('name')?.hasError('maxlength')) {
+          }@else if (profileForm.get('name')?.hasError('maxlength')) {
               <p class="error-register"> La longitud máxima son treinta caracteres </p>
-          }@else if (registerForm.get('name')?.hasError('pattern')) {
+          }@else if (profileForm.get('name')?.hasError('pattern')) {
               <p class="error-register"> El nombre solo puede contener mayusculas, minusculas y espacios </p>
           }
           </div>
@@ -46,13 +49,13 @@
           <div class="form-group">
             <input type="text" id="second_name" name="second_name" formControlName="second_name" required>
             <label for="second_name">Second Name</label>
-            @if (registerForm.get('second_name')?.touched && registerForm.get('second_name')?.hasError('required')) {
+            @if (profileForm.get('second_name')?.touched && profileForm.get('second_name')?.hasError('required')) {
               <p class="error-register"> La contraseña es obligatoria </p>
-          }@else if (registerForm.get('second_name')?.hasError('minlength')) {
+          }@else if (profileForm.get('second_name')?.hasError('minlength')) {
               <p class="error-register"> La longitud mínima son dos caracteres </p>
-          }@else if (registerForm.get('second_name')?.hasError('maxlength')) {
+          }@else if (profileForm.get('second_name')?.hasError('maxlength')) {
               <p class="error-register"> La longitud máxima son treinta caracteres </p>
-          }@else if (registerForm.get('second_name')?.hasError('pattern')) {
+          }@else if (profileForm.get('second_name')?.hasError('pattern')) {
               <p class="error-register"> Los apellidos solo puede contener mayusculas, minusculas y espacios </p>
           }
           </div>
@@ -60,13 +63,13 @@
           <div class="form-group">
             <input type="password" id="password" name="password" formControlName="password" required>
             <label for="password">Password</label>
-            @if (registerForm.get('password')?.touched && registerForm.get('password')?.hasError('required')) {
+            @if (profileForm.get('password')?.touched && profileForm.get('password')?.hasError('required')) {
               <p class="error-register"> Los apellidos son obligatorios </p>
-           }@else if (registerForm.get('password')?.hasError('minlength')) {
+           }@else if (profileForm.get('password')?.hasError('minlength')) {
               <p class="error-register"> La longitud mínima son ocho caracteres </p>
-           }@else if (registerForm.get('password')?.hasError('maxlength')) {
+           }@else if (profileForm.get('password')?.hasError('maxlength')) {
               <p class="error-register"> La longitud máxima son treinta caracteres </p>
-           }@else if (registerForm.get('password')?.hasError('pattern')) {
+           }@else if (profileForm.get('password')?.hasError('pattern')) {
               <p class="error-register"> La contraseña debe y puede contener al menos una letra minúscula, una mayúscula, un número y un caracter especial válido.  </p>
            }
           </div>

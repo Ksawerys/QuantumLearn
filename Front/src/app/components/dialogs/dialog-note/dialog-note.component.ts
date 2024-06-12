@@ -33,6 +33,7 @@ export class DialogNoteComponent implements OnInit {
   colors: string[] = [];
   emptyNote = true
   @ViewChild('dialogTag') dialogTag!: DialogTagComponent;
+  @ViewChild('noteDescription', { static: false }) noteElement!: ElementRef;
 
   constructor(private noteService: NoteService, private toolsService: ToolsService, private el: ElementRef, private renderer: Renderer2) { 
     this.noteForm = new FormGroup({
@@ -112,17 +113,28 @@ export class DialogNoteComponent implements OnInit {
     });
   }
 
+  adjustSize(element: any) {
+    const text = this.noteForm.get('description')?.value || '';
+    const numberOfCharacters = text.length;
+    const charactersPerLine = 50; // This is an estimate, adjust as needed
+    const lineHeight = 20; // This is an estimate, adjust as needed
+    const numberOfLines = Math.ceil(numberOfCharacters / charactersPerLine);
+    const newHeight = numberOfLines * lineHeight;
+    element.style.height = newHeight + 'px';
+  }
 
   getNote(userId: number, note?: Note) {
-    console.log('getNote',userId,note);
     this.userId = userId;
-    this.visibility = true
     if (note) {
       this.note = note;
       console.log('noentoen',userId,  this.note.NoteTags);
       this.noteForm.patchValue({
         title: note.title || '',
         description: note.description || ''
+      });
+      setTimeout(() => {
+        this.adjustSize(this.noteElement.nativeElement);
+        this.visibility = true
       });
     }else{
       this.emptyNote=true

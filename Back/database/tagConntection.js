@@ -23,7 +23,7 @@ class TagConnection {
         console.error(error);
         throw error;
     }
-}
+  }
 
     getTags= async () => {
         try {

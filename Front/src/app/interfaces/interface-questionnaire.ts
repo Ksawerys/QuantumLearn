@@ -35,3 +35,14 @@ export interface Questionnaire {
     id: number;
     name: string;
   }
+
+  export interface UserAnswers {
+    userId: number;
+    responses: Answer[];
+  }
+
+  export interface Answer {
+    questionId: number;
+    choiceId?: number;
+    response: string;
+  }

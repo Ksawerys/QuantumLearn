@@ -7,6 +7,8 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Tag, { through: 'note_tags', foreignKey: 'note_id' });
       this.hasMany(models.NoteTag, { foreignKey: 'note_id' });
       this.hasMany(models.Subnote, { foreignKey: 'note_id' });
+      this.belongsToMany(models.User, { through: 'user_notes', foreignKey: 'note_id' });
+      this.hasMany(models.UserNote, { foreignKey: 'note_id' });
     }
   }
 

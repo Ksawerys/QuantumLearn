@@ -1,17 +1,29 @@
-const { Factory } = require('rosie');
-
-//genero una pregunta por cada tipo de pregunta. Los tipos de preguntas que se crean en el seeder. Son estos pero se definen en el archvio questionTypeFactory.js
-const questionTypes = ['open', 'rating', 'choice'];
+const questionTypes = ['open', 'rating', 'choice','open', 'rating', 'choice', 'open',  'rating','choice','open', 'rating', 'choice' ];
 const questions = [
-  "¿Que quieres hacer de mayor?",
-  "Puntua del 1 al 5 tu experiencia con la aplicación",
-  "Elige que idea te gusta mas como futura implementación de la aplicación"
+  "What language would you like to learn?",
+  "Rate your interest in learning a new language from 1 to 5",
+  "Choose the language you would most like to learn:",
+
+  "What do you like most about our academic learning website?",
+  "On a scale of 1 to 5, how would you rate the user experience of our website?",
+  "Which of the following features do you find most useful?",
+  
+  "Are there any specific subjects within your area of study that you are particularly interested in?",
+  "Have you considered exploring other areas of study?",
+  "Do you prefer studying alone or in a group?",
+
+  "What is your preferred area of study?",
+  "Do you find online learning platforms helpful for your studies?",
+  "How often do you use physical books and libraries for studying?",
 ];
 
-questionTypes.forEach((type, index) => {
-  Factory.define(`question${index}`)
-    .attr('question', questions[index])
-    .attr('type_id', index + 1);
-});
+function build(questionIndex, typeId) {
+  return {
+    type_id: typeId,
+    question: questions[questionIndex],
+    created_at: new Date(),
+    updated_at: new Date()
+  };
+}
 
-module.exports = Factory;
+module.exports = { build };

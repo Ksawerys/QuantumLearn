@@ -8,6 +8,7 @@ import { NotesComponent } from './components/notes/notes.component';
 import { SubNotesComponent } from './components/sub-notes/sub-notes.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { QuestionnaireMenuComponent } from './components/questionnaire-menu/questionnaire-menu.component';
+import { GraphComponent } from './components/graph/graph.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,4 +21,5 @@ export const routes: Routes = [
     { path: 'sub-notes', component:  SubNotesComponent},
     { path: 'questionrie_menu', component:  QuestionnaireMenuComponent},
     { path: 'questionrie', component:  QuestionnaireComponent},
+    { path: 'graph', component:  GraphComponent},
 ];
