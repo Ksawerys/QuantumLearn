@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild, HostListener, OnInit, Renderer2, AfterViewInit } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Note, NoteTag } from '../../interfaces/interface-note';
 import { DialogNoteComponent } from '../dialogs/dialog-note/dialog-note.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -37,10 +37,14 @@ export class NotesComponent implements OnInit,AfterViewInit  {
   @ViewChild('dropdown2') dropdown2!: ElementRef;
   @ViewChild('dialogNote') dialogNote!: DialogNoteComponent;
 
-  constructor(private dialog: MatDialog, private noteService: NoteService, private toolsService: ToolsService, private renderer: Renderer2) { }  
+  constructor( private router:Router,private dialog: MatDialog, private noteService: NoteService, private toolsService: ToolsService, private renderer: Renderer2) { }  
   link = '';
   ngOnInit() {
     this.link = sessionStorage.getItem('token') ? '/profile' : '/login';
+    const hasToken = !!sessionStorage.getItem('token');
+    if (!hasToken) {
+      this.router.navigate(['/login']);
+    }
     this.colors = this.noteService.getColors();
     const token = sessionStorage.getItem('token'); 
     if (token && !this.toolsService.isTokenExpired(token)) { 
